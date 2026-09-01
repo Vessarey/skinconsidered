@@ -2,20 +2,28 @@ import { NextResponse } from "next/server";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+type Payload = { email?: unknown; source?: unknown; website?: unknown };
+
 export async function POST(request: Request) {
-  let payload: { email?: unknown; source?: unknown };
+  let payload: Payload;
 
   try {
-    payload = (await request.json()) as { email?: unknown; source?: unknown };
+    payload = (await request.json()) as Payload;
   } catch {
     return NextResponse.json({ message: "Invalid request." }, { status: 400 });
   }
 
   const email = typeof payload.email === "string" ? payload.email.trim().toLowerCase() : "";
-  const source = typeof payload.source === "string" ? payload.source.slice(0, 64) : "site";
+  const source = typeof payload.source === "string" ? payload.source.replace(/[^a-z0-9-]/gi, "").slice(0, 64) || "site" : "site";
+  const honeypot = typeof payload.website === "string" ? payload.website.trim() : "";
 
   if (!emailPattern.test(email) || email.length > 254) {
     return NextResponse.json({ message: "Enter a valid email address." }, { status: 400 });
+  }
+
+  // A filled honeypot means an automated submission. Acknowledge without forwarding.
+  if (honeypot) {
+    return NextResponse.json({ message: "Request received." });
   }
 
   const webhook = process.env.NEWSLETTER_WEBHOOK_URL;
@@ -39,7 +47,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "The newsletter service is unavailable. Please try again." }, { status: 502 });
     }
 
-    return NextResponse.json({ message: "You’re on the list. Check your inbox for confirmation." });
+    return NextResponse.json({ message: "Request received. Watch your inbox for the confirmation step." });
   } catch {
     return NextResponse.json({ message: "The newsletter service is unavailable. Please try again." }, { status: 502 });
   }

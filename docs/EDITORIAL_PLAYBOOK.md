@@ -40,7 +40,8 @@ Grades belong to the exact claim. They are not permanent scores for an ingredien
 - Do not use invented medical bylines, subscriber counts, timestamps, volume numbers, or implied reviewers.
 - Do not publish individualized medical directions.
 - Keep culture stories out of “ancient secret” and “beauty hack” framing.
-- Add a dated correction rather than silently rewriting a material error.
+- Add a dated correction rather than silently rewriting a material error. In practice: add an entry to the file’s `updates` array in `content/` with `kind: "correction"` (what was wrong and what replaced it) or `kind: "update"` (a new development, original report not wrong). The entry renders on the file and on `/corrections` automatically.
+- Link related files deliberately through the `related` field rather than relying on readers to find them; the audit fails on a slug that does not exist.
 
 ## Growth without trust debt
 

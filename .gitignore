@@ -19,3 +19,6 @@ npm-debug.log*
 
 # local newsletter fallback data
 /.data
+
+# editor launch config for the in-app browser
+/.claude/launch.json

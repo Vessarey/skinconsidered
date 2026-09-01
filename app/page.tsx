@@ -1,24 +1,65 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { NewsletterPanel } from "@/components/NewsletterPanel";
 import { NewsTicker } from "@/components/NewsTicker";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SignalVisual } from "@/components/SignalVisual";
-import { cultureStories, guides, stories } from "@/lib/content";
+import { WorldStrip } from "@/components/WorldStrip";
+import { cultureStories, EDITION, guides, ingredients, readingTime, stories, storiesByDate } from "@/lib/content";
+import { canonical } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  alternates: canonical("/"),
+};
+
+const startingPoints = [
+  { eyebrow: "Catch me up", title: "What changed lately?", copy: "Open the global wire for the newest recalls, rules, research, and procedure signals.", href: "/today" },
+  { eyebrow: "Make sense of a label", title: "Is this ingredient worth it?", copy: "See what an ingredient can reasonably do—and what the label still cannot tell you.", href: "/ingredients" },
+  { eyebrow: "Make it simpler", title: "Help me build a routine", copy: "Start with three useful steps before adding another promising bottle.", href: "/guides/routine-from-zero" },
+  { eyebrow: "Ask safer questions", title: "I'm considering a procedure", copy: "Bring a provider-and-device checklist, not just a saved before-and-after photo.", href: "/guides/procedure-safety-checklist" },
+  { eyebrow: "Follow the longer story", title: "Take me somewhere unexpected", copy: "Explore beauty practices as culture, material history, and living knowledge.", href: "/culture" },
+];
 
 export default function Home() {
+  // The first story in the content file is the editors' lead; everything else follows the calendar.
   const lead = stories[0];
-  const briefing = stories.slice(1, 5);
-  const research = stories.slice(5, 8);
+  const briefing = storiesByDate.filter((story) => story.slug !== lead.slug).slice(0, 4);
+  const research = storiesByDate.filter((story) => story.kind === "research" || story.kind === "procedure").slice(0, 3);
+  const leadReading = readingTime(lead.sections, lead.dek);
+  const leadUpdated = lead.updates?.at(-1);
 
   return (
     <main id="main-content">
       <NewsTicker />
 
+      <section className="start-here" aria-labelledby="start-here-title">
+        <div className="start-here-intro">
+          <span>Welcome / choose your way in</span>
+          <h2 id="start-here-title">What brought you here today?</h2>
+          <p>No skincare vocabulary required. Pick a question and we&apos;ll take you to the most useful starting point.</p>
+          <div className="start-here-trust">
+            <b>✓ Rechecked {EDITION.label}</b>
+            <span>{stories.length} current dispatches · every claim opens to its source file</span>
+            <Link href="/methodology">See how we weigh evidence →</Link>
+          </div>
+        </div>
+        <nav className="start-paths" aria-label="Choose a skincare starting point">
+          {startingPoints.map((item, index) => (
+            <Link href={item.href} key={item.title}>
+              <span>0{index + 1} / {item.eyebrow}</span>
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
+              <b aria-hidden="true">↗</b>
+            </Link>
+          ))}
+        </nav>
+      </section>
+
       <section className="lead-grid" aria-labelledby="lead-title">
         <Link className="lead-visual-link" href={`/dispatches/${lead.slug}`} aria-label={`Read ${lead.headline}`}>
           <SignalVisual color={lead.color} label={`Abstract editorial artwork for ${lead.headline}`} />
-          <span>Global signal / 001</span>
+          <span>Latest verified update</span>
         </Link>
         <article className="lead-story">
           <div className="lead-meta">
@@ -31,8 +72,8 @@ export default function Home() {
           <p>{lead.dek}</p>
           <div className="lead-byline">
             <span>Skin Considered desk</span>
-            <span>{lead.readTime}</span>
-            <span>Updated {lead.dateLabel}</span>
+            <span>{leadReading.label} read</span>
+            <span>{leadUpdated ? `Updated ${leadUpdated.dateLabel}` : lead.dateLabel}</span>
           </div>
           <Link className="text-link" href={`/dispatches/${lead.slug}`}>
             Read the full consideration <span aria-hidden="true">→</span>
@@ -61,8 +102,8 @@ export default function Home() {
       <section className="homepage-section">
         <SectionHeading
           eyebrow="Research desk"
-          href="/today"
-          linkLabel="Open the global wire"
+          href="/today?desk=Research"
+          linkLabel="Open the research wire"
           note="*The claim is never stronger than the study design."
           title="The week, considered"
         />
@@ -89,31 +130,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="world-strip" aria-labelledby="world-title">
-        <div className="world-intro">
-          <span>Six regions · one standard</span>
-          <h2 id="world-title">Skincare has no single center.<sup>*</sup></h2>
-          <p>Follow regulation, clinical research, safety signals, procedures, and practices where they actually happen.</p>
-          <Link href="/today">Explore the global wire →</Link>
-        </div>
-        <div className="world-orbit" aria-hidden="true">
-          <span className="world-ring ring-one" />
-          <span className="world-ring ring-two" />
-          <span className="world-ring ring-three" />
-          {[
-            ["North America", "filter access"],
-            ["Europe", "safety alerts"],
-            ["Asia", "procedure research"],
-            ["Oceania", "SPF oversight"],
-            ["Latin America", "recall watch"],
-          ].map(([region, topic], index) => (
-            <span className={`world-point point-${index + 1}`} key={region}>
-              <b>{region}</b>
-              <small>{topic}</small>
-            </span>
-          ))}
-        </div>
-      </section>
+      <WorldStrip />
 
       <section className="homepage-section guide-preview">
         <SectionHeading
@@ -132,10 +149,31 @@ export default function Home() {
                 <h3>{guide.title}</h3>
               </div>
               <p>{guide.description}</p>
-              <b>{guide.readTime} ↗</b>
+              <b>{readingTime(guide.sections, guide.description).label} ↗</b>
             </Link>
           ))}
         </div>
+      </section>
+
+      <section className="homepage-section ingredient-strip" aria-labelledby="ingredient-strip-title">
+        <SectionHeading
+          eyebrow="Ingredient files"
+          href="/ingredients"
+          linkLabel="Open the index"
+          note="Grades travel with the claim, not the ingredient."
+          title="The name on the front"
+        />
+        <ul id="ingredient-strip-title" aria-label="Ingredient files">
+          {ingredients.map((ingredient) => (
+            <li key={ingredient.slug}>
+              <Link href={`/ingredients#${ingredient.slug}`}>
+                <span>{ingredient.name}</span>
+                <small>{ingredient.family}</small>
+              </Link>
+              <EvidenceBadge grade={ingredient.evidence} compact />
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="culture-preview">
@@ -150,8 +188,12 @@ export default function Home() {
           {cultureStories.slice(0, 3).map((story, index) => (
             <article className={`culture-card culture-${story.color}`} key={story.slug}>
               <div className="culture-card-number">0{index + 1}</div>
-              <div className="culture-card-art" aria-hidden="true"><span /></div>
-              <small>{story.place} · {story.era}</small>
+              <div className="culture-card-art" aria-hidden="true">
+                <span />
+              </div>
+              <small>
+                {story.place} · {story.era}
+              </small>
               <h3>
                 <Link href={`/culture/${story.slug}`}>{story.title}</Link>
               </h3>

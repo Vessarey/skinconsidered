@@ -7,7 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Global skincare news, weighed before publication.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f5e9e8",
-    theme_color: "#123c2d",
+    // Exact design tokens: --paper and --ink in globals.css
+    background_color: "#f6eeea",
+    theme_color: "#182620",
   };
 }

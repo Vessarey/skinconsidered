@@ -2,44 +2,40 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useState } from "react";
+import type { SearchItem } from "@/lib/content";
 
-type SearchItem = {
-  href: string;
-  type: string;
-  title: string;
-  description: string;
-  terms: string;
-};
+function matches(item: SearchItem, words: string[]) {
+  const haystack = `${item.title} ${item.description} ${item.type} ${item.terms}`.toLowerCase();
+  return words.every((word) => haystack.includes(word));
+}
 
-export function SearchExperience({ items }: { items: SearchItem[] }) {
+export function SearchExperience({ items, suggestions }: { items: SearchItem[]; suggestions: string[] }) {
   const params = useSearchParams();
-  const [query, setQuery] = useState(params.get("q") ?? "");
-  const [submitted, setSubmitted] = useState(query);
+  const initial = params.get("q") ?? "";
+  const [query, setQuery] = useState(initial);
 
-  const results = useMemo(() => {
-    const words = submitted.toLowerCase().trim().split(/\s+/).filter(Boolean);
-    if (!words.length) return items;
-    return items.filter((item) => {
-      const haystack = `${item.title} ${item.description} ${item.type} ${item.terms}`.toLowerCase();
-      return words.every((word) => haystack.includes(word));
-    });
-  }, [items, submitted]);
+  const words = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+  const results = words.length ? items.filter((item) => matches(item, words)) : items;
+
+  function syncUrl(value: string) {
+    window.history.replaceState(null, "", value ? `/search?q=${encodeURIComponent(value)}` : "/search");
+  }
 
   function search(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitted(query);
-    window.history.replaceState(null, "", query ? `/search?q=${encodeURIComponent(query)}` : "/search");
+    syncUrl(query.trim());
   }
 
   return (
     <div className="search-experience">
-      <form onSubmit={search}>
+      <form action="/search" method="get" onSubmit={search} role="search">
         <label htmlFor="site-search">Search articles, guides, ingredients, or places</label>
         <div>
           <input
             autoFocus
             id="site-search"
+            name="q"
             onChange={(event) => setQuery(event.target.value)}
             placeholder="TRY: SUNSCREEN, JAPAN, RETINOIDS…"
             type="search"
@@ -47,15 +43,30 @@ export function SearchExperience({ items }: { items: SearchItem[] }) {
           />
           <button type="submit">Search</button>
         </div>
+        <div className="search-suggestions" aria-label="Suggested searches">
+          <span>Try</span>
+          {suggestions.map((suggestion) => (
+            <button
+              key={suggestion}
+              onClick={() => {
+                setQuery(suggestion);
+                syncUrl(suggestion);
+              }}
+              type="button"
+            >
+              {suggestion}
+            </button>
+          ))}
+        </div>
       </form>
       <p className="result-count" aria-live="polite">
         {results.length} {results.length === 1 ? "result" : "results"}
-        {submitted ? ` for “${submitted}”` : " across the archive"}
+        {words.length ? ` for “${query.trim()}”` : " across the archive"}
       </p>
       <div className="search-results">
         {results.map((item, index) => (
           <article key={`${item.href}-${item.title}`}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
+            <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
             <div>
               <small>{item.type}</small>
               <h2>

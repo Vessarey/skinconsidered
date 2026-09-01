@@ -1,27 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
+/** Writes the progress transform directly, so scrolling never re-renders React. */
 export function ReadingProgress() {
-  const [progress, setProgress] = useState(0);
+  const bar = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    let frame = 0;
+
     const update = () => {
+      frame = 0;
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(max <= 0 ? 0 : Math.min(100, (window.scrollY / max) * 100));
+      const progress = max <= 0 ? 0 : Math.min(1, window.scrollY / max);
+      if (bar.current) bar.current.style.transform = `scaleX(${progress})`;
     };
+
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+
     update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
 
   return (
     <div className="reading-progress" aria-hidden="true">
-      <span style={{ transform: `scaleX(${progress / 100})` }} />
+      <span ref={bar} />
     </div>
   );
 }

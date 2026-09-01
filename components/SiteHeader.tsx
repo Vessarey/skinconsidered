@@ -1,12 +1,7 @@
 import Link from "next/link";
-
-const nav = [
-  ["Today", "/today"],
-  ["Guides", "/guides"],
-  ["Ingredients", "/ingredients"],
-  ["Procedures", "/procedures"],
-  ["Culture", "/culture"],
-];
+import { EDITION } from "@/content/site";
+import { formatEditionDate } from "@/lib/content";
+import { PrimaryNav } from "./PrimaryNav";
 
 export function SiteHeader() {
   return (
@@ -15,9 +10,13 @@ export function SiteHeader() {
         Skip to content
       </a>
       <div className="utility-bar">
-        <span>MON 01 SEP 2026</span>
+        <span>
+          Edition <time dateTime={EDITION.date}>{formatEditionDate(EDITION.date)}</time>
+        </span>
         <span>considered before published · independent · source-linked</span>
-        <span>VOL.01 / NO.001</span>
+        <span>
+          Vol.{EDITION.volume} / No.{EDITION.number}
+        </span>
       </div>
       <header className="site-header">
         <Link className="wordmark" href="/" aria-label="Skin Considered home">
@@ -32,16 +31,7 @@ export function SiteHeader() {
             <br />
             Global reporting · practical education · no miracle language.
           </p>
-          <nav aria-label="Primary navigation">
-            {nav.map(([label, href]) => (
-              <Link href={href} key={href}>
-                {label}
-              </Link>
-            ))}
-            <Link className="search-link" href="/search" aria-label="Search Skin Considered">
-              Search <span aria-hidden="true">↗</span>
-            </Link>
-          </nav>
+          <PrimaryNav />
         </div>
       </header>
     </>

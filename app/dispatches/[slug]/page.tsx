@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EditorialArticle } from "@/components/EditorialArticle";
-import { getStory, stories } from "@/lib/content";
+import { deskLabel, getStory, lastUpdated, readingTime, resolveRelated, siteUrl, stories } from "@/lib/content";
+import { breadcrumbs, canonical } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -17,13 +18,15 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return {
     title: story.headline,
     description: story.dek,
-    alternates: { canonical: `/dispatches/${story.slug}` },
+    alternates: canonical(`/dispatches/${story.slug}`),
     openGraph: {
       type: "article",
       title: story.headline,
       description: story.dek,
       publishedTime: story.date,
+      modifiedTime: lastUpdated(story),
       section: story.category,
+      tags: [story.region, story.location, deskLabel(story.kind), story.category],
     },
   };
 }
@@ -33,18 +36,31 @@ export default async function DispatchPage({ params }: { params: Params }) {
   const story = getStory(slug);
   if (!story) notFound();
 
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    headline: story.headline,
-    description: story.dek,
-    datePublished: story.date,
-    dateModified: story.date,
-    articleSection: story.category,
-    author: { "@type": "Organization", name: "Skin Considered editorial desk" },
-    publisher: { "@type": "Organization", name: "Skin Considered" },
-    citation: story.sources.map((source) => source.url),
-  };
+  const base = siteUrl();
+  const reading = readingTime(story.sections, story.dek);
+  const modified = lastUpdated(story);
+
+  const schema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      headline: story.headline,
+      description: story.dek,
+      datePublished: story.date,
+      dateModified: modified,
+      articleSection: story.category,
+      mainEntityOfPage: `${base}/dispatches/${story.slug}`,
+      author: { "@type": "Organization", name: "Skin Considered editorial desk" },
+      publisher: { "@type": "Organization", name: "Skin Considered", url: base },
+      citation: story.sources.map((source) => source.url),
+      isAccessibleForFree: true,
+    },
+    breadcrumbs(base, [
+      { name: "Skin Considered", path: "/" },
+      { name: "Today", path: "/today" },
+      { name: story.headline, path: `/dispatches/${story.slug}` },
+    ]),
+  ];
 
   return (
     <>
@@ -56,11 +72,24 @@ export default async function DispatchPage({ params }: { params: Params }) {
         eyebrow={`${story.location} / ${story.category}`}
         grade={story.grade}
         gradeLabel={story.signal}
+        ledger={{ signal: story.signal, whyItMatters: story.whyItMatters, limitations: story.limitations }}
         limitation={story.limitations}
-        meta={["Skin Considered desk", story.dateLabel, story.readTime]}
+        meta={[
+          "Skin Considered desk",
+          story.dateLabel,
+          ...(story.updates?.length ? [`Updated ${story.updates[story.updates.length - 1].dateLabel}`] : []),
+          `${reading.label} read`,
+        ]}
+        quickRead={[
+          { label: "What happened", text: story.dek },
+          { label: "Why it matters", text: story.whyItMatters },
+          { label: "Keep in mind", text: story.limitations },
+        ]}
+        related={resolveRelated(story.related)}
         sections={story.sections}
         sources={story.sources}
         title={story.headline}
+        updates={story.updates}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
     </>

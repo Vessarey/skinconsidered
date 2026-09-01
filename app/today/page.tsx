@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { GlobalFeed } from "@/components/GlobalFeed";
 import { NewsTicker } from "@/components/NewsTicker";
-import { stories } from "@/lib/content";
+import { deskLabel, desks, regions, wireItems } from "@/lib/content";
+import { canonical } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Today — the global skincare wire",
-  description: "Verified skincare regulation, research, procedures, and safety updates from around the world.",
+  description: "Source-linked skincare regulation, research, procedures, and safety updates from around the world, filterable by region and desk.",
+  alternates: canonical("/today"),
 };
 
 export default function TodayPage() {
@@ -15,14 +18,18 @@ export default function TodayPage() {
       <header className="page-hero global-hero">
         <div>
           <span>Live desk / source-checked</span>
-          <h1>Today, around the skin world.<sup>*</sup></h1>
+          <h1>
+            Today, around the skin world.<sup>*</sup>
+          </h1>
         </div>
         <p>
-          Regulation is not efficacy. A trial is not a trend. A recall is not a category verdict. Each dispatch names what happened,
-          where, and how confident the evidence lets us be.
+          Regulation is not efficacy. A trial is not a trend. A recall is not a category verdict. Each dispatch names what happened, where, and how
+          confident the evidence lets us be.
         </p>
       </header>
-      <GlobalFeed stories={stories} />
+      <Suspense fallback={<p className="search-loading">Opening the wire…</p>}>
+        <GlobalFeed desks={desks.map(deskLabel)} regions={[...regions]} stories={wireItems} />
+      </Suspense>
     </main>
   );
 }
