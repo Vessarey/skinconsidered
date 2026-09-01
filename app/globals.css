@@ -1507,7 +1507,7 @@ main {
 
 .related-files { padding: 4rem 2rem; background: #e4ecff; border-top: 3px solid var(--ink); }
 .related-files h2 { margin: 0 0 1.3rem; font-size: clamp(2rem, 4vw, 4rem); line-height: 0.9; letter-spacing: -0.055em; text-transform: uppercase; }
-.related-files ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; border: 2px solid var(--ink); list-style: none; }
+.related-files ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin: 0; padding: 0; border: 2px solid var(--ink); list-style: none; }
 .related-files li { min-width: 0; border-right: 1px solid var(--ink); }
 .related-files li:last-child { border-right: 0; }
 .related-files a { min-height: 10rem; display: grid; align-content: space-between; gap: 0.8rem; padding: 1.2rem; text-decoration: none; }
@@ -1840,3 +1840,6 @@ main {
   .medical-note { background: none; border: 1px solid #000; }
   a { color: inherit; }
 }
+.ledger-box dd a { font-weight: 800; }
+/* The suggestion row sits inside the search form, so it must escape the input/button grid. */
+.search-experience form > div.search-suggestions { display: flex; grid-template-columns: none; border: 0; }

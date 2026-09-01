@@ -118,21 +118,24 @@ export function EditorialArticle({
         <aside className="article-aside">
           {ledger && grade ? (
             <div className="ledger-box">
-              <h2>The claim ledger</h2>
+              <h2>The evidence grade</h2>
               <dl>
                 <div>
-                  <dt>Evidence</dt>
+                  <dt>This claim</dt>
                   <dd>
                     <b>{gradeDefinitions[grade].code}</b> {gradeDefinitions[grade].label}. {ledger.signal}.
                   </dd>
                 </div>
                 <div>
-                  <dt>Why it matters</dt>
-                  <dd>{ledger.whyItMatters}</dd>
+                  <dt>What the grade means</dt>
+                  <dd>{gradeDefinitions[grade].description}</dd>
                 </div>
                 <div>
-                  <dt>The limit</dt>
-                  <dd>{ledger.limitations}</dd>
+                  <dt>What it does not mean</dt>
+                  <dd>
+                    A verdict on the ingredient, brand, country, or category. Grades travel with the exact claim.{" "}
+                    <Link href={`/methodology#grade-${grade.toLowerCase()}`}>How grading works →</Link>
+                  </dd>
                 </div>
               </dl>
             </div>
