@@ -3,9 +3,9 @@ import type { EvidenceGrade, StoryKind } from "./types";
 /** The dated edition shown in the utility bar, footer, and feeds. Update when a new edition ships. */
 export const EDITION = {
   volume: "01",
-  number: "001",
-  date: "2026-09-01",
-  label: "September 1, 2026",
+  number: "002",
+  date: "2026-09-02",
+  label: "September 2, 2026",
 };
 
 export const LAST_REVIEWED = EDITION.label;
