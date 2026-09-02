@@ -11,6 +11,14 @@ export function canonical(path: string): NonNullable<Metadata["alternates"]> {
   };
 }
 
+/** Trim a description to search-snippet length on a word boundary; never cuts mid-word. */
+export function metaDescription(text: string, limit = 155) {
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (clean.length <= limit) return clean;
+  const cut = clean.slice(0, limit - 1);
+  return `${cut.slice(0, Math.max(cut.lastIndexOf(" "), 80))}…`;
+}
+
 export function breadcrumbs(base: string, trail: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",

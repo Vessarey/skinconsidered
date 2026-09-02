@@ -16,7 +16,7 @@ export default function PrivacyPage() {
       </header>
       <div className="policy-layout">
         <aside>
-          <p>No advertising pixels or third-party analytics are included in this local build.</p>
+          <p>No advertising pixels. Page-view counts are collected without cookies or cross-site identifiers; details below.</p>
         </aside>
         <article>
           <h2 id="newsletter">Newsletter</h2>
@@ -32,8 +32,10 @@ export default function PrivacyPage() {
           </p>
           <h2>Analytics</h2>
           <p>
-            This build does not install analytics. A privacy-respecting measurement plan should define page views, source attribution, newsletter
-            conversion, and returning-reader metrics without collecting sensitive skincare concerns by default.
+            The site uses Vercel Web Analytics to count page views and referrers. It sets no cookies, stores no IP addresses, and does not build cross-site
+            profiles; visitors are counted with a short-lived hash that resets daily. We use the aggregate counts to see which files readers open, where they
+            arrive from, and which pages lead to a newsletter signup. We do not record what you search for on this site, and we do not collect skincare
+            concerns or health information.
           </p>
           <h2>Advertising and affiliates</h2>
           <p>

@@ -17,7 +17,7 @@ import {
   resolveRelated,
   siteUrl,
 } from "@/lib/content";
-import { breadcrumbs, canonical } from "@/lib/seo";
+import { breadcrumbs, canonical, metaDescription } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
   return {
     title: `${profile.name}: cost, downtime, evidence, and risks`,
-    description: `${profile.purpose} U.S. cost context, sessions, healing timeline, realistic benefits, serious risks, who should pause, and primary sources.`,
+    description: metaDescription(`${profile.cost}. ${profile.purpose} Sessions, downtime, evidence grade, risks, and sources.`),
     alternates: canonical(`/procedures/${profile.slug}`),
     openGraph: {
       type: "article",

@@ -5,7 +5,7 @@ import { canonical } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "What we cover and where it comes from",
-  description: "The Skin Considered coverage taxonomy, the jurisdictions on file, the source registry with its in-use and watchlist status, and how a source becomes a published file.",
+  description: "The coverage taxonomy, jurisdictions on file, the source registry with in-use and watchlist status, and how a source becomes a published file.",
   alternates: canonical("/coverage"),
 };
 

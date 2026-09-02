@@ -18,7 +18,7 @@ import {
   resolveRelated,
   siteUrl,
 } from "@/lib/content";
-import { breadcrumbs, canonical } from "@/lib/seo";
+import { breadcrumbs, canonical, metaDescription } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!ingredient) return {};
   return {
     title: `${ingredient.name}: uses, strength, evidence, and side effects`,
-    description: `${ingredient.summary} U.S. status: ${ingredient.status}.`,
+    description: metaDescription(`${ingredient.status}. ${ingredient.summary}`),
     alternates: canonical(`/ingredients/${ingredient.slug}`),
     openGraph: { type: "article", title: `${ingredient.name} — the topical file`, description: ingredient.summary, modifiedTime: lastUpdated(ingredient), section: "Topicals" },
   };
