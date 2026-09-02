@@ -54,7 +54,7 @@ export function NewsletterForm({ source = "site", configured = false }: { source
   }
 
   return (
-    <form className="newsletter-form" onSubmit={submit} noValidate={false}>
+    <form className="newsletter-form" data-source={source} onSubmit={submit} noValidate={false}>
       {!configured && (
         <p className="newsletter-preview-note" role="status">
           <b>Preview.</b> The newsletter provider is not connected yet, so addresses are not stored. You can test the form; nothing is sent.

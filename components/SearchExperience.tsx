@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 import type { SearchItem } from "@/lib/content";
+import { track } from "./PostHogProvider";
 
 function matches(item: SearchItem, words: string[]) {
   const haystack = `${item.title} ${item.description} ${item.type} ${item.terms}`.toLowerCase();
@@ -25,6 +26,8 @@ export function SearchExperience({ items, suggestions }: { items: SearchItem[]; 
   function search(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     syncUrl(query.trim());
+    // Aggregate only: result count and whether it was empty. The query text is never sent.
+    if (words.length) track("site_search", { results: results.length, zero: results.length === 0 });
   }
 
   return (
