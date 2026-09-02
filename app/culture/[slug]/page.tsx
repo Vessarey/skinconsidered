@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EditorialArticle } from "@/components/EditorialArticle";
 import { cultureStories, EDITION, getCultureStory, lastUpdated, readingTime, resolveRelated, siteUrl } from "@/lib/content";
-import { breadcrumbs, canonical, metaDescription } from "@/lib/seo";
+import { breadcrumbs, canonical, metaDescription, schemaDate } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title: story.title,
     description: metaDescription(story.description),
     alternates: canonical(`/culture/${story.slug}`),
-    openGraph: { type: "article", title: story.title, description: story.description, modifiedTime: lastUpdated(story), section: "Practice archive" },
+    openGraph: { type: "article", title: story.title, description: story.description, modifiedTime: schemaDate(lastUpdated(story)), section: "Practice archive" },
   };
 }
 
@@ -36,7 +36,7 @@ export default async function CultureStoryPage({ params }: { params: Params }) {
       "@type": "Article",
       headline: story.title,
       description: story.description,
-      dateModified: lastUpdated(story),
+      dateModified: schemaDate(lastUpdated(story)),
       articleSection: "Practice archive",
       about: story.place,
       mainEntityOfPage: `${base}/culture/${story.slug}`,

@@ -5,7 +5,7 @@ import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { NewsletterPanel } from "@/components/NewsletterPanel";
 import { RelatedFiles } from "@/components/RelatedFiles";
 import { formatLongDate, getTrend, gradeDefinitions, lastUpdated, resolveRelated, siteUrl, trends } from "@/lib/content";
-import { breadcrumbs, canonical, metaDescription } from "@/lib/seo";
+import { breadcrumbs, canonical, metaDescription, schemaDate } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title: `${trend.name}: does it work?`,
     description: metaDescription(`Verdict: ${trend.verdict}. ${trend.whatItIs} The claim: ${trend.claim}`),
     alternates: canonical(`/trends/${trend.slug}`),
-    openGraph: { type: "article", title: `${trend.name}: what the evidence says`, description: trend.claim, modifiedTime: lastUpdated(trend), section: "Trends" },
+    openGraph: { type: "article", title: `${trend.name}: what the evidence says`, description: trend.claim, modifiedTime: schemaDate(lastUpdated(trend)), section: "Trends" },
   };
 }
 
@@ -42,7 +42,7 @@ export default async function TrendPage({ params }: { params: Params }) {
       "@type": "Article",
       headline: `${trend.name}: does it work?`,
       description: trend.claim,
-      dateModified: lastUpdated(trend),
+      dateModified: schemaDate(lastUpdated(trend)),
       articleSection: "Trends",
       mainEntityOfPage: `${base}/trends/${trend.slug}`,
       image: [`${base}/trends/${trend.slug}/opengraph-image`],

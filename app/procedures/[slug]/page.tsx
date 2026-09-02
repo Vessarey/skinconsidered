@@ -17,7 +17,7 @@ import {
   resolveRelated,
   siteUrl,
 } from "@/lib/content";
-import { breadcrumbs, canonical, metaDescription } from "@/lib/seo";
+import { breadcrumbs, canonical, metaDescription, schemaDate } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       type: "article",
       title: `${profile.name} — what to know before you book`,
       description: profile.summary,
-      modifiedTime: lastUpdated(profile),
+      modifiedTime: schemaDate(lastUpdated(profile)),
       section: profile.category,
       tags: [profile.category, ...profile.concerns],
     },
@@ -64,7 +64,7 @@ export default async function ProcedurePage({ params }: { params: Params }) {
       "@type": "Article",
       headline: `${profile.name}: cost, downtime, evidence, and risks`,
       description: profile.summary,
-      dateModified: lastUpdated(profile),
+      dateModified: schemaDate(lastUpdated(profile)),
       articleSection: "Procedures",
       mainEntityOfPage: `${base}/procedures/${profile.slug}`,
       image: [`${base}/procedures/${profile.slug}/opengraph-image`],

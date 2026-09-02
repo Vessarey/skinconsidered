@@ -71,7 +71,7 @@ function watchNewsletterPanels() {
         observer.unobserve(entry.target);
       }
     },
-    { threshold: 0.5 },
+    { threshold: 0.2 },
   );
   document.querySelectorAll(".newsletter-panel, .footer-newsletter").forEach((panel) => observer.observe(panel));
   return () => observer.disconnect();

@@ -31,3 +31,12 @@ export function breadcrumbs(base: string, trail: { name: string; path: string }[
     })),
   };
 }
+
+/**
+ * Schema.org and Open Graph want ISO 8601 with a timezone; content files store
+ * plain dates. Publication and review dates are recorded as calendar days in
+ * UTC, so midnight UTC is the honest expansion. Already-qualified values pass through.
+ */
+export function schemaDate(date: string) {
+  return /T/.test(date) ? date : `${date}T00:00:00+00:00`;
+}

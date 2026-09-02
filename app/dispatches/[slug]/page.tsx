@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EditorialArticle } from "@/components/EditorialArticle";
 import { deskLabel, getStory, lastUpdated, readingTime, resolveRelated, siteUrl, stories } from "@/lib/content";
-import { breadcrumbs, canonical, metaDescription } from "@/lib/seo";
+import { breadcrumbs, canonical, metaDescription, schemaDate } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -23,8 +23,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       type: "article",
       title: story.headline,
       description: story.dek,
-      publishedTime: story.date,
-      modifiedTime: lastUpdated(story),
+      publishedTime: schemaDate(story.date),
+      modifiedTime: schemaDate(lastUpdated(story)),
       section: story.category,
       tags: [story.region, story.location, deskLabel(story.kind), story.category],
     },
@@ -46,8 +46,8 @@ export default async function DispatchPage({ params }: { params: Params }) {
       "@type": "NewsArticle",
       headline: story.headline,
       description: story.dek,
-      datePublished: story.date,
-      dateModified: modified,
+      datePublished: schemaDate(story.date),
+      dateModified: schemaDate(modified),
       articleSection: story.category,
       mainEntityOfPage: `${base}/dispatches/${story.slug}`,
       image: [`${base}/dispatches/${story.slug}/opengraph-image`],
