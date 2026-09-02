@@ -45,13 +45,13 @@ export default function AboutPage() {
             <li>No affiliate links. A procedure or ingredient file never earns money when you buy or book.</li>
             <li>Sponsorship, if it comes, is labeled at the placement and kept out of evidence grades, corrections, rankings, and the newsletter body.</li>
             <li>Membership, if it comes, buys tools and access, never a different verdict.</li>
-            <li>Analytics, if connected, will be privacy-respecting and will not profile readers by skin concern by default.</li>
+            <li>Analytics is cookieless and aggregate: no session recording, no autocapture, no profiling of readers by skin concern. The <Link href="/privacy">privacy page</Link> lists exactly what is collected.</li>
           </ul>
           <div className="policy-callout">
             <b>Current status</b>
             <p>
               This is the founding edition. The newsletter form is provider-ready but says “preview” on every placement until a subscriber platform, double
-              opt-in, and privacy workflow are connected. No analytics, sponsorships, or memberships are active. Correction intake is not yet live. The{" "}
+              opt-in, and privacy workflow are connected. Cookieless analytics are active; no sponsorships or memberships are. Correction intake is not yet live. The{" "}
               <Link href="/coverage">coverage page</Link> shows which sources are cited and which are only watched.
             </p>
           </div>
