@@ -32,10 +32,12 @@ export default function PrivacyPage() {
           </p>
           <h2>Analytics</h2>
           <p>
-            The site uses Vercel Web Analytics to count page views and referrers. It sets no cookies, stores no IP addresses, and does not build cross-site
-            profiles; visitors are counted with a short-lived hash that resets daily. We use the aggregate counts to see which files readers open, where they
-            arrive from, and which pages lead to a newsletter signup. We do not record what you search for on this site, and we do not collect skincare
-            concerns or health information.
+            The site uses two measurement tools, both configured to collect as little as possible. Vercel Web Analytics counts page views and referrers with
+            no cookies and no stored IP addresses. PostHog records page views, page exits, and whether a newsletter form submission succeeded (never the
+            address typed). It is configured without cookies (a random identifier is kept in your browser&apos;s local storage), without session recording,
+            without automatic click or form capture, and it honors your browser&apos;s Do Not Track setting. We use the aggregate counts to see which files
+            readers open, where they arrive from, and which pages lead to a signup. We do not record what you search for on this site, and we do not collect
+            skincare concerns or health information.
           </p>
           <h2>Advertising and affiliates</h2>
           <p>

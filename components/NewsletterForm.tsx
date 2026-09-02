@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useId, useState } from "react";
 import { NEWSLETTER } from "@/content/site";
+import { track } from "./PostHogProvider";
 
 type FormState = "idle" | "submitting" | "success" | "error" | "preview";
 
@@ -36,16 +37,19 @@ export function NewsletterForm({ source = "site", configured = false }: { source
       if (result.preview) {
         setStatus("preview");
         setMessage(result.message ?? "Signup is in preview mode.");
+        track("newsletter_submit", { source, outcome: "preview" });
         return;
       }
 
       if (!response.ok) throw new Error(result.message ?? "Please try again.");
       setStatus("success");
       setMessage(result.message ?? "Request received.");
+      track("newsletter_submit", { source, outcome: "success" });
       formElement.reset();
     } catch (error) {
       setStatus("error");
       setMessage(error instanceof Error ? error.message : "Please try again.");
+      track("newsletter_submit", { source, outcome: "error" });
     }
   }
 
