@@ -81,15 +81,16 @@ export default async function DispatchPage({ params }: { params: Params }) {
           `${reading.label} read`,
         ]}
         quickRead={[
-          { label: "What happened", text: story.dek },
+          { label: "Bottom line", text: story.dek },
           { label: "Why it matters", text: story.whyItMatters },
-          { label: "Keep in mind", text: story.limitations },
+          { label: "What we don't know", text: story.limitations },
         ]}
         related={resolveRelated(story.related)}
         sections={story.sections}
         sources={story.sources}
         title={story.headline}
         updates={story.updates}
+        showVisual={false}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
     </>

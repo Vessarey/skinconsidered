@@ -6,7 +6,7 @@ import { canonical } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Search the archive",
-  description: "Search Skin Considered news, guides, ingredient files, and cultural history.",
+  description: "Search Skin Considered news, procedure comparisons, guides, ingredient files, and cultural history.",
   alternates: canonical("/search"),
   // Query pages should not compete with the files they point to.
   robots: { index: false, follow: true },

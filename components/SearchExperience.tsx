@@ -30,7 +30,7 @@ export function SearchExperience({ items, suggestions }: { items: SearchItem[]; 
   return (
     <div className="search-experience">
       <form action="/search" method="get" onSubmit={search} role="search">
-        <label htmlFor="site-search">Search articles, guides, ingredients, or places</label>
+        <label htmlFor="site-search">Search news, procedures, guides, ingredients, or places</label>
         <div>
           <input
             autoFocus

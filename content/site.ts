@@ -19,6 +19,18 @@ export function siteUrl() {
   return (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
 }
 
+/**
+ * The newsletter as promised on the site. Sending only starts once a provider
+ * is connected (see NEWSLETTER_WEBHOOK_URL); until then every form says so.
+ */
+export const NEWSLETTER = {
+  name: "The Daily Considered",
+  cadence: "One short email each weekday morning, plus a Sunday synthesis",
+  promise: "What changed in skincare regulation, safety, research, and procedures—how much it deserves your trust—and what, if anything, to do about it.",
+  bullets: ["Primary sources linked in every item", "Evidence grade on the exact claim, never the brand", "Corrections sent to the same inbox, not buried"],
+  reassurance: "Free. No sponsors in the body of the email. Unsubscribe in one click.",
+} as const;
+
 /** Canonical region order for filters and the world strip. Regions with no dispatches are hidden automatically. */
 export const REGION_ORDER = ["North America", "Latin America", "Europe", "Asia", "Oceania", "Global"] as const;
 
@@ -54,8 +66,10 @@ export const gradeDefinitions: Record<EvidenceGrade, { code: string; label: stri
 
 export const primaryNav = [
   { label: "Today", href: "/today" },
+  { label: "U.S.", href: "/us" },
   { label: "Guides", href: "/guides" },
-  { label: "Ingredients", href: "/ingredients" },
+  { label: "Topicals", href: "/ingredients" },
   { label: "Procedures", href: "/procedures" },
+  { label: "Trends", href: "/trends" },
   { label: "Culture", href: "/culture" },
 ] as const;

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Suspense } from "react";
 import { GlobalFeed } from "@/components/GlobalFeed";
 import { NewsTicker } from "@/components/NewsTicker";
@@ -27,6 +28,11 @@ export default function TodayPage() {
           confident the evidence lets us be.
         </p>
       </header>
+      <div className="today-us-link">
+        <span>Looking for U.S. information?</span>
+        <p>Start with FDA alerts, current cosmetic rules, and plain-language next steps.</p>
+        <Link href="/us">Open the U.S. essentials desk →</Link>
+      </div>
       <Suspense fallback={<p className="search-loading">Opening the wire…</p>}>
         <GlobalFeed desks={desks.map(deskLabel)} regions={[...regions]} stories={wireItems} />
       </Suspense>

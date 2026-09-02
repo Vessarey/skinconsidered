@@ -2,10 +2,15 @@
 
 import Link from "next/link";
 import { FormEvent, useId, useState } from "react";
+import { NEWSLETTER } from "@/content/site";
 
 type FormState = "idle" | "submitting" | "success" | "error" | "preview";
 
-export function NewsletterForm({ source = "site" }: { source?: string }) {
+/**
+ * `configured` is decided on the server from NEWSLETTER_WEBHOOK_URL. When it is
+ * false the form says so before anyone types, and the API confirms it after.
+ */
+export function NewsletterForm({ source = "site", configured = false }: { source?: string; configured?: boolean }) {
   const [status, setStatus] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
   const id = useId();
@@ -46,6 +51,11 @@ export function NewsletterForm({ source = "site" }: { source?: string }) {
 
   return (
     <form className="newsletter-form" onSubmit={submit} noValidate={false}>
+      {!configured && (
+        <p className="newsletter-preview-note" role="status">
+          <b>Preview.</b> The newsletter provider is not connected yet, so addresses are not stored. You can test the form; nothing is sent.
+        </p>
+      )}
       <label htmlFor={`${id}-email`}>Email address</label>
       <div>
         <input
@@ -59,7 +69,7 @@ export function NewsletterForm({ source = "site" }: { source?: string }) {
           required
         />
         <button disabled={status === "submitting"} type="submit">
-          {status === "submitting" ? "Sending…" : "Subscribe"}
+          {status === "submitting" ? "Sending…" : configured ? "Subscribe" : "Test signup"}
         </button>
       </div>
       {/* Honeypot: hidden from people, filled by bots, rejected by the API. */}
@@ -70,7 +80,7 @@ export function NewsletterForm({ source = "site" }: { source?: string }) {
       <p className={`form-message ${status}`} id={`${id}-message`} aria-live="polite">
         {message || (
           <>
-            One considered briefing each Sunday. Free. Unsubscribe anytime. <Link href="/privacy#newsletter">How we handle your address</Link>.
+            {NEWSLETTER.cadence}. {NEWSLETTER.reassurance} <Link href="/privacy#newsletter">How we handle your address</Link>.
           </>
         )}
       </p>

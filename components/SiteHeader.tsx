@@ -29,7 +29,7 @@ export function SiteHeader() {
           <p>
             Skincare news, considered carefully.
             <br />
-            Global reporting · practical education · no miracle language.
+            Global reporting · practical education.
           </p>
           <PrimaryNav />
         </div>

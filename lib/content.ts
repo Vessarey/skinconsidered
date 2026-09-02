@@ -1,6 +1,11 @@
+import { concernGuides } from "@/content/concerns";
+import { sourceRegistry, taxonomy } from "@/content/coverage";
 import { cultureStories as cultureRecords } from "@/content/culture";
+import { aspsFees2022, PRICE_SURVEY_DATE, priceMenus, priceMenuSource } from "@/content/price-survey";
+import { procedurePrices } from "@/content/procedure-prices";
 import { guides as guideRecords } from "@/content/guides";
 import { ingredients } from "@/content/ingredients";
+import { procedureProfiles as procedureRecords } from "@/content/procedures";
 import {
   DESKS,
   EDITION,
@@ -9,28 +14,67 @@ import {
   REGION_ORDER,
 } from "@/content/site";
 import { stories as storyRecords } from "@/content/stories";
+import { trends } from "@/content/trends";
 import type {
   CultureStory as CultureRecord,
+  DepthTarget,
   Guide as GuideRecord,
+  Ingredient,
+  ProcedureCategory,
+  ProcedureConcern,
+  ProcedureProfile,
   Related,
+  SourceRegistryEntry,
+  SourceStatus,
   Story as StoryRecord,
 } from "@/content/types";
 
 export type {
   AccentColor,
+  AdvertisedPrice,
+  ConcernGuide,
+  DepthTarget,
+  MediaImage,
+  PriceMenu,
+  CostBand,
   CultureStory as CultureStoryRecord,
+  DowntimeBand,
   EvidenceGrade,
   FileUpdate,
   Guide as GuideRecord,
   Ingredient,
+  ProcedureCategory,
+  ProcedureConcern,
+  ProcedureKind,
+  ProcedureMetric,
+  ProcedureProfile,
+  ProcedureSetting,
   Related,
   Source,
+  SourceRegistryEntry,
+  SourceStatus,
   Story as StoryRecord,
   StoryKind,
   StorySection,
+  TaxonomyTopic,
+  TopicalStatus,
+  TopicalUse,
+  Trend,
+  TrendCategory,
+  TrendVerdict,
 } from "@/content/types";
 
-export { gradeDefinitions, ingredients, LAST_REVIEWED };
+export { gradeDefinitions, ingredients, LAST_REVIEWED, taxonomy, trends };
+
+export function getTrend(slug: string) {
+  return trends.find((trend) => trend.slug === slug);
+}
+
+export const TREND_CATEGORY_ORDER = ["Routine", "Ingredient", "Device", "Supplement", "Procedure", "Safety"] as const;
+export const TREND_VERDICT_ORDER = ["Reasonable", "Harmless, low value", "Needs care", "Avoid"] as const;
+
+/** Ingredient families in display order, derived from the files. */
+export const ingredientFamilies = [...new Set(ingredients.map((ingredient) => ingredient.family))];
 export { EDITION };
 export const LAST_REVIEWED_ISO = EDITION.date;
 
@@ -38,6 +82,158 @@ type WithReadTime<T> = T & { readTime: string };
 export type Story = WithReadTime<StoryRecord>;
 export type Guide = WithReadTime<GuideRecord>;
 export type CultureStory = WithReadTime<CultureRecord>;
+
+/** Canonical display order for procedure families. Categories with no profiles are hidden automatically. */
+export const PROCEDURE_CATEGORY_ORDER: ProcedureCategory[] = [
+  "Facials & spa treatments",
+  "Peels & exfoliation",
+  "Injectables",
+  "Needling",
+  "Lasers & light",
+  "Tightening & lifting",
+  "Body contouring",
+  "Hair & scalp",
+  "Intimate health",
+  "Surgical (face)",
+  "Adjuncts",
+];
+
+export const PROCEDURE_CONCERN_ORDER: ProcedureConcern[] = [
+  "Lines & wrinkles",
+  "Volume & contour",
+  "Texture & pores",
+  "Acne & congestion",
+  "Scars",
+  "Pigment & dark spots",
+  "Redness & vessels",
+  "Laxity & lifting",
+  "Hair reduction",
+  "Dullness & hydration",
+  "Sun damage & precancerous spots",
+  "Fat & body contour",
+  "Hair loss",
+  "Tattoos",
+  "Excess skin & jowls",
+  "Intimate health",
+];
+
+const categoryRank = (category: ProcedureCategory) => PROCEDURE_CATEGORY_ORDER.indexOf(category);
+
+/**
+ * Profiles with the advertised-price survey merged in. A profile whose
+ * published cost is "No reliable estimate" takes its cost band from the
+ * survey range, so the explorer's cost filter still works for it.
+ */
+export const procedureProfiles: ProcedureProfile[] = procedureRecords
+  .slice()
+  .sort((a, b) => categoryRank(a.category) - categoryRank(b.category) || procedureRecords.indexOf(a) - procedureRecords.indexOf(b))
+  .map((profile) => {
+    const price = procedurePrices[profile.slug];
+    if (!price) return profile;
+    const { band, ...advertised } = price;
+    return { ...profile, advertised, costBand: profile.costBand === "No reliable estimate" ? band : profile.costBand };
+  });
+
+export { aspsFees2022, concernGuides, PRICE_SURVEY_DATE, priceMenus };
+
+/** Sources for a profile's advertised range: the named menus it was read from. */
+export function advertisedSources(profile: ProcedureProfile) {
+  return (profile.advertised?.menus ?? []).map(priceMenuSource).filter((source): source is NonNullable<typeof source> => Boolean(source));
+}
+
+/** Default depth targets by category, overridable per profile with `targets`. */
+const CATEGORY_TARGETS: Record<ProcedureCategory, DepthTarget[]> = {
+  "Facials & spa treatments": ["surface"],
+  "Peels & exfoliation": ["surface", "epidermis"],
+  Injectables: ["dermis", "fat"],
+  Needling: ["epidermis", "dermis"],
+  "Lasers & light": ["epidermis", "dermis"],
+  "Tightening & lifting": ["dermis", "smas"],
+  "Body contouring": ["fat"],
+  "Hair & scalp": ["follicle"],
+  "Intimate health": ["epidermis", "dermis"],
+  "Surgical (face)": ["smas", "fat"],
+  Adjuncts: ["dermis"],
+};
+
+const PROCEDURE_TARGET_OVERRIDES: Record<string, DepthTarget[]> = {
+  "led-light-therapy": ["epidermis", "dermis"],
+  "photodynamic-therapy": ["epidermis", "dermis"],
+  "deep-chemical-peel": ["epidermis", "dermis"],
+  "medium-chemical-peel": ["epidermis", "dermis"],
+  neuromodulators: ["muscle"],
+  "deoxycholic-acid": ["fat"],
+  "skin-boosters": ["dermis"],
+  "ipl-photofacial": ["vessels", "epidermis"],
+  "vascular-pigment-lasers": ["vessels"],
+  "laser-tattoo-removal": ["dermis"],
+  "laser-hair-removal": ["follicle"],
+  electrolysis: ["follicle"],
+  sclerotherapy: ["vessels"],
+  "electromagnetic-muscle-stimulation": ["muscle"],
+  "subdermal-rf-tightening": ["fat", "dermis"],
+  "thread-lift": ["fat", "dermis"],
+  "plla-buttock-augmentation": ["fat"],
+  "prp-hair-loss": ["follicle"],
+  "hair-transplant": ["follicle"],
+  "hydrafacial-keravive": ["surface", "follicle"],
+  blepharoplasty: ["fat", "surface"],
+  "buccal-fat-removal": ["fat"],
+  "facelift-neck-lift": ["smas", "surface"],
+  "prp-adjunct": ["dermis"],
+};
+
+export function procedureTargets(profile: ProcedureProfile): DepthTarget[] {
+  return profile.targets ?? PROCEDURE_TARGET_OVERRIDES[profile.slug] ?? CATEGORY_TARGETS[profile.category];
+}
+
+const FAMILY_TARGETS: Record<string, DepthTarget[]> = {
+  "Vitamin A derivatives": ["epidermis", "dermis"],
+  "Antimicrobial acne actives": ["surface", "follicle"],
+  "Hydroxy acids": ["surface", "epidermis"],
+  "Hormonal acne actives": ["follicle"],
+  "Anti-inflammatory acne actives": ["epidermis"],
+  "Dicarboxylic acid": ["epidermis", "follicle"],
+  "Tyrosinase inhibitors": ["epidermis"],
+  "Pigment modulators": ["epidermis"],
+  Antioxidants: ["epidermis"],
+  "Vitamin B3": ["epidermis"],
+  "Rosacea prescriptions": ["epidermis", "follicle"],
+  "Barrier lipids": ["surface"],
+  Humectants: ["surface"],
+  Occlusives: ["surface"],
+  "Humectants and keratolytics": ["surface"],
+  Osmolytes: ["surface"],
+  "UV filters": ["surface"],
+  "Cosmeceutical actives": ["surface", "epidermis"],
+  "Topical JAK inhibitors": ["epidermis"],
+  "Hair growth actives": ["follicle"],
+};
+
+export function ingredientTargets(ingredient: Ingredient): DepthTarget[] {
+  return ingredient.targets ?? FAMILY_TARGETS[ingredient.family] ?? ["surface"];
+}
+
+/** A concern guide with its ingredient slugs resolved to files. */
+export function concernGuideEntries() {
+  return concernGuides.map((guide) => ({
+    ...guide,
+    firstLine: guide.firstLine.map((item) => ({ ...item, file: getIngredient(item.ingredient) })).filter((item) => item.file),
+    alsoUseful: guide.alsoUseful.map((item) => ({ ...item, file: getIngredient(item.ingredient) })).filter((item) => item.file),
+  }));
+}
+
+export const procedureCategories = PROCEDURE_CATEGORY_ORDER.filter((category) => procedureProfiles.some((profile) => profile.category === category));
+export const procedureConcerns = PROCEDURE_CONCERN_ORDER.filter((concern) => procedureProfiles.some((profile) => profile.concerns.includes(concern)));
+
+export function getProcedure(slug: string) {
+  return procedureProfiles.find((profile) => profile.slug === slug);
+}
+
+/** ISO date → "September 1, 2026" in UTC, matching the audit's label check. */
+export function formatLongDate(iso: string) {
+  return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+}
 
 function wordsIn(value: unknown) {
   return JSON.stringify(value)
@@ -106,8 +302,8 @@ function effectiveDate(item: StoryRecord) {
   return latestUpdate(item.updates)?.date ?? item.date;
 }
 
-export function lastUpdated(item: { date?: string; updates?: { date: string }[] }) {
-  return item.updates?.slice().sort((a, b) => b.date.localeCompare(a.date))[0]?.date ?? item.date ?? EDITION.date;
+export function lastUpdated(item: { date?: string; reviewed?: string; updates?: { date: string }[] }) {
+  return item.updates?.slice().sort((a, b) => b.date.localeCompare(a.date))[0]?.date ?? item.reviewed ?? item.date ?? EDITION.date;
 }
 
 export function deskLabel(kind: StoryRecord["kind"]) {
@@ -183,7 +379,15 @@ export function getRelatedFiles(related?: Related): RelatedFile[] {
   }
   for (const slug of related.ingredients ?? []) {
     const item = getIngredient(slug);
-    if (item) files.push({ kind: "Ingredient", title: item.name, href: `/ingredients#${slug}`, meta: item.family });
+    if (item) files.push({ kind: "Topical", title: item.name, href: `/ingredients/${slug}`, meta: `${item.family} · ${item.status}` });
+  }
+  for (const slug of related.procedures ?? []) {
+    const item = getProcedure(slug);
+    if (item) files.push({ kind: "Procedure", title: item.name, href: `/procedures/${slug}`, meta: `${item.category} · Grade ${gradeDefinitions[item.evidenceGrade].code}` });
+  }
+  for (const slug of related.trends ?? []) {
+    const item = getTrend(slug);
+    if (item) files.push({ kind: "Trend", title: item.name, href: `/trends/${slug}`, meta: `${item.category} · ${item.verdict}` });
   }
   return files;
 }
@@ -215,6 +419,21 @@ export function allUpdates(): UpdateEntry[] {
   for (const story of cultureStories) {
     for (const update of story.updates ?? []) {
       entries.push({ ...update, desk: "Practice archive", title: story.title, href: `/culture/${story.slug}` });
+    }
+  }
+  for (const profile of procedureProfiles) {
+    for (const update of profile.updates ?? []) {
+      entries.push({ ...update, desk: "Procedures", title: profile.name, href: `/procedures/${profile.slug}` });
+    }
+  }
+  for (const ingredient of ingredients) {
+    for (const update of ingredient.updates ?? []) {
+      entries.push({ ...update, desk: "Topicals", title: ingredient.name, href: `/ingredients/${ingredient.slug}` });
+    }
+  }
+  for (const trend of trends) {
+    for (const update of trend.updates ?? []) {
+      entries.push({ ...update, desk: "Trends", title: trend.name, href: `/trends/${trend.slug}` });
     }
   }
   return entries.sort((a, b) => b.date.localeCompare(a.date));
@@ -294,12 +513,103 @@ export const searchableItems = [
     terms: `${item.place} ${item.era} culture history`,
   })),
   ...ingredients.map((item) => ({
-    href: `/ingredients#${item.slug}`,
-    type: "Ingredient file",
+    href: `/ingredients/${item.slug}`,
+    type: `Topical · ${item.status}`,
     title: item.name,
     description: item.summary,
-    terms: `${item.family} ${item.jobs.join(" ")} ${(item.aliases ?? []).join(" ")}`,
+    terms: [item.family, ...item.jobs, ...(item.aliases ?? []), ...item.forms, ...item.uses.map((use) => use.use), item.trendNote ?? ""].join(" "),
+  })),
+  ...trends.map((item) => ({
+    href: `/trends/${item.slug}`,
+    type: `Trend · ${item.category} · ${item.verdict}`,
+    title: item.name,
+    description: item.claim,
+    terms: [...(item.aliases ?? []), item.whatItIs, item.evidence, item.verdict].join(" "),
+  })),
+  ...procedureProfiles.map((item) => ({
+    href: `/procedures/${item.slug}`,
+    type: `Procedure · ${item.category}${item.kind === "branded" ? " · Brand" : ""}`,
+    title: item.name,
+    description: item.summary,
+    terms: [
+      ...(item.aliases ?? []),
+      ...item.goals,
+      ...item.concerns,
+      item.kind,
+      item.setting,
+      item.purpose,
+      item.evidence,
+      item.cost,
+      item.sessions,
+      item.downtime,
+      item.results,
+      item.duration,
+      ...item.benefits,
+      ...item.tradeoffs,
+      ...item.majorRisks,
+    ].join(" "),
   })),
 ] satisfies SearchItem[];
 
-export const searchSuggestions = ["sunscreen", "routine", "retinoids", "procedures", "Japan"];
+export const searchSuggestions = ["tazarotene", "azelaic acid", "slugging", "Botox", "HydraFacial", "melasma", "Japan"];
+
+// ------------------------------------------------------------------
+// Coverage: what the desk tracks, and which sources are actually cited.
+// ------------------------------------------------------------------
+
+export type SourceCoverage = SourceRegistryEntry & { cited: number; status: SourceStatus };
+
+function hostOf(url: string) {
+  try {
+    return new URL(url).hostname.toLowerCase();
+  } catch {
+    return "";
+  }
+}
+
+/** Every source URL on file across dispatches, guides, culture files, and procedure profiles. */
+export function allSourceUrls() {
+  return [...stories, ...guides, ...cultureStories, ...procedureProfiles, ...ingredients, ...trends].flatMap((item) => item.sources.map((source) => source.url));
+}
+
+/** Registry entries with a computed citation count. "In use" is never declared by hand. */
+export function sourceCoverage(): SourceCoverage[] {
+  const hosts = allSourceUrls().map(hostOf);
+  return sourceRegistry.map((entry) => {
+    const cited = hosts.filter((host) => entry.domains.some((domain) => host === domain || host.endsWith(`.${domain}`))).length;
+    return { ...entry, cited, status: cited > 0 ? "In use" : "Watchlist" };
+  });
+}
+
+export type JurisdictionCoverage = {
+  location: string;
+  region: string;
+  count: number;
+  desks: string[];
+  latest: string;
+  latestLabel: string;
+};
+
+/** Where current dispatches come from, computed from the files themselves. */
+export function jurisdictionCoverage(): JurisdictionCoverage[] {
+  const byLocation = new Map<string, JurisdictionCoverage>();
+  for (const story of storiesByDate) {
+    const existing = byLocation.get(story.location);
+    const desk = deskLabel(story.kind);
+    if (existing) {
+      existing.count += 1;
+      if (!existing.desks.includes(desk)) existing.desks.push(desk);
+    } else {
+      byLocation.set(story.location, {
+        location: story.location,
+        region: story.region,
+        count: 1,
+        desks: [desk],
+        latest: effectiveDate(story),
+        latestLabel: formatLongDate(effectiveDate(story)),
+      });
+    }
+  }
+  const regionRank = (region: string) => REGION_ORDER.indexOf(region as (typeof REGION_ORDER)[number]);
+  return [...byLocation.values()].sort((a, b) => regionRank(a.region) - regionRank(b.region) || b.count - a.count);
+}

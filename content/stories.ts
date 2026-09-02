@@ -51,6 +51,159 @@ export const stories: Story[] = [
     ],
   },
   {
+    slug: "us-skin-lightening-mercury-warning-2026",
+    related: { dispatches: ["us-cosmetics-mocra-listing-2026", "bemotrizinol-us-sunscreen-filter"] },
+    kind: "safety",
+    category: "Consumer warning",
+    region: "North America",
+    location: "United States",
+    headline: "FDA testing found high mercury levels in a skin-lightening product",
+    shortHeadline: "FDA warns about mercury in La Crema De Rebeca",
+    dek: "FDA laboratory testing found high mercury levels in La Crema De Rebeca. The agency says repeated skin exposure can cause serious, potentially permanent kidney and neurologic harm.",
+    date: "2026-05-14",
+    dateLabel: "May 14, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "FDA laboratory finding and warning letter",
+    whyItMatters: "Mercury was not disclosed on the product label, so a shopper could not identify this risk from the ingredient list.",
+    limitations: "The warning letter names one product and company. It does not establish that every skin-lightening product contains mercury, and it is not a recall notice.",
+    sources: [
+      {
+        label: "U.S. Food and Drug Administration — La Crema De Rebeca warning letter",
+        url: "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/warning-letters/la-crema-de-rebeca-728782-05142026",
+        published: "May 14, 2026",
+      },
+      {
+        label: "FDA consumer warning — skin products containing mercury and/or hydroquinone",
+        url: "https://www.fda.gov/consumers/health-fraud-scams/fda-warns-consumers-skin-products-containing-mercury-andor-hydroquinone",
+      },
+    ],
+    sections: [
+      {
+        heading: "What to do now",
+        paragraphs: [
+          "Do not use La Crema De Rebeca. FDA also advises consumers not to use over-the-counter skin-lightening products and to talk with a clinician about treatment options for dark spots or other pigment concerns.",
+          "If you have used the named product, bring the product name and a photo of its label to a clinician. The FDA consumer page linked below explains the health concerns and lists products the agency has tested.",
+        ],
+      },
+      {
+        heading: "What FDA found",
+        paragraphs: [
+          "FDA said laboratory analysis confirmed high mercury levels in La Crema De Rebeca, a product marketed online for skin treatment and skin lightening. The agency said mercury was not disclosed on the label and described the product as misbranded and an unapproved new drug.",
+          "Repeated skin application can allow mercury to enter the bloodstream. FDA lists kidney damage, neurologic damage, and direct skin injury among the possible harms, with heightened risk for children and pregnant individuals.",
+        ],
+      },
+      {
+        heading: "Keep the scope precise",
+        paragraphs: [
+          "This is strong evidence about the named product because it rests on FDA laboratory analysis. It is not evidence that every product marketed for hyperpigmentation or every product from a particular community or country contains mercury.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "us-cosmetics-mocra-listing-2026",
+    related: { dispatches: ["us-skin-lightening-mercury-warning-2026", "bemotrizinol-us-sunscreen-filter"] },
+    kind: "news",
+    category: "U.S. regulation",
+    region: "North America",
+    location: "United States",
+    headline: "U.S. cosmetic listings pass 1.29 million under MoCRA",
+    shortHeadline: "What 1.29 million U.S. cosmetic listings do—and do not—mean",
+    dek: "FDA reported 16,398 active facility registrations and 1,298,361 active cosmetic product listings as of June 30, 2026. Listing is a traceability requirement, not FDA approval.",
+    date: "2026-06-30",
+    dateLabel: "June 30, 2026",
+    grade: "Context",
+    color: "cobalt",
+    signal: "FDA registration and product-listing data",
+    whyItMatters: "The system gives FDA more information about who makes cosmetics and which products are marketed in the United States.",
+    limitations: "The totals are administrative data, not safety scores. FDA explicitly says registration and listing are neither cosmetic approval nor a promotional certificate.",
+    sources: [
+      {
+        label: "U.S. Food and Drug Administration — cosmetic facility registration and product listing",
+        url: "https://www.fda.gov/cosmetics/registration-listing-cosmetic-product-facilities-and-products",
+        published: "Data as of June 30, 2026",
+      },
+      {
+        label: "FDA — Modernization of Cosmetics Regulation Act of 2022",
+        url: "https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra",
+      },
+    ],
+    sections: [
+      {
+        heading: "The number in plain English",
+        paragraphs: [
+          "Under the Modernization of Cosmetics Regulation Act, covered manufacturers and processors register facilities with FDA, while the responsible person named on a cosmetic label lists each marketed product and its ingredients. Facility registrations are renewed every two years; product listings are updated annually.",
+          "FDA's June 30 snapshot counted 16,398 unique active facility registrations and 1,298,361 unique active cosmetic product listings. Certain small businesses and products covered by drug or device requirements may be exempt.",
+        ],
+      },
+      {
+        heading: "What changed for accountability",
+        paragraphs: [
+          "MoCRA also requires responsible persons to report serious adverse events to FDA within 15 business days and to maintain records supporting adequate safety substantiation. It gives FDA new records-access and mandatory-recall authorities under defined conditions.",
+          "The law does not require one specific safety test for every cosmetic product or ingredient. Companies remain responsible for ensuring safety, and FDA can act against adulterated or misbranded products.",
+        ],
+      },
+      {
+        heading: "What the label cannot claim",
+        paragraphs: [
+          "A facility number or product listing does not mean FDA tested, approved, or endorses a cosmetic. FDA says it does not issue certificates for cosmetic registrations or listings, so a seller should not use listing as an approval badge.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "us-rf-microneedling-safety-communication",
+    related: { guides: ["procedure-safety-checklist"], dispatches: ["picosecond-laser-adjunct-skincare-trial"] },
+    kind: "safety",
+    category: "Procedure safety",
+    region: "North America",
+    location: "United States",
+    headline: "FDA is evaluating serious complications reported after RF microneedling",
+    shortHeadline: "What the FDA RF microneedling warning means for patients",
+    dek: "FDA says it received reports of burns, scarring, fat loss, disfigurement, and nerve damage with certain uses of radiofrequency microneedling devices.",
+    date: "2025-10-15",
+    dateLabel: "October 15, 2025",
+    grade: "A",
+    color: "violet",
+    signal: "FDA medical-device safety communication",
+    whyItMatters: "The communication turns a trend-driven treatment decision into a concrete discussion about the provider, exact device, risks, and complication plan.",
+    limitations: "Adverse-event reports do not show how often complications occur or establish that every device or use has the same risk. FDA says its evaluation is ongoing.",
+    sources: [
+      {
+        label: "U.S. Food and Drug Administration — RF microneedling safety communication",
+        url: "https://www.fda.gov/medical-devices/safety-communications/potential-risks-certain-uses-radiofrequency-rf-microneedling-fda-safety-communication",
+        published: "October 15, 2025",
+      },
+      {
+        label: "FDA — Microneedling Devices",
+        url: "https://www.fda.gov/medical-devices/aesthetic-cosmetic-devices/microneedling-devices",
+      },
+    ],
+    sections: [
+      {
+        heading: "Before you book",
+        paragraphs: [
+          "Treat radiofrequency microneedling as a medical procedure. FDA recommends choosing a licensed healthcare provider who is trained and experienced with the procedure and asking which exact device will be used.",
+          "Ask what complications are possible for your skin and treatment area, what recovery should look like, and who will treat a problem. FDA says RF microneedling devices should not be used at home.",
+        ],
+      },
+      {
+        heading: "What FDA reported",
+        paragraphs: [
+          "The safety communication names burns, scarring, fat loss, disfigurement, and nerve damage among serious complications reported with certain uses. Some reports described the need for medical or surgical treatment.",
+          "FDA says it is working with manufacturers and healthcare providers and will update the public if significant new information becomes available. Problems can be reported through MedWatch.",
+        ],
+      },
+      {
+        heading: "What clearance does not mean",
+        paragraphs: [
+          "FDA has authorized specific microneedling devices for specific indications. That does not authorize every treatment claim, every body area, or combining a device with unreviewed topical products, platelet-rich plasma, or other substances.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "bemotrizinol-us-sunscreen-filter",
     related: { ingredients: ["bemotrizinol"], dispatches: ["australia-sunscreen-testing-consultation"], guides: ["routine-from-zero"] },
     kind: "news",

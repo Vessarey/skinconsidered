@@ -15,13 +15,36 @@ The publication wins through repeat trust, not maximum posting volume.
 5. **Publish only through the gates.** Run content audit, lint, typecheck, and production build. Check desktop and mobile navigation, source links, single-page heading structure, and horizontal overflow.
 6. **Review the audience signal.** Once analytics are connected, log organic entry pages, returning readers, engaged reading, newsletter conversion, and unsubscribe rate. Improve one weak point—not the entire site—per cycle.
 
+## Source registry and coverage
+
+The registry in `content/coverage.ts` is the desk's watchlist: for each source, the jurisdiction, what it can establish, its domains, and the intended check cadence. The coverage page computes which sources are actually cited and which jurisdictions have files; it never claims completeness. When you add a new regulator, society, journal, or archive:
+
+1. Add a registry entry with an HTTPS URL and its domains before citing it.
+2. Cite it in a file; the coverage page flips it from “Watchlist” to “In use” automatically.
+3. Run `npm run audit:links` before a release to catch link rot. Publishers that block scripted requests appear as “blocked”; open those by hand.
+
+## Procedure files
+
+A procedure file grades a stated purpose, not a device, brand, or clinic. Before publishing or updating one:
+
+- File brands under their generic family (`kind: "branded"` with a `brandNote`), and keep popularity figures separate from effectiveness with a `caveat` on every metric.
+- Quote a cost only from a published, linked figure and say what it includes and excludes; otherwise write “No reliable estimate” and explain how to get a real quote.
+- Name the serious risks, the pause signs, who performs the treatment in the U.S. and where state rules vary, and the U.S. regulatory status of what is used.
+- Set `reviewed` to the review date. A material change gets an entry in `updates`; the profile is never silently rewritten.
+
+## Topical and trend files
+
+- A topical file grades each use separately. Say the U.S. status (prescription, OTC drug, cosmetic) before the evidence, list the forms actually sold, and name pregnancy and interaction cautions. Cite drug labels through DailyMed, not a brand site.
+- A trend file separates what the trend is, what it claims, and what the evidence supports. The grade rates the evidence; the verdict is ours and also weighs cost and harm. Reserve "Avoid" for documented harm (sunscreen contouring, DIY needling and injections, tanning peptides).
+- When a trend and a topical overlap (slugging and petrolatum, bakuchiol and retinol), cross-link both ways with `related` so the reader lands on the evidence whichever door they used.
+
 ## Weekly editorial mix
 
 - 2–3 timely global dispatches with primary sources.
 - 1 research consideration that explains methods and limits.
 - 1 evergreen guide update driven by reader questions or search intent.
 - 1 cultural-history or material-practice story with credited context.
-- 1 newsletter that synthesizes rather than repeats the homepage.
+- The Daily Considered on weekdays (short: what changed, how much to trust it, what to do) and a Sunday synthesis that does not repeat the homepage. Sending starts only when a provider with double opt-in is connected; until then every form says “preview”.
 
 ## Evidence language
 

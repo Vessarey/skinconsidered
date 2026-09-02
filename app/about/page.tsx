@@ -40,11 +40,19 @@ export default function AboutPage() {
             First: earn a repeat audience through useful work. Later: reader memberships, clearly labeled sponsorships, events, and selected tools may
             support the publication. Editorial ranking and evidence grades will never be sold.
           </p>
+          <h2>Commercial rules, stated before there is any commerce</h2>
+          <ul>
+            <li>No affiliate links. A procedure or ingredient file never earns money when you buy or book.</li>
+            <li>Sponsorship, if it comes, is labeled at the placement and kept out of evidence grades, corrections, rankings, and the newsletter body.</li>
+            <li>Membership, if it comes, buys tools and access, never a different verdict.</li>
+            <li>Analytics, if connected, will be privacy-respecting and will not profile readers by skin concern by default.</li>
+          </ul>
           <div className="policy-callout">
             <b>Current status</b>
             <p>
-              This is the founding edition. Newsletter capture is provider-ready but remains visibly in preview until a subscriber platform and privacy
-              workflow are connected. Correction intake is not yet live.
+              This is the founding edition. The newsletter form is provider-ready but says “preview” on every placement until a subscriber platform, double
+              opt-in, and privacy workflow are connected. No analytics, sponsorships, or memberships are active. Correction intake is not yet live. The{" "}
+              <Link href="/coverage">coverage page</Link> shows which sources are cited and which are only watched.
             </p>
           </div>
           <p>

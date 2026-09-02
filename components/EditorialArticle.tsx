@@ -38,6 +38,7 @@ type EditorialArticleProps = {
   related?: RelatedFile[];
   updates?: FileUpdate[];
   quickRead?: QuickReadItem[];
+  showVisual?: boolean;
 };
 
 export function EditorialArticle({
@@ -59,6 +60,7 @@ export function EditorialArticle({
   related = [],
   updates = [],
   quickRead,
+  showVisual = true,
 }: EditorialArticleProps) {
   const headings = sections.map((section) => ({ id: slugify(section.heading), label: section.heading }));
 
@@ -91,8 +93,8 @@ export function EditorialArticle({
       {quickRead && quickRead.length > 0 && (
         <section className="article-quick-read" aria-labelledby="quick-read-title">
           <div>
-            <span>New here?</span>
-            <h2 id="quick-read-title">The 60-second version</h2>
+            <span>Read this first</span>
+            <h2 id="quick-read-title">The short version</h2>
           </div>
           <div className="quick-read-grid">
             {quickRead.map((item, index) => (
@@ -106,32 +108,34 @@ export function EditorialArticle({
         </section>
       )}
 
-      <div className="article-lead-visual">
-        <SignalVisual color={color} label={`Abstract editorial artwork for ${title}`} />
-        <div>
-          <span>{gradeLabel ?? "The considered signal"}</span>
-          <p>{limitation ?? note ?? "Read the source, scope, and limitations before carrying the claim forward."}</p>
+      {showVisual && (
+        <div className="article-lead-visual">
+          <SignalVisual color={color} label={`Abstract editorial artwork for ${title}`} />
+          <div>
+            <span>{gradeLabel ?? "The considered signal"}</span>
+            <p>{limitation ?? note ?? "Read the source, scope, and limitations before carrying the claim forward."}</p>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="article-layout">
         <aside className="article-aside">
           {ledger && grade ? (
             <div className="ledger-box">
-              <h2>The evidence grade</h2>
+              <h2>Source strength</h2>
               <dl>
                 <div>
-                  <dt>This claim</dt>
+                  <dt>This file</dt>
                   <dd>
                     <b>{gradeDefinitions[grade].code}</b> {gradeDefinitions[grade].label}. {ledger.signal}.
                   </dd>
                 </div>
                 <div>
-                  <dt>What the grade means</dt>
+                  <dt>Why this grade</dt>
                   <dd>{gradeDefinitions[grade].description}</dd>
                 </div>
                 <div>
-                  <dt>What it does not mean</dt>
+                  <dt>Important</dt>
                   <dd>
                     A verdict on the ingredient, brand, country, or category. Grades travel with the exact claim.{" "}
                     <Link href={`/methodology#grade-${grade.toLowerCase()}`}>How grading works →</Link>
@@ -238,8 +242,7 @@ export function EditorialArticle({
       </div>
 
       <RelatedFiles files={related} />
-
-      <NewsletterPanel compact />
+      <NewsletterPanel compact source="article" />
     </main>
   );
 }

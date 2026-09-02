@@ -1,19 +1,30 @@
+import { NEWSLETTER } from "@/content/site";
+import { newsletterConfigured } from "@/lib/newsletter";
 import { NewsletterForm } from "./NewsletterForm";
 
 export function NewsletterPanel({ compact = false, source }: { compact?: boolean; source?: string }) {
-  const headingId = compact ? "newsletter-title-compact" : "newsletter-title";
+  const headingId = `newsletter-title-${source ?? (compact ? "compact" : "panel")}`;
+  const configured = newsletterConfigured();
 
   return (
     <section className={`newsletter-panel ${compact ? "compact" : ""}`} aria-labelledby={headingId}>
       <div>
-        <span>The Sunday Considered</span>
+        <span>{NEWSLETTER.name}</span>
         <h2 id={headingId}>
-          Every study that mattered, weighed in one email.<sup>*</sup>
+          {compact ? "Get the next one weighed, not hyped." : "What changed, how much to trust it, and what to do."}
+          <sup>*</sup>
         </h2>
+        {!compact && (
+          <ul className="newsletter-bullets">
+            {NEWSLETTER.bullets.map((bullet) => (
+              <li key={bullet}>{bullet}</li>
+            ))}
+          </ul>
+        )}
       </div>
       <div>
-        <p>Global regulation, procedures, ingredient evidence, and one enduring guide—without launch-day hype.</p>
-        <NewsletterForm source={source ?? (compact ? "article" : "homepage")} />
+        <p>{compact ? `${NEWSLETTER.cadence}. ${NEWSLETTER.promise}` : NEWSLETTER.promise}</p>
+        <NewsletterForm configured={configured} source={source ?? (compact ? "article" : "homepage")} />
       </div>
     </section>
   );
