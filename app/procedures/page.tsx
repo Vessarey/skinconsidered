@@ -10,7 +10,7 @@ import { breadcrumbs, canonical } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Compare skin procedures: facials, peels, injectables, lasers, tightening",
   description:
-    "A decision center for U.S. skin procedures: cost context, sessions, downtime, healing, evidence grade, realistic benefits, serious risks, who performs it, and primary sources for every family.",
+    "A decision center for U.S. skin procedures: cost, downtime, evidence grade, benefits, risks, who performs it, and primary sources for every family.",
   alternates: canonical("/procedures"),
 };
 

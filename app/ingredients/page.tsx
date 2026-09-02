@@ -8,7 +8,7 @@ import { canonical } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Topicals: prescription, OTC, and cosmetic skincare ingredients",
   description:
-    "Tretinoin, tazarotene, adapalene, azelaic acid, benzoyl peroxide, hydroquinone, tranexamic acid, niacinamide, sunscreen filters, and more: U.S. status, strengths, evidence by use, side effects, and access.",
+    "Tretinoin, azelaic acid, benzoyl peroxide, hydroquinone, niacinamide, and more: U.S. status, strengths, evidence by use, side effects, and access.",
   alternates: canonical("/ingredients"),
 };
 

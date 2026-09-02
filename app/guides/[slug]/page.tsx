@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EditorialArticle } from "@/components/EditorialArticle";
 import { EDITION, getGuide, guides, lastUpdated, readingTime, resolveRelated, siteUrl } from "@/lib/content";
-import { breadcrumbs, canonical } from "@/lib/seo";
+import { breadcrumbs, canonical, metaDescription } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!guide) return {};
   return {
     title: guide.title,
-    description: guide.description,
+    description: metaDescription(guide.description),
     alternates: canonical(`/guides/${guide.slug}`),
     openGraph: { type: "article", title: guide.title, description: guide.description, modifiedTime: lastUpdated(guide), section: guide.level },
   };

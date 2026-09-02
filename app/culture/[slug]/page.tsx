@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EditorialArticle } from "@/components/EditorialArticle";
 import { cultureStories, EDITION, getCultureStory, lastUpdated, readingTime, resolveRelated, siteUrl } from "@/lib/content";
-import { breadcrumbs, canonical } from "@/lib/seo";
+import { breadcrumbs, canonical, metaDescription } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!story) return {};
   return {
     title: story.title,
-    description: story.description,
+    description: metaDescription(story.description),
     alternates: canonical(`/culture/${story.slug}`),
     openGraph: { type: "article", title: story.title, description: story.description, modifiedTime: lastUpdated(story), section: "Practice archive" },
   };

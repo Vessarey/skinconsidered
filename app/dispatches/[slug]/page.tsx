@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EditorialArticle } from "@/components/EditorialArticle";
 import { deskLabel, getStory, lastUpdated, readingTime, resolveRelated, siteUrl, stories } from "@/lib/content";
-import { breadcrumbs, canonical } from "@/lib/seo";
+import { breadcrumbs, canonical, metaDescription } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
   return {
     title: story.headline,
-    description: story.dek,
+    description: metaDescription(story.dek),
     alternates: canonical(`/dispatches/${story.slug}`),
     openGraph: {
       type: "article",

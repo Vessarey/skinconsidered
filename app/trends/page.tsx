@@ -7,7 +7,7 @@ import { canonical } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Skincare trends, weighed",
-  description: "Slugging, skin cycling, beef tallow, snail mucin, LED masks, collagen, exosomes, and more: what each trend claims, what the evidence supports, and who should skip it.",
+  description: "Slugging, skin cycling, beef tallow, snail mucin, LED masks, and more: what each trend claims, the evidence, and who should skip it.",
   alternates: canonical("/trends"),
 };
 
