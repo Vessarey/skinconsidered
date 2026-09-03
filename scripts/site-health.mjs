@@ -11,6 +11,15 @@ const origin = (process.argv[2] ?? process.env.SITE_ORIGIN ?? "https://skinconsi
 const USER_AGENT = "Mozilla/5.0 (compatible; SkinConsideredHealth/1.0)";
 const CONCURRENCY = 6;
 
+/** Decode the entities Next emits in metadata before measuring reader-visible length. */
+function decodeHtml(text) {
+  const named = { amp: "&", quot: '"', apos: "'", lt: "<", gt: ">" };
+  return text
+    .replace(/&#x([0-9a-f]+);/gi, (_, value) => String.fromCodePoint(Number.parseInt(value, 16)))
+    .replace(/&#(\d+);/g, (_, value) => String.fromCodePoint(Number.parseInt(value, 10)))
+    .replace(/&([a-z]+);/gi, (entity, name) => named[name.toLowerCase()] ?? entity);
+}
+
 async function get(url) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 25_000);
@@ -43,7 +52,7 @@ await Promise.all(
       const html = page.text;
       const title = html.match(/<title>([^<]*)<\/title>/)?.[1] ?? "";
       const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1] ?? "";
-      const description = html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "";
+      const description = decodeHtml(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "");
       const h1s = (html.match(/<h1[\s>]/g) ?? []).length;
       const jsonLd = /application\/ld\+json/.test(html);
       const imgsMissingAlt = (html.match(/<img(?![^>]*\balt=)[^>]*>/g) ?? []).length;
