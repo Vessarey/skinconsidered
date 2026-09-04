@@ -16,7 +16,7 @@ export const stories: Story[] = [
     category: "Recall",
     region: "Europe",
     location: "United Kingdom",
-    headline: "A U.K. micellar-water recall now covers three bottle sizes",
+    headline: "Simple micellar water recall covers three U.K. bottle sizes",
     shortHeadline: "Simple micellar-water recall expands to 200, 400, and 730 ml",
     dek: "The affected batches may be microbiologically contaminated and could cause eye inflammation. The official notice lists the exact bottle sizes and batch codes to check.",
     date: "2026-08-14",
