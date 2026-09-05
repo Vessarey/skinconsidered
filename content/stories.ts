@@ -2,6 +2,54 @@ import type { Story } from "./types";
 
 export const stories: Story[] = [
   {
+    slug: "canada-kohl-lead-recall-2026",
+    related: { culture: ["kohl-ancient-egypt"] },
+    kind: "safety",
+    category: "Recall",
+    region: "North America",
+    location: "Canada",
+    headline: "Canada recalls two kohl products over lead levels",
+    shortHeadline: "Two kohl products recalled in Canada over lead levels",
+    dek: "Health Canada says two named eye-cosmetic products contain lead above its impurity limits. The recall tells consumers to stop using them and return them to the importer for a refund.",
+    date: "2026-09-04",
+    dateLabel: "September 4, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "Official consumer-product recall",
+    whyItMatters: "Kohl is applied close to the eye, and repeated lead exposure can build up in the body. The notice gives Canadian shoppers two exact product names and a concrete action.",
+    limitations: "The notice does not report the measured lead concentrations or identify lot codes. It applies to two named products sold through one importer in Canada—not to every kohl or kajal product.",
+    sources: [
+      {
+        label: "Health Canada — traditional kohl products recalled due to chemical hazard",
+        url: "https://recalls-rappels.canada.ca/en/alert-recall/traditional-kohl-products-recalled-due-chemical-hazard",
+        published: "September 4, 2026",
+      },
+    ],
+    sections: [
+      {
+        heading: "Check the product name",
+        paragraphs: [
+          "The recall names Mumtaz Herbal Kajal With Almond Oil for Sensitive Eyes and Al-Asmad Alharmain Zam Zam & Rose Water. Health Canada says both contain lead above the impurity limits in its cosmetics guidance.",
+          "The importer reported that 576 units of each product were sold in Canada from January through August 2026. The products originated in India and the United Arab Emirates and were imported by Sara Islamic Store in Mississauga, Ontario.",
+        ],
+      },
+      {
+        heading: "What to do now",
+        paragraphs: [
+          "Health Canada tells consumers to stop using either recalled product immediately and return it to Sara Islamic Store for a refund. The official recall linked below has the importer's current contact information.",
+          "As of August 28, the company had reported no incidents or injuries in Canada. That does not measure exposure or prove that use was harmless; it only describes reports received by that date.",
+        ],
+      },
+      {
+        heading: "Keep the safety finding in scope",
+        paragraphs: [
+          "Lead can accumulate in the body, and Health Canada emphasizes that children are especially vulnerable. The notice does not publish the laboratory value, so readers cannot calculate an individual's exposure from the recall alone.",
+          "Kohl also has deep cultural and material histories across North Africa, the Middle East, and South Asia. A product-specific safety action should not be turned into a claim about every modern formula or about the communities connected to the practice.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "uk-simple-micellar-water-recall",
     related: { dispatches: ["uk-cosmetics-safety-notifications-2026", "brazil-anvisa-sunscreen-recall-henlau"] },
     updates: [
