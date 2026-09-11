@@ -83,7 +83,7 @@ export function EditorialArticle({
           ))}
         </div>
         <div className="article-trust" aria-label="Article verification status">
-          <span><b aria-hidden="true">✓</b> Sources rechecked {LAST_REVIEWED}</span>
+          <span>Site edition: {LAST_REVIEWED}</span>
           <span>{sources.length} {sources.length === 1 ? "source link" : "source links"} on file</span>
           <Link href="/methodology">How source strength works</Link>
           <Link href="/corrections">Report a correction</Link>
@@ -221,7 +221,7 @@ export function EditorialArticle({
 
           <section className="source-drawer" aria-labelledby="sources-title">
             <h2 id="sources-title">Open the source file</h2>
-            <p>These links support the claims above. We rechecked them on {LAST_REVIEWED}; disclosures and limits are summarized in the article.</p>
+            <p>These links support the claims above. Source dates, disclosures and limits are documented in the article and source list.</p>
             <ol>
               {sources.map((source) => (
                 <li key={source.url}>

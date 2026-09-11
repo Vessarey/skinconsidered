@@ -2,6 +2,63 @@ import type { Story } from "./types";
 
 export const stories: Story[] = [
   {
+    slug: "fda-paba-trolamine-sunscreen-final-order-2026",
+    related: { dispatches: ["bemotrizinol-us-sunscreen-filter"], guides: ["routine-from-zero"] },
+    kind: "news",
+    category: "Regulation",
+    region: "North America",
+    location: "United States",
+    headline: "FDA finalizes removal of two sunscreen actives—with a 2027 effective date",
+    shortHeadline: "FDA sets 2027 removal of PABA and trolamine salicylate",
+    dek: "A final U.S. order removes PABA and trolamine salicylate from the sunscreen monograph. FDA says consumers need not change their sunscreen use in response.",
+    date: "2026-09-11",
+    dateLabel: "September 11, 2026",
+    grade: "A",
+    color: "cobalt",
+    signal: "Final FDA administrative order, not yet effective",
+    whyItMatters: "This is a finalized regulatory decision, not a recall of sunscreen shelves. FDA says it knows of no U.S. sunscreen products currently sold with either active.",
+    limitations: "The order covers two sunscreen actives, not all chemical filters. Its scheduled effective date is September 11, 2027, with a statutory exception if disputed.",
+    sources: [
+      {
+        label: "FDA — Final Administrative Order OTC000008-1, order record and PDF",
+        url: "https://www.accessdata.fda.gov/scripts/cder/omuf/index.cfm?event=OrderDetail&orderid=OTC000008",
+        published: "September 11, 2026",
+      },
+      {
+        label: "FDA — sunscreen regulatory-action questions and answers",
+        url: "https://www.fda.gov/drugs/understanding-over-counter-medicines/questions-and-answers-fdas-regulatory-actions-over-counter-sunscreen",
+        published: "September 10, 2026 announcement",
+      },
+      {
+        label: "FDA — consumer sunscreen guidance, Removed Ingredients",
+        url: "https://www.fda.gov/drugs/understanding-over-counter-medicines/sunscreen-how-help-protect-your-skin-sun",
+      },
+    ],
+    sections: [
+      {
+        heading: "What the order changes",
+        paragraphs: [
+          "FDA concluded that the safety risks of aminobenzoic acid (PABA) and trolamine salicylate as sunscreen actives outweigh their benefits. Once the order takes effect, sunscreens containing either active will require an approved drug application rather than the monograph pathway.",
+          "Section VI sets September 11, 2027 as the effective date, subject to the statutory process if the order is disputed. A final decision is not the same as an immediate market withdrawal.",
+        ],
+      },
+      {
+        heading: "What readers should take from it",
+        paragraphs: [
+          "FDA's consumer advice is unchanged: use sunscreen with other sun-protection measures. The agency says no consumer action is needed because it is unaware of currently marketed U.S. sunscreens containing these ingredients.",
+          "The remaining parts of the 2021 proposal—including other actives, labeling and maximum SPF—are left for future orders. This decision is not a blanket verdict against other sunscreen filters or formulas.",
+        ],
+      },
+      {
+        heading: "Dates and evidence boundaries",
+        paragraphs: [
+          "FDA's consumer pages describe a September 10 announcement, while the formal order is marked issued September 11, 2026. This file uses the order's date; neither date should be confused with its scheduled 2027 implementation.",
+          "Grade A applies to the documented regulatory action, not a ranking of products. Our sources are agency records, not a manufacturer-sponsored trial; no brand recommendation follows from this report. Sources checked September 11, 2026.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "canada-kohl-lead-recall-2026",
     related: { culture: ["kohl-ancient-egypt"] },
     kind: "safety",

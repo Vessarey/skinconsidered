@@ -131,7 +131,8 @@ function checkUpdates(label, item) {
     if (!isoDate.test(update.date)) fail(`${label} "${item.slug}" has an update with a non-ISO date: ${update.date}`);
     if (formatDate(update.date) !== update.dateLabel) fail(`${label} "${item.slug}" update label "${update.dateLabel}" does not match ${update.date}`);
     if (!update.note) fail(`${label} "${item.slug}" has an update without a note.`);
-    if (update.date > EDITION.date) fail(`${label} "${item.slug}" has an update dated after the edition.`);
+    // A new file/update need not imply a fresh review of the entire site edition.
+    if (update.date > new Date().toISOString().slice(0, 10)) fail(`${label} "${item.slug}" has an update dated in the future.`);
   }
 }
 
@@ -155,7 +156,7 @@ for (const story of stories) {
   if (!isoDate.test(story.date)) fail(`${label} "${story.slug}" date is not ISO: ${story.date}`);
   else {
     if (formatDate(story.date) !== story.dateLabel) fail(`${label} "${story.slug}" dateLabel "${story.dateLabel}" does not match ${story.date}`);
-    if (story.date > EDITION.date) fail(`${label} "${story.slug}" is dated after the edition.`);
+    if (story.date > new Date().toISOString().slice(0, 10)) fail(`${label} "${story.slug}" is dated in the future.`);
   }
   for (const field of ["headline", "shortHeadline", "dek", "signal", "whyItMatters", "limitations", "location"]) {
     if (!story[field]?.trim()) fail(`${label} "${story.slug}" is missing ${field}.`);
