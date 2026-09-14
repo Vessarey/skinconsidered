@@ -1468,6 +1468,14 @@ main {
 .dispatch-signal b { color: var(--green); }
 .dispatch-signal > a { font-size: 1.8rem; text-decoration: none; }
 
+/* Keep the wire in one mobile column, including its evidence panel.
+   A retained grid-column: 2 would create an implicit column and crush the copy. */
+@media (max-width: 760px) {
+  .global-feed .dispatch-row { grid-template-columns: minmax(0, 1fr); }
+  .global-feed .dispatch-index { display: none; }
+  .global-feed .dispatch-signal { grid-column: 1; }
+}
+
 /* Guide and ingredient indexes */
 .guides-index > article {
   display: grid;
