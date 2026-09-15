@@ -406,21 +406,47 @@ export const stories: Story[] = [
     category: "Sunscreen",
     region: "Oceania",
     location: "Australia",
-    headline: "Australia's sunscreen-testing review is awaiting a published decision",
-    shortHeadline: "Australia's SPF-testing consultation has closed; a decision is pending",
-    dek: "The TGA consultation closed May 23 after examining laboratory oversight, testing transparency, ingredient standards, lifecycle checks, and clearer SPF labels. No decision is posted on the consultation page as of September 1.",
+    headline: "Australia's sunscreen reviews address two different questions",
+    shortHeadline: "Australia's SPF-testing review and 4-MBC proposal are separate",
+    dek: "The broader SPF-testing consultation closed May 23. A separate consultation on the ingredient 4-MBC opened September 11 and closes October 12. Proposals are not final rules.",
     date: "2026-03-26",
     dateLabel: "March 26, 2026",
     grade: "Context",
     color: "green",
-    signal: "Public consultation",
+    signal: "Two distinct regulatory consultations",
     whyItMatters: "Australia has an unusually high skin-cancer burden, so confidence in sunscreen testing and labeling has direct public-health stakes.",
-    limitations: "The consultation is closed, but its proposals are not final rules. The TGA says its decision will be published on the consultation page.",
+    limitations: "These consultations do not establish final new rules. The 4-MBC review uses exposure modelling and published toxicology; full underlying raw data were not available for independent corroboration. It does not measure the rate of harm in sunscreen users.",
+    updates: [{
+      kind: "update",
+      date: "2026-09-15",
+      dateLabel: "September 15, 2026",
+      note: "Clarified the distinction between the earlier SPF-testing consultation and the separate 4-MBC consultation announced September 11. Added its October 12 closing date, proposal origins and review limitations. The original March 26 article date is unchanged; September 15 is our editorial update, not a new regulatory action.",
+    }],
     sources: [
       {
         label: "Australian Therapeutic Goods Administration",
         url: "https://www.tga.gov.au/news/media-releases/improving-regulation-sunscreens-australia",
         published: "March 26, 2026",
+      },
+      {
+        label: "TGA — broader sunscreen-regulation consultation",
+        url: "https://consultations.tga.gov.au/tga/improvements-to-regulation-of-sunscreens-in-aus/",
+        published: "March 26–May 23, 2026 consultation period",
+      },
+      {
+        label: "TGA — 4-MBC consultation, options and deadline",
+        url: "https://consultations.tga.gov.au/tga/scheduling-pre-meeting-notice-4mbc-nov-2026/",
+        published: "September 11–October 12, 2026 consultation period",
+      },
+      {
+        label: "TGA — 4-MBC announcement and consumer advice",
+        url: "https://www.tga.gov.au/news/media-releases/tga-consult-additional-controls-active-sunscreen-ingredient",
+        published: "September 11, 2026",
+      },
+      {
+        label: "TGA — 4-MBC safety review and limitations",
+        url: "https://www.tga.gov.au/resources/publication/corporate-reports/safety-review-4-methylbenzylidene-camphor-4-mbc",
+        published: "Published September 11, 2026; report version July 2026",
       },
     ],
     sections: [
@@ -434,7 +460,22 @@ export const stories: Story[] = [
         heading: "Why the process matters",
         paragraphs: [
           "A sunscreen label compresses a large amount of formulation and testing work into a few claims. Regulation determines which test methods count, how evidence is documented, and what happens when products or laboratories fall short.",
-          "As of September 1, the consultation page still says submissions will be reviewed and a decision published there. Until that response appears, the correct status is decision pending—not framework changed.",
+          "The broader consultation page checked September 15 lists the consultation as closed on May 23; no final response was found on that page. That is a page-specific observation, not proof that every Australian sunscreen policy remains unchanged.",
+        ],
+      },
+      {
+        heading: "A separate ingredient-safety consultation",
+        paragraphs: [
+          "On September 11, the TGA opened a separate consultation on 4-methylbenzylidene camphor (4-MBC). It closes October 12, 2026, ahead of advisory-committee consideration in November. October 12 is the closing date, not an opening or implementation date.",
+          "The TGA Delegate put forward two options using concentration limits and, for one option, age and application-site conditions. Two private applicants proposed a prohibition. These are competing proposals, not adopted restrictions; the applicants' proposal should not be described as a TGA ban.",
+          "The TGA's September 11 announcement advises Australians to continue sunscreen use alongside other sun-protection measures. It does not announce a product recall. This ingredient-specific process is separate from the earlier review of SPF testing and broader regulation.",
+        ],
+      },
+      {
+        heading: "What the safety review can establish",
+        paragraphs: [
+          "The July-version report, published September 11, combines existing safety assessments and toxicology with the Australian Sunscreen Exposure Model. Its recommendations depend on assumed exposure and available evidence, not a newly measured rate of disease among sunscreen users. It lacked full raw data for independent corroboration and excluded other consumer-product exposure, metabolites and impurities from its risk assessment.",
+          "CTX grades the policy process, not sunscreen efficacy or a product's safety. Our sources are regulator records, not a sponsored product trial; private applicants' proposals are identified as such. Sources for this clarification checked September 15, 2026. The September 11 development is not being presented as a new September 15 action.",
         ],
       },
     ],
