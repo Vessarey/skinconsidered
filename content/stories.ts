@@ -2,6 +2,71 @@ import type { Story } from "./types";
 
 export const stories: Story[] = [
   {
+    slug: "eu-sunscreen-in-vitro-testing-2026",
+    related: { dispatches: ["australia-sunscreen-testing-consultation", "bemotrizinol-us-sunscreen-filter"], guides: ["routine-from-zero"] },
+    kind: "news",
+    category: "Regulation",
+    region: "Europe",
+    location: "European Union",
+    headline: "European Commission backs SPF testing without induced sunburn",
+    shortHeadline: "EU backs sunburn-free sunscreen SPF testing",
+    dek: "A September 15 recommendation supports laboratory SPF testing within its validated scope. The underlying campaign does not establish that all sunscreens meet their claims.",
+    date: "2026-09-15",
+    dateLabel: "September 15, 2026",
+    grade: "Context",
+    color: "cobalt",
+    signal: "Commission recommendation informed by a market-surveillance campaign",
+    whyItMatters: "How SPF is measured matters for both label credibility and the volunteers involved in testing. This announcement supports a less harmful method; it does not announce a ban on human SPF testing.",
+    limitations: "The sample was largely risk-targeted, not representative of all sunscreens. Correlation does not mean identical results. ISO 23675 excludes sticks and powders and does not measure water resistance.",
+    sources: [
+      {
+        label: "European Commission DG GROW — sunscreen-testing announcement",
+        url: "https://single-market-economy.ec.europa.eu/news/eu-moves-more-ethical-sunscreen-testing-2026-09-15_en",
+        published: "September 15, 2026",
+      },
+      {
+        label: "EU Publications Office — JACOP 2025 sunscreen final report (download available)",
+        url: "https://op.europa.eu/en/publication-detail/-/publication/d11996e2-8c85-11f1-9262-01aa75ed71a1/language-en",
+        published: "Report written June 2026; released July 30, 2026",
+      },
+      {
+        label: "ISO 23675:2024 — public abstract and method scope",
+        url: "https://www.iso.org/standard/76616.html",
+        published: "December 2024",
+      },
+    ],
+    sections: [
+      {
+        heading: "What changed—and when",
+        paragraphs: [
+          "On September 15, the European Commission encouraged manufacturers to prioritise sunscreen tests that avoid harming human volunteers. Conventional in vivo SPF testing uses UV-induced skin redness; in vitro testing measures light passing through a sunscreen film on a laboratory substrate.",
+          "This is a new announcement about earlier work, not a study completed this week. JACOP 2025 testing ran from October 2025 to March 2026. The report was written in June and released on the EU publications website on July 30; ISO 23675 was published in December 2024.",
+        ],
+      },
+      {
+        heading: "What the comparison supports",
+        paragraphs: [
+          "Authorities in 11 EU countries collected 74 sunscreen and SPF day-cream products. The report gives a correlation of r = 0.855 between in vivo and in vitro SPF results. Two stick/lip-balm products could not undergo the in vitro test, so 74 is the campaign's product count—not the number of paired comparisons or human participants.",
+          "A strong correlation means the results tended to move together, not that both methods always gave the same SPF. The report says in vitro values were generally slightly lower and that borderline or conflicting results required individual assessment. The hybrid HDRS method was not evaluated in this campaign.",
+        ],
+      },
+      {
+        heading: "Method validation is not a product clearance",
+        paragraphs: [
+          "Authorities assessed 33 of the 74 products (45%) as non-conforming for SPF and/or UVA performance. Sampling combined targeted, risk-based selection with non-targeted sampling; this is not a market-wide failure rate. National follow-up included withdrawals, recalls and other measures, with a May 29 reporting cut-off—not a new blanket recall on September 15.",
+          "ISO's public scope covers emulsions and alcoholic single-phase formulations, excluding sticks and powders. It measures static SPF, not water resistance. UVA protection was assessed using a separate standard. The announcement cannot establish whether a particular bottle meets its label claims.",
+        ],
+      },
+      {
+        heading: "What readers should take from it",
+        paragraphs: [
+          "The Commission continues to recommend sunscreen alongside shade, protective clothing and avoiding peak sun exposure. A change in test-method preference is not a reason to abandon sun protection or a recommendation to buy a particular brand.",
+          "CTX grades the policy and testing context, not treatment efficacy. The campaign was Commission-funded and the report was written by EY for the Commission. We reviewed the published report, not the individual laboratory files or a full conflict-of-interest audit; only ISO's public abstract was reviewed. Sources checked September 16, 2026.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "fda-paba-trolamine-sunscreen-final-order-2026",
     related: { dispatches: ["bemotrizinol-us-sunscreen-filter"], guides: ["routine-from-zero"] },
     kind: "news",
