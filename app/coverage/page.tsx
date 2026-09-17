@@ -65,7 +65,7 @@ export default function CoveragePage() {
       <section className="coverage-section" aria-labelledby="taxonomy-title">
         <div className="coverage-intro">
           <span>01 / Taxonomy</span>
-          <h2 id="taxonomy-title">Seven desks. One filing system.</h2>
+          <h2 id="taxonomy-title">{taxonomy.length} desks. One filing system.</h2>
           <p>A development is filed by what it is, not by who announced it. The list under each desk is the scope we aim to cover; it is not a claim that every item in scope has been reported.</p>
         </div>
         <div className="coverage-taxonomy">
@@ -128,8 +128,9 @@ export default function CoveragePage() {
             {inUse.length} sources in use, {watchlist.length} on the watchlist.
           </h2>
           <p>
-            “In use” is computed: at least one current file cites that source’s domain. “Watchlist” means we know where to look and have not yet published
-            from it. Cadence is the intended check schedule for the editorial desk, not a log of checks completed.
+            “In use” means at least one source link on file matches this registry entry. Each link is counted against the most specific registered domain,
+            so a specialist subdomain is not also counted under its parent. Counts include repeated citations across files, not just unique URLs.
+            “Watchlist” means no matching citation is on file. Cadence is the intended check schedule, not a log of checks completed.
           </p>
         </div>
         {REGION_GROUPS.map((region) => {

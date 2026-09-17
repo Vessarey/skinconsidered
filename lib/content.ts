@@ -1,4 +1,5 @@
 import { concernGuides } from "@/content/concerns";
+import { countSourceCitations } from "./source-coverage";
 import { sourceRegistry, taxonomy } from "@/content/coverage";
 import { cultureStories as cultureRecords } from "@/content/culture";
 import { aspsFees2022, PRICE_SURVEY_DATE, priceMenus, priceMenuSource } from "@/content/price-survey";
@@ -559,14 +560,6 @@ export const searchSuggestions = ["tazarotene", "azelaic acid", "slugging", "Bot
 
 export type SourceCoverage = SourceRegistryEntry & { cited: number; status: SourceStatus };
 
-function hostOf(url: string) {
-  try {
-    return new URL(url).hostname.toLowerCase();
-  } catch {
-    return "";
-  }
-}
-
 /** Every source URL on file across dispatches, guides, culture files, and procedure profiles. */
 export function allSourceUrls() {
   return [...stories, ...guides, ...cultureStories, ...procedureProfiles, ...ingredients, ...trends].flatMap((item) => item.sources.map((source) => source.url));
@@ -574,11 +567,7 @@ export function allSourceUrls() {
 
 /** Registry entries with a computed citation count. "In use" is never declared by hand. */
 export function sourceCoverage(): SourceCoverage[] {
-  const hosts = allSourceUrls().map(hostOf);
-  return sourceRegistry.map((entry) => {
-    const cited = hosts.filter((host) => entry.domains.some((domain) => host === domain || host.endsWith(`.${domain}`))).length;
-    return { ...entry, cited, status: cited > 0 ? "In use" : "Watchlist" };
-  });
+  return countSourceCitations(sourceRegistry, allSourceUrls());
 }
 
 export type JurisdictionCoverage = {
