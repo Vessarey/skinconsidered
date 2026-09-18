@@ -2,6 +2,47 @@ import type { Story } from "./types";
 
 export const stories: Story[] = [
   {
+    slug: "singapore-nu-skin-dermatic-effects-recall-2026",
+    related: { dispatches: ["canada-kohl-lead-recall-2026", "uk-simple-micellar-water-recall"] },
+    kind: "safety",
+    category: "Recall",
+    region: "Asia",
+    location: "Singapore",
+    headline: "Singapore recalls NU SKIN ageLOC Dermatic Effects from suppliers",
+    shortHeadline: "Singapore retail recall: ageLOC Dermatic Effects",
+    dek: "HSA detected theophylline in the named cosmetic. The recall covers all batches supplied in Singapore.",
+    date: "2026-09-18",
+    dateLabel: "September 18, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "Official retail-level recall",
+    whyItMatters: "Retail and wholesale suppliers are instructed to stop supply and return remaining stock to the local company.",
+    limitations: "The notice gives no concentration or exposure estimate. This is not a consumer-level recall or a finding about other NU SKIN products.",
+    sources: [
+      {
+        label: "HSA — NU SKIN ageLOC Dermatic Effects recall",
+        url: "https://www.hsa.gov.sg/announcements/nu-skin-ageloc-dermatic-effects/",
+        published: "Notice: September 18; recall: September 17, 2026",
+      },
+    ],
+    sections: [
+      {
+        heading: "Dates and identification",
+        paragraphs: [
+          "The recall began September 17, 2026; HSA published its notice September 18. Product identifier: CCPN2106638. The local company is NU SKIN ENTERPRISES SINGAPORE PTE LTD.",
+          "HSA lists Class 2 and retail-level action following product-quality surveillance testing. Its supplier instructions do not establish a consumer refund programme.",
+        ],
+      },
+      {
+        heading: "Keep the finding in scope",
+        paragraphs: [
+          "Readers with the product can consult the linked notice or ask the local company for clarification. An ingredient detection alone does not quantify an individual's risk.",
+          "Grade A describes the documented action, not efficacy. This source is a regulator notice, not a sponsored product trial. Checked September 18, 2026.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "eu-sunscreen-in-vitro-testing-2026",
     related: { dispatches: ["australia-sunscreen-testing-consultation", "bemotrizinol-us-sunscreen-filter"], guides: ["routine-from-zero"] },
     kind: "news",

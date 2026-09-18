@@ -325,6 +325,18 @@ export const sourceRegistry: SourceRegistryEntry[] = [
     domains: ["gov.br"],
   },
   {
+    id: "hsa",
+    name: "Singapore Health Sciences Authority",
+    jurisdiction: "Singapore",
+    region: "Asia",
+    type: "Regulator",
+    covers: ["Cosmetic product recalls", "Health-product safety alerts", "Recall class, level and supplier instructions"],
+    cadence: "Daily on weekdays",
+    url: "https://www.hsa.gov.sg/announcements/",
+    domains: ["hsa.gov.sg"],
+    note: "Publication and recall dates can differ. Distinguish retail-level supplier instructions from consumer-level recalls.",
+  },
+  {
     id: "pmda",
     name: "Japan PMDA / MHLW",
     jurisdiction: "Japan",

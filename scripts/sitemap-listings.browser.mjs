@@ -20,18 +20,21 @@ try {
   assert.equal(records["/today"], expected.all);
   assert.equal(records["/us"], expected.us);
   assert.equal(records["/privacy"], EDITION.date);
-  const newest = stories.find((story) => story.slug === "fda-paba-trolamine-sunscreen-final-order-2026");
+  const effectiveDate = (story) => [story.date, ...(story.updates ?? []).map((update) => update.date)].sort().at(-1);
+  const byDate = [...stories].sort((a, b) => effectiveDate(b).localeCompare(effectiveDate(a)));
   for (const width of [1280, 375]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of ["/", "/today", "/us"]) {
+      const newest = route === "/us" ? byDate.find((story) => story.location === "United States") : byDate[0];
+      assert.ok(newest);
       await page.goto(`${base}${route}`);
       assert.equal(await page.locator("h1").count(), 1);
       assert.ok(await page.locator(`a[href="/dispatches/${newest.slug}"]`).count());
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
       if (route === "/today" && process.env.SCREENSHOT_DIR) await page.screenshot({ path: `${process.env.SCREENSHOT_DIR}/latest-${width}.png` });
+      await page.locator(`a[href="/dispatches/${newest.slug}"]`).first().click();
+      await page.waitForURL(`**/dispatches/${newest.slug}`);
     }
-    await page.locator(`a[href="/dispatches/${newest.slug}"]`).first().click();
-    await page.waitForURL(`**/dispatches/${newest.slug}`);
     assert.deepEqual(errors, []);
     console.log(`PASS ${width}px: three listings, one H1, no overflow/errors, article navigation`);
   }
