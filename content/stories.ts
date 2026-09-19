@@ -2,6 +2,52 @@ import type { Story } from "./types";
 
 export const stories: Story[] = [
   {
+    slug: "canada-counterfeit-soprano-laser-advisory-2026",
+    related: { procedures: ["laser-hair-removal"], guides: ["procedure-safety-checklist"] },
+    kind: "safety",
+    category: "Device advisory",
+    region: "North America",
+    location: "Canada",
+    headline: "Canada warns clinics about counterfeit Soprano laser devices",
+    shortHeadline: "Counterfeit Soprano laser devices flagged in Canada",
+    dek: "Health Canada identifies devices labelled Beijing Perfectlaser Technology Co., Ltd. The advisory distinguishes them from genuine Alma Lasers equipment.",
+    date: "2026-09-18",
+    dateLabel: "September 18, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "Official public advisory",
+    whyItMatters: "A brand name or licence document alone cannot establish that a clinic's machine is authentic.",
+    limitations: "The notice lists no affected clinics, serial numbers, device counts or injury rate. It is not a recall of genuine Soprano systems.",
+    sources: [
+      {
+        label: "Health Canada — counterfeit laser advisory RA-82651",
+        url: "https://recalls-rappels.canada.ca/en/alert-recall/counterfeit-laser-hair-removal-and-therapy-devices-found-some-clinics-and-may-pose",
+        published: "September 18, 2026",
+      },
+      {
+        label: "Health Canada — Medical Devices Active Licence Listing (MDALL)",
+        url: "https://www.canada.ca/en/health-canada/services/drugs-health-products/medical-devices/licences/medical-devices-active-licence-listing.html",
+        published: "July 26, 2024 page details",
+      },
+    ],
+    sections: [
+      {
+        heading: "Verify the machine, not the branding",
+        paragraphs: [
+          "Health Canada reports a falsified medical-device licence. It tells clinics to compare permanent-label manufacturer, device and model identifiers with MDALL, consult the manufacturer if uncertain, and stop using and safely dispose of counterfeits.",
+          "MDALL supports searches by company, licence, device name or identifier. It covers licensed Class II–IV devices; Class I devices and investigational or special-access devices are not listed. Our article does not authenticate any individual machine.",
+        ],
+      },
+      {
+        heading: "For people who received treatment",
+        paragraphs: [
+          "The agency advises patients with health concerns after laser therapy—including immediate pain, redness or swelling—to consult a licensed healthcare professional.",
+          "Counterfeit identification includes confirmation from the genuine manufacturer, which has a commercial interest. Grade A reflects the advisory, not treatment efficacy. Sources checked September 19, 2026.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "singapore-nu-skin-dermatic-effects-recall-2026",
     related: { dispatches: ["canada-kohl-lead-recall-2026", "uk-simple-micellar-water-recall"] },
     kind: "safety",
