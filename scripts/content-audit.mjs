@@ -14,6 +14,7 @@ import { procedureProfiles } from "../content/procedures.ts";
 import { DESKS, EDITION, REGION_ORDER, gradeDefinitions } from "../content/site.ts";
 import { stories } from "../content/stories.ts";
 import { trends } from "../content/trends.ts";
+import { reviewHasDatedRecord } from "../lib/review-date.ts";
 import { concernGuides } from "../content/concerns.ts";
 import { priceMenus, PRICE_SURVEY_DATE } from "../content/price-survey.ts";
 import { procedurePrices } from "../content/procedure-prices.ts";
@@ -225,7 +226,7 @@ for (const trend of trends) {
   if (!TREND_VERDICTS.includes(trend.verdict)) fail(`${label} "${trend.slug}" has an unknown verdict: ${trend.verdict}`);
   if (!gradeDefinitions[trend.grade]) fail(`${label} "${trend.slug}" has an unknown grade: ${trend.grade}`);
   if (!isoDate.test(trend.reviewed ?? "")) fail(`${label} "${trend.slug}" reviewed date is not ISO: ${trend.reviewed}`);
-  else if (trend.reviewed > EDITION.date) fail(`${label} "${trend.slug}" is reviewed after the edition date.`);
+  else if (!reviewHasDatedRecord(trend.reviewed, EDITION.date, trend.updates)) fail(`${label} "${trend.slug}" needs a dated update for a review after the edition date.`);
   checkSources(label, trend);
   checkRelated(label, trend);
   checkUpdates(label, trend);
