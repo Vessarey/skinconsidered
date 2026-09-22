@@ -337,6 +337,18 @@ export const sourceRegistry: SourceRegistryEntry[] = [
     note: "Publication and recall dates can differ. Distinguish retail-level supplier instructions from consumer-level recalls.",
   },
   {
+    id: "tfda",
+    name: "Taiwan Food and Drug Administration",
+    jurisdiction: "Taiwan",
+    region: "Asia",
+    type: "Regulator",
+    covers: ["Cosmetic safety notices", "Overseas recall advisories", "Consumer purchase guidance"],
+    cadence: "Daily on weekdays",
+    url: "https://www.fda.gov.tw/",
+    domains: ["fda.gov.tw"],
+    note: "An overseas-alert notice is not evidence of local testing or a domestic recall. Keep the originating regulator's dates and scope explicit.",
+  },
+  {
     id: "pmda",
     name: "Japan PMDA / MHLW",
     jurisdiction: "Japan",

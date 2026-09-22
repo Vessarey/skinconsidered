@@ -2,6 +2,51 @@ import type { Story } from "./types";
 
 export const stories: Story[] = [
   {
+    slug: "taiwan-medicube-cream-advisory-2026",
+    related: { dispatches: ["singapore-nu-skin-dermatic-effects-recall-2026"], trends: ["salmon-dna-pdrn"] },
+    kind: "safety",
+    category: "Consumer advisory",
+    region: "Asia",
+    location: "Taiwan",
+    headline: "Taiwan flags Medicube cream after Singapore's batch recall",
+    shortHeadline: "Taiwan issues Medicube cream purchase warning",
+    dek: "Taiwan's September 21 notice advises against buying Medicube PDRN Pink Collagen Capsule Cream. It cites Singapore's earlier Sudan IV finding.",
+    date: "2026-09-21",
+    dateLabel: "September 21, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "Official consumer advisory, not a new test result",
+    whyItMatters: "Taiwan's purchase advice and Singapore's batch-specific recall have different scopes. Check which notice applies to your situation.",
+    limitations: "The Taiwan notice does not establish local contamination or a domestic recall. Singapore's finding does not apply to every batch or all Medicube products.",
+    sources: [
+      { label: "Taiwan FDA — overseas cosmetic alert (Traditional Chinese)", url: "https://www.fda.gov.tw/TC/csmnewsContent.aspx?id=8040&mid=271", published: "September 21, 2026" },
+      { label: "Singapore HSA — Medicube batch recall", url: "https://www.hsa.gov.sg/announcements/medicube-pdrn-pink-collagen-capsule-cream--/", published: "Notice: August 28; recall: August 26, 2026" },
+      { label: "Singapore HSA — testing results and consumer advice", url: "https://www.hsa.gov.sg/announcements/hsa-tests-product-samples-of-medicube-pdrn-pink-collagen-capsule-cream-for-presence-of-sudan-red-dyes/", published: "August 28, 2026" },
+    ],
+    sections: [
+      {
+        heading: "What is new",
+        paragraphs: [
+          "Taiwan FDA's September 21 overseas-alert notice urges consumers not to buy the named cream from overseas, online or other sellers. It relays Singapore's earlier action, not a newly announced Taiwanese laboratory finding.",
+        ],
+      },
+      {
+        heading: "Singapore's action was batch-specific",
+        paragraphs: [
+          "HSA recalled two Venus Beauty Pte. Ltd. batches on August 26, publishing the notice August 28: 2E122I.2E117I and 2E191G.2E193G. Retail and wholesale suppliers were told to stop supply and return stock.",
+          "HSA reported minute amounts of Sudan IV in those samples. It did not detect the dye in samples from APR SG or Rirora International, permitted unaffected batches to resume sale, and required accredited-laboratory testing of every batch those three companies intended to supply locally.",
+        ],
+      },
+      {
+        heading: "Advice without a blanket risk claim",
+        paragraphs: [
+          "In its August 28 advice, HSA said serious harm from previous use was unlikely, but consumers should stop using affected products and ask the seller about refund concerns. It reported no local adverse-event reports at that time; that is not a current worldwide safety count.",
+          "Grade A applies to the documented official actions, not skincare efficacy. These are regulator notices, not sponsored product studies. Sources checked September 22, 2026; the Taiwan notice is summarized from Traditional Chinese.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "canada-counterfeit-soprano-laser-advisory-2026",
     related: { procedures: ["laser-hair-removal"], guides: ["procedure-safety-checklist"] },
     kind: "safety",

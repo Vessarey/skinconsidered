@@ -32,7 +32,8 @@ try {
     await page.goto(`${base}/coverage`);
     const entry = page.locator(".coverage-registry > li").filter({ has: page.locator("h4", { hasText: "Singapore Health Sciences Authority" }) });
     assert.equal(await entry.locator(".coverage-status").textContent(), "In use");
-    assert.match(await entry.locator(".coverage-registry-foot").textContent(), /Cited: 1 link/);
+    const hsaCitations = stories.flatMap((item) => item.sources).filter((source) => new URL(source.url).hostname === "www.hsa.gov.sg").length;
+    assert.match(await entry.locator(".coverage-registry-foot").textContent(), new RegExp(`Cited: ${hsaCitations} links?`));
     console.log(`PASS ${width}px: recall scope, dates, source/schema, Asia navigation, registry and no overflow`);
   }
   for (const endpoint of ["/rss.xml", "/sitemap.xml"]) assert.ok((await (await fetch(`${base}${endpoint}`)).text()).includes(path), endpoint);
