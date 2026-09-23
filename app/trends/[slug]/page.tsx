@@ -5,7 +5,7 @@ import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { NewsletterPanel } from "@/components/NewsletterPanel";
 import { RelatedFiles } from "@/components/RelatedFiles";
 import { formatLongDate, getTrend, gradeDefinitions, lastUpdated, resolveRelated, siteUrl, trends } from "@/lib/content";
-import { breadcrumbs, canonical, metaDescription, schemaDate } from "@/lib/seo";
+import { breadcrumbs, canonical, metaDescription, schemaDate, seoTitle } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const trend = getTrend(slug);
   if (!trend) return {};
   return {
-    title: `${trend.name}: does it work?`,
+    title: seoTitle(`${trend.name}: does it work?`),
     description: metaDescription(`Verdict: ${trend.verdict}. ${trend.whatItIs} The claim: ${trend.claim}`),
     alternates: canonical(`/trends/${trend.slug}`),
     openGraph: { type: "article", title: `${trend.name}: what the evidence says`, description: trend.claim, modifiedTime: schemaDate(lastUpdated(trend)), section: "Trends" },

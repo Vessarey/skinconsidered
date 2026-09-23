@@ -18,7 +18,7 @@ import {
   resolveRelated,
   siteUrl,
 } from "@/lib/content";
-import { breadcrumbs, canonical, metaDescription, schemaDate } from "@/lib/seo";
+import { breadcrumbs, canonical, metaDescription, schemaDate, seoTitle } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const ingredient = getIngredient(slug);
   if (!ingredient) return {};
   return {
-    title: `${ingredient.name}: uses, strength, evidence, and side effects`,
+    title: seoTitle(`${ingredient.name}: uses, strength, evidence, and side effects`),
     description: metaDescription(`${ingredient.status}. ${ingredient.summary}`),
     alternates: canonical(`/ingredients/${ingredient.slug}`),
     openGraph: { type: "article", title: `${ingredient.name} — the topical file`, description: ingredient.summary, modifiedTime: schemaDate(lastUpdated(ingredient)), section: "Topicals" },

@@ -5,7 +5,7 @@ import { NewsletterPanel } from "@/components/NewsletterPanel";
 import { RoutineCards } from "@/components/RoutineCards";
 import { RoutineVideo } from "@/components/RoutineMedia";
 import { routineDate, routineEvidenceSource, routines } from "@/content/routines";
-import { canonical, breadcrumbs, schemaDate } from "@/lib/seo";
+import { canonical, breadcrumbs, schemaDate, seoTitle } from "@/lib/seo";
 import { siteUrl } from "@/content/site";
 import styles from "@/components/Routines.module.css";
 
@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const item = routines.find((entry) => entry.slug === slug);
   if (!item) return {};
-  return { title: `${item.name}’s skincare routine: products, video & context`, description: item.description, alternates: canonical(`/routines/${slug}`), openGraph: { title: `${item.name}’s skincare routine, considered`, description: item.description, type: "article", url: `/routines/${slug}` } };
+  return { title: seoTitle(`${item.name}’s skincare routine: products, video & context`), description: item.description, alternates: canonical(`/routines/${slug}`), openGraph: { title: `${item.name}’s skincare routine, considered`, description: item.description, type: "article", url: `/routines/${slug}` } };
 }
 
 export default async function RoutinePage({ params }: { params: Promise<{ slug: string }> }) {

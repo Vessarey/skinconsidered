@@ -19,6 +19,18 @@ export function metaDescription(text: string, limit = 155) {
   return `${cut.slice(0, Math.max(cut.lastIndexOf(" "), 80))}…`;
 }
 
+/**
+ * Google shows roughly 60 characters of a title. The layout template appends
+ * " — Skin Considered"; when that would push the descriptive part past the
+ * visible limit, drop the suffix so the words a searcher matched stay visible.
+ */
+export const TITLE_LIMIT = 60;
+const TITLE_SUFFIX = " — Skin Considered";
+
+export function seoTitle(base: string): string | { absolute: string } {
+  return base.length + TITLE_SUFFIX.length <= TITLE_LIMIT ? base : { absolute: base };
+}
+
 export function breadcrumbs(base: string, trail: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",
