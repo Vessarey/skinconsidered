@@ -1,4 +1,5 @@
 import { concernGuides } from "@/content/concerns";
+import { resolveOrigin } from "@/lib/seo";
 import { countSourceCitations } from "./source-coverage";
 import { sourceRegistry, taxonomy } from "@/content/coverage";
 import { cultureStories as cultureRecords } from "@/content/culture";
@@ -293,7 +294,7 @@ export function formatEditionDate(date: string) {
 }
 
 export function siteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  return resolveOrigin(process.env.NEXT_PUBLIC_SITE_URL, process.env.VERCEL_ENV);
 }
 
 function latestUpdate<T extends { date: string; dateLabel: string }>(updates?: T[]) {

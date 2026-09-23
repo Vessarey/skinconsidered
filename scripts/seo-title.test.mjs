@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { seoTitle, TITLE_LIMIT } from "../lib/seo.ts";
+import { PRODUCTION_ORIGIN, resolveOrigin, seoTitle, TITLE_LIMIT } from "../lib/seo.ts";
 import { procedureProfiles } from "../content/procedures.ts";
 
 const SUFFIX = " — Skin Considered";
@@ -27,4 +27,11 @@ test("procedures without a national figure exist, so the snippet lead matters", 
   const missing = procedureProfiles.filter((profile) => profile.cost.startsWith("No reliable"));
   assert.ok(missing.length > 0);
   for (const profile of missing) assert.ok(profile.purpose.trim().length > 40, profile.slug);
+});
+
+test("production builds never fall back to a localhost origin", () => {
+  assert.equal(resolveOrigin(undefined, "production"), PRODUCTION_ORIGIN);
+  assert.equal(resolveOrigin("", "production"), PRODUCTION_ORIGIN);
+  assert.equal(resolveOrigin(undefined, "preview"), "http://localhost:3000");
+  assert.equal(resolveOrigin("https://example.test/", "production"), "https://example.test");
 });
