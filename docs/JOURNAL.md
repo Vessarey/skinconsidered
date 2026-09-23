@@ -12,9 +12,10 @@ Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`
 1. Committed the pending reader work as one commit on `release/2026-09-22`, after gates passed on the full tree.
 2. `seoTitle()` in `lib/seo.ts` drops the brand suffix when a title would exceed 60 characters. Applied to procedure, topical, trend, dispatch, guide, culture, and routine pages.
 3. Procedure descriptions no longer open with "No reliable national estimate." (28 of 45 files); they lead with the purpose.
-4. Pushed the branch and opened a PR to `main`. Not merged; merging deploys production and is the owner's call.
+4. Production builds now fall back to `https://skinconsidered.com` if `NEXT_PUBLIC_SITE_URL` is missing; the Vercel preview showed localhost canonicals because the variable is production-only.
+5. Pushed the branch and opened PR #1 to `main`. Not merged; merging deploys production and is the owner's call. Vercel preview built and was checked in a signed-in browser: `/newsletter`, `/routines/dua-lipa`, and `/procedures/thread-lift` render with one H1 and no horizontal overflow.
 
-**Validation.** Committed HEAD alone: lint, typecheck, build, 35 tests pass in a clean worktree. Full release: content audit, lint, typecheck, build, 58 tests, and a local crawl of 139 sitemap URLs plus 11 internal links all pass. Rendered titles and descriptions checked on seven pages.
+**Validation.** Committed HEAD alone: lint, typecheck, build, 35 tests pass in a clean worktree. Full release: content audit, lint, typecheck, build, 59 tests, and a local crawl of 139 sitemap URLs plus 11 internal links all pass. Rendered titles and descriptions checked on seven pages.
 
 **Blockers for the owner.** Merge the PR. Set `BUTTONDOWN_API_KEY` in Vercel so signups become real. Reauthenticate PostHog for agents.
 
