@@ -65,10 +65,11 @@ export const gradeDefinitions: Record<EvidenceGrade, { code: string; label: stri
 };
 
 export const primaryNav = [
-  { label: "Today", href: "/today" },
+  { label: "Latest", href: "/today" },
+  { label: "Routines", href: "/routines" },
   { label: "U.S.", href: "/us" },
   { label: "Guides", href: "/guides" },
-  { label: "Topicals", href: "/ingredients" },
+  { label: "Ingredients", href: "/ingredients" },
   { label: "Procedures", href: "/procedures" },
   { label: "Trends", href: "/trends" },
   { label: "Culture", href: "/culture" },

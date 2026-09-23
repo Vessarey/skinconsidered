@@ -6,6 +6,7 @@ import { aspsFees2022, PRICE_SURVEY_DATE, priceMenus, priceMenuSource } from "@/
 import { procedurePrices } from "@/content/procedure-prices";
 import { guides as guideRecords } from "@/content/guides";
 import { ingredients } from "@/content/ingredients";
+import { routines } from "@/content/routines";
 import { procedureProfiles as procedureRecords } from "@/content/procedures";
 import {
   DESKS,
@@ -494,7 +495,7 @@ export type SearchItem = {
 export const searchableItems = [
   ...storiesByDate.map((item) => ({
     href: `/dispatches/${item.slug}`,
-    type: `${deskLabel(item.kind)} · ${item.category}`,
+    type: [...new Set([deskLabel(item.kind), item.category])].join(" · "),
     title: item.headline,
     description: item.dek,
     terms: [item.region, item.location, item.kind, item.signal, item.whyItMatters, ...item.sections.map((section) => section.heading)].join(" "),
@@ -550,9 +551,16 @@ export const searchableItems = [
       ...item.majorRisks,
     ].join(" "),
   })),
+  ...routines.map((item) => ({
+    href: `/routines/${item.slug}`,
+    type: "Celebrity routine · First-person source",
+    title: `${item.name}’s skincare routine`,
+    description: item.description,
+    terms: ["celebrity skincare Vogue video", item.angle, ...item.products.map((product) => product.name)].join(" "),
+  })),
 ] satisfies SearchItem[];
 
-export const searchSuggestions = ["tazarotene", "azelaic acid", "slugging", "Botox", "HydraFacial", "melasma", "Japan"];
+export const searchSuggestions = ["Sunscreen", "Retinoids", "Skin barrier", "Botox", "Hailey Bieber", "Japan"];
 
 // ------------------------------------------------------------------
 // Coverage: what the desk tracks, and which sources are actually cited.
@@ -562,7 +570,7 @@ export type SourceCoverage = SourceRegistryEntry & { cited: number; status: Sour
 
 /** Every source URL on file across dispatches, guides, culture files, and procedure profiles. */
 export function allSourceUrls() {
-  return [...stories, ...guides, ...cultureStories, ...procedureProfiles, ...ingredients, ...trends].flatMap((item) => item.sources.map((source) => source.url));
+  return [...stories, ...guides, ...cultureStories, ...procedureProfiles, ...ingredients, ...trends, ...routines].flatMap((item) => item.sources.map((source) => source.url));
 }
 
 /** Registry entries with a computed citation count. "In use" is never declared by hand. */

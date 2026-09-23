@@ -1,0 +1,112 @@
+{
+  "images": [
+    {
+      "file": "home-hero.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "concept": "Layered cross-section of skin rendered as calm stacked wave bands with a single sun disc above; the daily-news what-is-new mood.",
+      "prompt": "Use case: stylized-concept\nAsset type: editorial website hero illustration\nPrimary request: Create a 1536x1024 landscape illustration of a layered cross-section of skin rendered as calm stacked wave bands, with one single sun disc floating above; evoke a quiet daily-news “what’s new” mood.\nScene/backdrop: dominant flat paper background #f6eeea with generous open negative space.\nSubject: simplified horizontal skin strata as broad organic wave bands; one simple sun disc above; no additional objects.\nStyle/medium: original flat screenprint / risograph museum-poster aesthetic, visible warm paper grain, slight deliberate ink misregistration, bold simple geometric and organic shapes, calm and uncluttered.\nComposition/framing: landscape 3:2, centered low stacked bands occupying the lower half to two-thirds, single disc above, balanced asymmetry, generous margins.\nColor palette: use only paper #f6eeea as the dominant background, ink #182620 for restrained structure, raspberry #d6336c and cobalt #2049c7 as the only accent colors. No other colors, shades, gradients, white, black, gray, beige, or color casts.\nConstraints: exact 1536x1024 PNG intent; crisp flat silhouettes with tactile grain; at most the two specified accent colors; no text, letters, numbers, symbols that resemble writing, logos, watermarks, product packaging, brands, photorealism, or realistic human faces.\nAvoid: busy detail, glossy rendering, 3D, shadows that introduce new colors, medical gore, labels, captions, borders, mockup framing."
+    },
+    {
+      "file": "home-us.png",
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "concept": "An abstract stamp-like seal with a magnifying lens over stacked paper sheets; regulation and checking.",
+      "prompt": "Use case: stylized-concept\nAsset type: editorial website square section illustration\nREQUIRED NATIVE CANVAS: exactly 1024 pixels wide by 1024 pixels high, square PNG. Do not output 1254x1254 or any other size.\nPrimary request: Create an abstract stamp-like seal showing one magnifying lens hovering over a small stack of paper sheets; evoke regulation, inspection, and careful checking without any official insignia or writing.\nScene/backdrop: solid dark ink #182620 background, the single allowed exception to the paper-background rule, with generous negative space.\nSubject: bold circular seal geometry, a simple magnifying lens, and three offset paper-sheet silhouettes; all shapes abstract and clearly legible.\nStyle/medium: original flat screenprint / risograph museum-poster aesthetic, visible paper grain, slight deliberate ink misregistration, bold simple geometric shapes, calm and uncluttered.\nComposition/framing: centered stamp-like arrangement with broad margins; lens crosses part of the stacked sheets; balanced square composition.\nColor palette: dark ink #182620 dominant background; paper #f6eeea only for sheet and lens details; acid yellow #d9f34a and raspberry #d6336c as the only accent colors. No other colors, shades, gradients, white, black, gray, beige, or color casts.\nConstraints: output exactly 1024x1024 pixels; crisp flat silhouettes with tactile grain; no text, letters, numbers, document lines that resemble writing, official seals, stars, flags, logos, watermarks, product packaging, brands, photorealism, or realistic human faces.\nAvoid: busy detail, glossy rendering, 3D, realistic shadows, government emblems, labels, captions, borders, mockup framing."
+    },
+    {
+      "file": "explore-learn.png",
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "concept": "An open book whose pages turn into a skin-barrier brick wall.",
+      "prompt": "Use case: stylized-concept\nAsset type: editorial website square section illustration\nREQUIRED NATIVE CANVAS: exactly 1024 pixels wide by 1024 pixels high, square PNG.\nPrimary request: Create an open book whose turning pages seamlessly become a simplified skin-barrier brick wall.\nScene/backdrop: dominant flat paper #f6eeea background with generous open negative space.\nSubject: one open book in the lower half; a few broad pages lift and transform into a calm staggered wall of rounded brick-like barrier cells; no extra objects.\nStyle/medium: original flat screenprint / risograph museum-poster aesthetic, visible warm paper grain, slight deliberate ink misregistration, bold simple geometric and organic shapes, calm and uncluttered.\nComposition/framing: centered square composition, book low and wide, barrier wall rising gently from the page turn, broad quiet margins.\nColor palette: use only paper #f6eeea as the dominant background, ink #182620 for restrained outlines and structure, and green #1f7a3d as the sole accent color. No other colors, shades, gradients, white, black, gray, beige, or color casts.\nConstraints: output exactly 1024x1024 pixels; crisp flat silhouettes with tactile grain; no text, letters, numbers, page writing, logos, watermarks, product packaging, brands, photorealism, or realistic human faces.\nAvoid: busy detail, glossy rendering, 3D, realistic shadows, medical gore, labels, captions, borders, mockup framing."
+    },
+    {
+      "file": "explore-decode.png",
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "concept": "A dropper releasing one drop that splits into simple molecular circles.",
+      "prompt": "Use case: stylized-concept\nAsset type: editorial website square section illustration\nREQUIRED NATIVE CANVAS: exactly 1024 pixels wide by 1024 pixels high, square PNG.\nPrimary request: Create one simple laboratory dropper releasing a single large drop that splits below into a sparse cluster of simple molecular circles connected by a few short bonds.\nScene/backdrop: dominant flat paper #f6eeea background with generous open negative space.\nSubject: one oversized abstract dropper near the top, one falling drop at center, and a restrained molecule-like constellation of circles below; no vessels or packaging.\nStyle/medium: original flat screenprint / risograph museum-poster aesthetic, visible warm paper grain, slight deliberate ink misregistration, bold simple geometric and organic shapes, calm and uncluttered.\nComposition/framing: centered vertical square composition with the dropper in the upper third and the circles in the lower half; broad quiet margins.\nColor palette: use only paper #f6eeea as the dominant background, ink #182620 for restrained outlines and structure, and cobalt #2049c7 as the sole accent color. No other colors, shades, gradients, white, black, gray, beige, or color casts.\nConstraints: output exactly 1024x1024 pixels; crisp flat silhouettes with tactile grain; no text, letters, numbers, formulas, chemical labels, logos, watermarks, product packaging, brands, photorealism, or realistic human faces.\nAvoid: busy detail, glossy glass, 3D, realistic shadows, medical equipment, labels, captions, borders, mockup framing."
+    },
+    {
+      "file": "explore-weigh.png",
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "concept": "A balance scale weighing a phone-shaped rectangle against a stack of papers.",
+      "prompt": "Use case: stylized-concept\nAsset type: editorial website square section illustration\nREQUIRED NATIVE CANVAS: exactly 1024 pixels wide by 1024 pixels high, square PNG.\nPrimary request: Create a simple balance scale weighing one plain phone-shaped rectangle against a neat stack of paper sheets, suggesting comparison of online claims with documented evidence.\nScene/backdrop: dominant flat paper #f6eeea background with generous open negative space.\nSubject: one centered balance scale; one pan holds an unlabeled phone-shaped slab with no screen content, the other holds three blank offset sheets; no extra objects.\nStyle/medium: original flat screenprint / risograph museum-poster aesthetic, visible warm paper grain, slight deliberate ink misregistration, bold simple geometric shapes, calm and uncluttered.\nComposition/framing: centered square composition, horizontal balance beam across the middle, broad margins, visually balanced but with subtle tension.\nColor palette: use only paper #f6eeea as the dominant background, ink #182620 for restrained structure, and raspberry #d6336c as the sole accent color. No other colors, shades, gradients, white, black, gray, beige, or color casts.\nConstraints: output exactly 1024x1024 pixels; crisp flat silhouettes with tactile grain; phone must have no buttons, icons, interface, words, or brand cues; papers must be blank; no text, letters, numbers, logos, watermarks, product packaging, brands, photorealism, or realistic human faces.\nAvoid: busy detail, glossy rendering, 3D, realistic shadows, justice-court emblems, labels, captions, borders, mockup framing."
+    },
+    {
+      "file": "explore-lookback.png",
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "concept": "An ancient clay vessel, a comb, and a leaf arranged like museum objects.",
+      "prompt": "Use case: stylized-concept\nAsset type: editorial website square section illustration\nREQUIRED NATIVE CANVAS: exactly 1024 pixels wide by 1024 pixels high, square PNG.\nPrimary request: Arrange one ancient clay vessel, one simple comb, and one leaf as three quiet museum objects.\nScene/backdrop: dominant flat paper #f6eeea background with generous open negative space.\nSubject: a broad rounded ancient vessel with two small handles, a flat wide-tooth comb, and a single botanical leaf; stylized silhouettes rather than archaeological realism; no extra objects.\nStyle/medium: original flat screenprint / risograph museum-poster aesthetic, visible warm paper grain, slight deliberate ink misregistration, bold simple geometric and organic shapes, calm curatorial mood, uncluttered.\nComposition/framing: centered square still-life arrangement with the vessel as anchor, comb and leaf offset around it, broad margins and a subtle display-plinth rhythm without an actual frame.\nColor palette: use only paper #f6eeea as the dominant background, ink #182620 for restrained outlines and structure, and violet #7451c8 as the sole accent color. No other colors, shades, gradients, white, black, gray, beige, or color casts.\nConstraints: output exactly 1024x1024 pixels; crisp flat silhouettes with tactile grain; no text, letters, numbers, decorative script, symbols, labels, logos, watermarks, product packaging, brands, photorealism, or realistic human faces.\nAvoid: busy historical scene, glossy rendering, 3D, realistic shadows, artifact labels, captions, borders, mockup framing."
+    },
+    {
+      "file": "desk-guides.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "concept": "A simple route map of steps from a cleanser to a sunscreen sun, numbered only with dots.",
+      "prompt": "Use case: stylized-concept\nAsset type: editorial website landscape section illustration\nPrimary request: Create a simple route map of skincare steps beginning with an abstract cleanser symbol and ending at a sunscreen sun symbol; mark the route only with plain dots, never numerals.\nScene/backdrop: dominant flat paper #f6eeea background with generous open negative space.\nSubject: a gently winding path across the canvas; at the start, a simple cleansing water drop with two bubbles instead of any bottle or packaging; along the route, a sparse sequence of solid circular step dots; at the end, one simple sun disc with short rays.\nStyle/medium: original flat screenprint / risograph museum-poster aesthetic, visible warm paper grain, slight deliberate ink misregistration, bold simple geometric and organic shapes, calm and uncluttered.\nComposition/framing: landscape 3:2, route travels horizontally in a few generous curves, objects widely spaced, broad margins.\nColor palette: use only paper #f6eeea as the dominant background, ink #182620 for restrained structure, green #1f7a3d and cobalt #2049c7 as the only accent colors. No other colors, shades, gradients, white, black, gray, beige, or color casts.\nConstraints: exact 1536x1024 PNG intent; route markers are dots only with no numerals; no text, letters, numbers, arrows with labels, icons containing writing, logos, watermarks, product packaging, bottles, tubes, brands, photorealism, or realistic human faces.\nAvoid: busy transit-map detail, glossy rendering, 3D, realistic shadows, labels, captions, borders, mockup framing."
+    },
+    {
+      "file": "desk-ingredients.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "concept": "A row of tall apothecary bottles with abstract botanical and molecular shapes floating above them.",
+      "prompt": "Use case: stylized-concept\nAsset type: editorial website landscape section illustration\nPrimary request: Create a row of tall, unlabeled, old apothecary bottle silhouettes with abstract botanical leaves and simple molecular circles floating above them.\nScene/backdrop: dominant flat paper #f6eeea background with generous open negative space.\nSubject: four tall plain apothecary vessel silhouettes of varied simple geometry, with no labels, caps with brand cues, or packaging details; above them, a sparse airy arrangement of leaves, circles, and a few connecting bonds.\nStyle/medium: original flat screenprint / risograph museum-poster aesthetic, visible warm paper grain, slight deliberate ink misregistration, bold simple geometric and organic shapes, calm and uncluttered.\nComposition/framing: landscape 3:2, bottle row anchored low, floating shapes occupy the upper middle, broad quiet margins.\nColor palette: use only paper #f6eeea as the dominant background, ink #182620 for restrained structure, cobalt #2049c7 and violet #7451c8 as the only accent colors. No other colors, shades, gradients, white, black, gray, beige, or color casts.\nConstraints: exact 1536x1024 PNG intent; all bottles completely blank and generic; no text, letters, numbers, formulas, labels, logos, watermarks, commercial product packaging, brands, photorealism, or realistic human faces.\nAvoid: busy shelf scene, glossy glass, 3D, realistic shadows, pharmacy branding, labels, captions, borders, mockup framing."
+    },
+    {
+      "file": "desk-trends.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "concept": "A rising and falling wave line of hype with a small steady evidence line beneath it.",
+      "prompt": "Use case: stylized-concept\nAsset type: editorial website landscape section illustration\nPrimary request: Create an abstract comparison of a dramatic rising-and-falling wave line of hype above a small steady evidence line beneath it.\nScene/backdrop: dominant flat paper #f6eeea background with generous open negative space.\nSubject: one bold raspberry wave traverses the upper-middle canvas with a few exaggerated peaks and troughs; beneath it, one thin calm ink horizontal line with three small acid-yellow evidence dots; no axes, chart frame, or labels.\nStyle/medium: original flat screenprint / risograph museum-poster aesthetic, visible warm paper grain, slight deliberate ink misregistration, bold simple geometric and organic shapes, calm editorial mood, uncluttered.\nComposition/framing: landscape 3:2, wave spans most of the width without touching edges, steady line is shorter and centered beneath, broad quiet margins.\nColor palette: use only paper #f6eeea as the dominant background, ink #182620 for restrained structure, raspberry #d6336c and acid yellow #d9f34a as the only accent colors. No other colors, shades, gradients, white, black, gray, beige, or color casts.\nConstraints: exact 1536x1024 PNG intent; the graphic must remain fully abstract; no text, letters, numbers, axes, tick labels, arrows, logos, watermarks, product packaging, brands, photorealism, or realistic human faces.\nAvoid: busy data visualization, glossy rendering, 3D, realistic shadows, captions, borders, mockup framing."
+    },
+    {
+      "file": "desk-culture.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "concept": "A hammam archway, a kohl pot, and a rice bowl as flat museum silhouettes.",
+      "prompt": "Use case: stylized-concept\nAsset type: editorial website landscape section illustration\nPrimary request: Arrange a hammam archway, a small traditional kohl pot, and a simple rice bowl as three flat museum silhouettes.\nScene/backdrop: dominant flat paper #f6eeea background with generous open negative space.\nSubject: one broad horseshoe-like hammam arch as the largest anchor, one small rounded kohl vessel with a simple lid, and one low rice bowl with a softly mounded top; respectful object-study presentation with no people and no extra cultural symbols.\nStyle/medium: original flat screenprint / risograph museum-poster aesthetic, visible warm paper grain, slight deliberate ink misregistration, bold simple geometric and organic shapes, calm curatorial mood, uncluttered.\nComposition/framing: landscape 3:2, three silhouettes spaced like museum objects across a quiet horizontal field, arch slightly larger, broad margins.\nColor palette: use only paper #f6eeea as the dominant background, ink #182620 for restrained structure, violet #7451c8 and green #1f7a3d as the only accent colors. No other colors, shades, gradients, white, black, gray, beige, or color casts.\nConstraints: exact 1536x1024 PNG intent; no text, letters, numbers, decorative script, labels, logos, watermarks, product packaging, brands, photorealism, or realistic human faces.\nAvoid: busy interior scene, ornate pattern overload, stereotypes, glossy rendering, 3D, realistic shadows, captions, borders, mockup framing."
+    },
+    {
+      "file": "desk-procedures.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "concept": "A calm side-profile silhouette with a single laser line and a healing-timeline arc of dots.",
+      "prompt": "Use case: stylized-concept\nAsset type: editorial website landscape section illustration\nPrimary request: Create a calm, highly stylized cropped side-profile silhouette with one single straight laser line touching the cheek area and a healing-timeline arc made only from dots.\nScene/backdrop: dominant flat paper #f6eeea background with generous open negative space.\nSubject: an abstract geometric profile silhouette with no realistic facial features or identity; exactly one raspberry laser line; one gentle violet arc of evenly spaced dots suggesting a healing timeline; no medical devices.\nStyle/medium: original flat screenprint / risograph museum-poster aesthetic, visible warm paper grain, slight deliberate ink misregistration, bold simple geometric and organic shapes, calm clinical-editorial mood, uncluttered.\nComposition/framing: landscape 3:2, cropped profile occupies one side with face directed toward open space, single line crosses the open field to the cheek, dotted arc curves nearby, broad margins.\nColor palette: use only paper #f6eeea as the dominant background, ink #182620 for the silhouette and restrained structure, violet #7451c8 and raspberry #d6336c as the only accent colors. No other colors, shades, gradients, white, black, gray, beige, or color casts.\nConstraints: exact 1536x1024 PNG intent; exactly one laser line; timeline uses dots only; no realistic human face, eyes, eyelashes, detailed lips, skin texture, text, letters, numbers, arrows, logos, watermarks, product packaging, brands, or photorealism.\nAvoid: medical gore, procedure equipment, beauty-ad glamour, busy detail, glossy rendering, 3D, realistic shadows, labels, captions, borders, mockup framing."
+    },
+    {
+      "file": "desk-us.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "concept": "A capitol dome silhouette beside a stack of official documents and one lens.",
+      "prompt": "Use case: stylized-concept\nAsset type: editorial website landscape section illustration\nPrimary request: Create a simplified capitol dome silhouette beside a stack of blank official documents and one magnifying lens.\nScene/backdrop: dominant flat paper #f6eeea background with generous open negative space.\nSubject: one abstract civic dome with columns and no flag or emblem; three offset blank document sheets; one large simple magnifying lens partially overlapping the papers; no extra government symbols.\nStyle/medium: original flat screenprint / risograph museum-poster aesthetic, visible warm paper grain, slight deliberate ink misregistration, bold simple geometric shapes, calm and uncluttered.\nComposition/framing: landscape 3:2, dome and document-lens group balanced side by side with broad margins and clear silhouettes.\nColor palette: use only paper #f6eeea as the dominant background, ink #182620 for restrained structure, cobalt #2049c7 and acid yellow #d9f34a as the only accent colors. No other colors, shades, gradients, white, black, gray, beige, or color casts.\nConstraints: exact 1536x1024 PNG intent; all documents completely blank; no text, letters, numbers, document lines that resemble writing, flags, seals, stars, official emblems, logos, watermarks, product packaging, brands, photorealism, or realistic human faces.\nAvoid: busy city scene, partisan symbols, glossy rendering, 3D, realistic shadows, labels, captions, borders, mockup framing."
+    }
+  ]
+}

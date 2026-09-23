@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import type { WireItem } from "@/lib/content";
 
 type Filters = { region: string; desk: string };
@@ -23,12 +23,12 @@ function writeFilters(filters: Filters) {
   if (filters.region !== ALL) params.set("region", filters.region);
   if (filters.desk !== ALL) params.set("desk", filters.desk);
   const query = params.toString();
-  window.history.replaceState(null, "", query ? `/today?${query}` : "/today");
+  window.history.pushState(null, "", query ? `/today?${query}` : "/today");
 }
 
 export function GlobalFeed({ stories, regions, desks }: { stories: WireItem[]; regions: string[]; desks: string[] }) {
   const params = useSearchParams();
-  const [filters, setFilters] = useState<Filters>(() => readFilters(params, regions, desks));
+  const filters = readFilters(params, regions, desks);
 
   const visible = useMemo(
     () =>
@@ -40,7 +40,6 @@ export function GlobalFeed({ stories, regions, desks }: { stories: WireItem[]; r
 
   function update(next: Partial<Filters>) {
     const merged = { ...filters, ...next };
-    setFilters(merged);
     writeFilters(merged);
   }
 

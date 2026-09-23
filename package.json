@@ -12,7 +12,8 @@
     "audit:content": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/content-audit.mjs",
     "audit:links": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-sources.mjs",
     "site:health": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/site-health.mjs",
-    "gsc": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/gsc-query.mjs"
+    "gsc": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/gsc-query.mjs",
+    "newsletter": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/newsletter-send.mjs"
   },
   "dependencies": {
     "@fontsource/archivo": "^5.2.8",

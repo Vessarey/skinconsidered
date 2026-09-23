@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { GlobalFeed } from "@/components/GlobalFeed";
-import { NewsTicker } from "@/components/NewsTicker";
 import { deskLabel, desks, regions, wireItems } from "@/lib/content";
 import { canonical } from "@/lib/seo";
 
@@ -15,17 +14,15 @@ export const metadata: Metadata = {
 export default function TodayPage() {
   return (
     <main id="main-content">
-      <NewsTicker />
       <header className="page-hero global-hero">
         <div>
-          <span>Live desk / source-checked</span>
+          <span>Global skincare news</span>
           <h1>
-            Today, around the skin world.<sup>*</sup>
+            The latest, in perspective.
           </h1>
         </div>
         <p>
-          Regulation is not efficacy. A trial is not a trend. A recall is not a category verdict. Each dispatch names what happened, where, and how
-          confident the evidence lets us be.
+          Follow safety alerts, research, and regulatory changes from around the world. Filter by region or topic to find what matters to you.
         </p>
       </header>
       <div className="today-us-link">

@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 import posthog from "posthog-js";
 import { useEffect } from "react";
+import { redactAnalyticsProperties } from "@/lib/analytics-privacy";
+import { readerClickLabel } from "@/lib/reader-clicks";
 
 /**
  * Product analytics with the privacy posture documented on /privacy:
@@ -28,10 +30,14 @@ import { useEffect } from "react";
 const key = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const host = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com";
 
+function isLocalPreview() {
+  return typeof window !== "undefined" && ["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname);
+}
+
 let initialized = false;
 
 function ensureInit() {
-  if (initialized || !key || typeof window === "undefined") return;
+  if (initialized || !key || typeof window === "undefined" || isLocalPreview()) return;
   posthog.init(key, {
     api_host: host,
     persistence: "localStorage",
@@ -44,6 +50,7 @@ function ensureInit() {
     capture_dead_clicks: false,
     disable_surveys: true,
     capture_performance: { web_vitals: true, network_timing: false },
+    before_send: (event) => event ? { ...event, properties: redactAnalyticsProperties(event.properties) } : null,
   });
   initialized = true;
 }
@@ -52,7 +59,7 @@ type Props = Record<string, string | number | boolean>;
 
 /** Fire an app event by name. Safe to call when analytics are off. */
 export function track(event: string, properties?: Props) {
-  if (!key) return;
+  if (!key || isLocalPreview()) return;
   ensureInit();
   posthog.capture(event, properties);
 }
@@ -94,12 +101,17 @@ function onDocumentClick(event: MouseEvent) {
       track("outbound_click", { domain: url.hostname.replace(/^www\./, ""), path });
       return;
     }
+    const explicitLabel = readerClickLabel(anchor.closest("[data-reader-cta]")?.getAttribute("data-reader-cta") ?? null);
+    if (explicitLabel) {
+      track("cta_click", { label: explicitLabel, path });
+      return;
+    }
     if (anchor.closest(".related-files")) {
       const kind = anchor.querySelector("small")?.textContent?.trim().toLowerCase() ?? "file";
       track("related_click", { to_kind: kind, path });
       return;
     }
-    if (anchor.closest(".home-now-actions, .home-procedure-entry, .home-us, .home-explore nav, .procedure-start nav, .procedure-profile-more, .topical-open, .trend-card-bottom")) {
+    if (anchor.closest(".home-now-actions, .home-procedure-entry, .home-us, .home-explore nav, .reader-story, .topic-shortcuts, .newsletter-panel, .header-newsletter, .procedure-start nav, .procedure-profile-more, .topical-open, .trend-card-bottom")) {
       track("cta_click", { label: (anchor.textContent ?? "").trim().slice(0, 60), path });
     }
     return;
@@ -123,7 +135,7 @@ export function PostHogProvider() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!key) return;
+    if (!key || isLocalPreview()) return;
     ensureInit();
     posthog.capture("$pageview", { $current_url: window.location.href });
     const stopWatching = watchNewsletterPanels();
@@ -131,7 +143,7 @@ export function PostHogProvider() {
   }, [pathname]);
 
   useEffect(() => {
-    if (!key) return;
+    if (!key || isLocalPreview()) return;
     document.addEventListener("click", onDocumentClick, { capture: true });
     return () => document.removeEventListener("click", onDocumentClick, { capture: true });
   }, []);

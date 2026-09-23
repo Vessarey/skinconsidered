@@ -93,13 +93,11 @@ export function EditorialArticle({
       {quickRead && quickRead.length > 0 && (
         <section className="article-quick-read" aria-labelledby="quick-read-title">
           <div>
-            <span>Read this first</span>
             <h2 id="quick-read-title">The short version</h2>
           </div>
           <div className="quick-read-grid">
-            {quickRead.map((item, index) => (
+            {quickRead.map((item) => (
               <article key={item.label}>
-                <span>0{index + 1}</span>
                 <h3>{item.label}</h3>
                 <p>{item.text}</p>
               </article>
@@ -137,7 +135,7 @@ export function EditorialArticle({
                 <div>
                   <dt>Important</dt>
                   <dd>
-                    A verdict on the ingredient, brand, country, or category. Grades travel with the exact claim.{" "}
+                    This grade applies to the specific claim in this story. It does not rate the ingredient, brand, or category as a whole.{" "}
                     <Link href={`/methodology#grade-${grade.toLowerCase()}`}>How grading works →</Link>
                   </dd>
                 </div>

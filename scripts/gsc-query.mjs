@@ -16,7 +16,11 @@
  *   flywheel [days=28]  queries ranking 8–20: the highest-leverage content targets
  *   dates [days=28]     daily clicks, impressions, CTR, position trend
  *   entry [days=28]     top pages by impressions with CTR, to spot title/description work
+ *   totals [days=28]    source-provided property totals (not a sum of page rows)
+ *   devices [days=28]   device mix
  *   inspect <url>       URL Inspection API result for one page (index status, canonical)
+ * Report options: --end YYYY-MM-DD, --page <exact URL or path>, --json.
+ * Dates are inclusive Pacific calendar dates; finalized web-search data only.
  *
  * Search Console data lags about two days and is empty for the first weeks of
  * a new property. Report "no rows yet" honestly; never invent a baseline.
@@ -24,6 +28,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { collectRows, reportWindow } from "./gsc-reporting.mjs";
 
 const ROOT = path.join(import.meta.dirname, "..");
 const PROPERTY = process.env.GSC_PROPERTY ?? "sc-domain:skinconsidered.com";
@@ -68,7 +73,6 @@ async function api(token, url, body) {
   return data;
 }
 
-const dateStr = (daysAgo) => new Date(Date.now() - daysAgo * 86_400_000).toISOString().slice(0, 10);
 const pct = (value) => `${(value * 100).toFixed(1)}%`;
 
 function printRows(rows, label) {
@@ -78,12 +82,20 @@ function printRows(rows, label) {
   }
   console.log(`${label.padEnd(60)} clicks  impr   ctr    pos`);
   for (const row of rows) {
-    console.log(`${String(row.keys.join(" | ")).slice(0, 60).padEnd(60)} ${String(row.clicks).padStart(6)} ${String(row.impressions).padStart(6)} ${pct(row.ctr).padStart(6)} ${row.position.toFixed(1).padStart(6)}`);
+    console.log(`${String((row.keys ?? ["Property total"]).join(" | ")).padEnd(60)} ${String(row.clicks).padStart(6)} ${String(row.impressions).padStart(6)} ${pct(row.ctr).padStart(6)} ${row.position.toFixed(1).padStart(6)}`);
   }
 }
 
-const [cmd = "sites", arg] = process.argv.slice(2);
-const days = Number(arg) || 28;
+const args = process.argv.slice(2);
+const [cmd = "sites", arg] = args;
+const option = (name) => {
+  const index = args.indexOf(name);
+  if (index === -1) return undefined;
+  if (!args[index + 1] || args[index + 1].startsWith("--")) throw new Error(`${name} requires a value`);
+  return args[index + 1];
+};
+const days = !arg || arg.startsWith("--") ? 28 : Number(arg);
+if (!["sites", "inspect", "queries", "pages", "entry", "dates", "flywheel", "totals", "devices"].includes(cmd)) throw new Error("Unknown report. Use sites, inspect, queries, pages, entry, dates, flywheel, totals or devices.");
 
 if (cmd === "sites") {
   const token = await getAccessToken("https://www.googleapis.com/auth/webmasters.readonly");
@@ -104,13 +116,21 @@ if (cmd === "sites") {
   console.log(JSON.stringify({ url, verdict: result.verdict, coverageState: result.coverageState, indexingState: result.indexingState, lastCrawlTime: result.lastCrawlTime, googleCanonical: result.googleCanonical, userCanonical: result.userCanonical, robotsTxtState: result.robotsTxtState }, null, 2));
 } else {
   const token = await getAccessToken("https://www.googleapis.com/auth/webmasters.readonly");
-  const dimension = cmd === "dates" ? "date" : cmd === "pages" || cmd === "entry" ? "page" : "query";
-  const body = { startDate: dateStr(days + 2), endDate: dateStr(2), dimensions: [dimension], rowLimit: 100 };
+  const dimension = cmd === "dates" ? "date" : cmd === "devices" ? "device" : cmd === "pages" || cmd === "entry" ? "page" : "query";
+  const body = { ...reportWindow(days, option("--end")), dimensions: cmd === "totals" ? [] : [dimension], type: "web", dataState: "final" };
   if (cmd === "flywheel") body.dimensions = ["query", "page"];
-  const data = await api(token, `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(PROPERTY)}/searchAnalytics/query`, body);
+  const page = option("--page");
+  if (page) body.dimensionFilterGroups = [{ groupType: "and", filters: [{ dimension: "page", operator: "equals", expression: page.startsWith("/") ? SITE_ORIGIN + page : page }] }];
+  const data = await collectRows((request) => api(token, `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(PROPERTY)}/searchAnalytics/query`, request), body);
   let rows = data.rows ?? [];
   if (cmd === "flywheel") rows = rows.filter((row) => row.position >= 8 && row.position <= 20 && row.impressions >= 5).sort((a, b) => b.impressions - a.impressions);
   if (cmd === "entry") rows = rows.sort((a, b) => b.impressions - a.impressions);
   if (cmd === "dates") rows = rows.sort((a, b) => a.keys[0].localeCompare(b.keys[0]));
-  printRows(rows, cmd);
+  const report = { property: PROPERTY, fetchedAt: new Date().toISOString(), timezone: "America/Los_Angeles", request: body, responseAggregationType: data.responseAggregationType, returnedRows: data.rows.length, caveat: "Final web-search data only; unavailable days are not zeros. Query rows may omit anonymized queries and the API may internally limit results. Page and property aggregation differ.", rows };
+  if (args.includes("--json")) console.log(JSON.stringify(report, null, 2));
+  else {
+    console.log(`${PROPERTY} | ${body.startDate} through ${body.endDate} inclusive (${days} days, Pacific time) | finalized web search | ${data.responseAggregationType ?? "auto"} | ${data.rows.length} API rows`);
+    printRows(rows, cmd);
+    console.log(report.caveat);
+  }
 }

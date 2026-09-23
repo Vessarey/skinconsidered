@@ -1,6 +1,6 @@
-import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { PostHogProvider } from "@/components/PostHogProvider";
+import { PageAnalytics } from "@/components/PageAnalytics";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, siteUrl } from "@/content/site";
@@ -11,6 +11,7 @@ import "@fontsource/archivo-black/400.css";
 import "@fontsource/space-mono/400.css";
 import "@fontsource/space-mono/700.css";
 import "./globals.css";
+import "./reader.css";
 
 const base = siteUrl();
 
@@ -91,7 +92,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SiteFooter />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
         {/* Cookieless, aggregate page-view counts only; documented on /privacy. */}
-        <Analytics />
+        <PageAnalytics />
         <PostHogProvider />
       </body>
     </html>

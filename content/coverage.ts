@@ -11,6 +11,7 @@ import type { SourceRegistryEntry, TaxonomyTopic } from "./types";
  */
 
 export const taxonomy: TaxonomyTopic[] = [
+  { desk: "In the Routine", href: "/routines", description: "Celebrity skincare with dated, first-person sources and independent context.", includes: ["Products identified in original recordings", "Known brand relationships and source dates", "Personal experience kept separate from clinical evidence"] },
   {
     desk: "Regulation",
     href: "/today?desk=Regulation",
@@ -70,6 +71,7 @@ export const taxonomy: TaxonomyTopic[] = [
 ];
 
 export const sourceRegistry: SourceRegistryEntry[] = [
+  { id: "vogue-first-person", name: "Vogue · Beauty Secrets", jurisdiction: "International celebrity interviews", region: "Global", type: "First-person media", covers: ["Dated product demonstrations", "Publicly disclosed brand relationships"], cadence: "At publication and before profile updates", url: "https://www.vogue.com/video/series/beauty-secrets", domains: ["vogue.com"], note: "Evidence of what was said or shown, not of product efficacy. Publisher may use affiliate links." },
   // ---------------------------------------------------------------- United States
   {
     id: "fda",

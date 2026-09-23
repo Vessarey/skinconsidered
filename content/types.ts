@@ -325,7 +325,7 @@ export type SourceRegistryEntry = {
   name: string;
   jurisdiction: string;
   region: SourceRegion;
-  type: "Regulator" | "Public health agency" | "Professional society" | "Literature" | "Statistics" | "Archive";
+  type: "Regulator" | "Public health agency" | "Professional society" | "Literature" | "Statistics" | "Archive" | "First-person media";
   covers: string[];
   cadence: string;
   url: string;
