@@ -2,6 +2,12 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-09-23 — search pagination keyboard repair (local, Codex)
+
+No new publication-worthy skincare item established in the bounded regulator, PubMed and museum scan. Reproduced an archive navigation failure: after expanding 10 results to 20, Tab skipped the newly revealed batch and reached the footer. Focus now moves to the first revealed story and visible/total counts update accessibly, including the final partial batch. Existing release preparation was preserved.
+
+Content audit, lint, typecheck, build, 59 Node tests, new 375px/1280px pagination regression, existing growth journeys and local health (139 sitemap pages plus 11 internal links) pass. Screenshots visually reviewed. No fresh audience query, public deployment, push, provider connection or newsletter sending. See `DAILY-EDITOR-2026-09-23.md` for source triage, test scope and the preview-port correction. Next: owner-reviewed release and public verification, not additional speculative rewrites.
+
 ## 2026-09-22 — release preparation and search snippet fix (local, Claude)
 
 **Finding.** Nothing has deployed since 2026-09-02. `origin/main` is at `b264243`; 21 committed changes plus uncommitted newsletter, routines, artwork, and analytics work sat locally. Live still serves the September 1 edition, `www` still answers 200, and 12 prepared routes return 404 (see `SEO-REFRESH-2026-09-22.md`).

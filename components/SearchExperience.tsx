@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import type { SearchItem } from "@/lib/content";
 import { searchArchive } from "@/lib/search";
 import { track } from "./PostHogProvider";
@@ -19,7 +19,21 @@ export function SearchExperience(props: Props) {
 function SearchResults({ items, suggestions, initial }: Props & { initial: string }) {
   const [query, setQuery] = useState(initial);
   const [limit, setLimit] = useState(10);
+  const resultsContainer = useRef<HTMLDivElement>(null);
+  const firstNewResult = useRef<number | null>(null);
   const results = searchArchive(items, query);
+
+  useEffect(() => {
+    if (firstNewResult.current === null) return;
+    // Continue reading at the newly revealed batch, even when the button disappears.
+    resultsContainer.current?.querySelectorAll<HTMLAnchorElement>("h2 a")[firstNewResult.current]?.focus();
+    firstNewResult.current = null;
+  }, [limit]);
+
+  function showMore() {
+    firstNewResult.current = limit;
+    setLimit((current) => current + 10);
+  }
 
   function navigateSearch(value: string) {
     const trimmed = value.trim();
@@ -54,10 +68,10 @@ function SearchResults({ items, suggestions, initial }: Props & { initial: strin
           ))}
         </div>
       </form>
-      <p className="result-count" aria-live="polite">
-        {query.trim() ? results.length + (results.length === 1 ? " result" : " results") + " for “" + query.trim() + "”" : "Browse " + items.length + " stories and guides"}
+      <p className="result-count" role="status" aria-atomic="true">
+        {query.trim() ? "Showing " + Math.min(limit, results.length) + " of " + results.length + (results.length === 1 ? " result" : " results") + " for “" + query.trim() + "”" : "Showing " + Math.min(limit, results.length) + " of " + items.length + " stories and guides"}
       </p>
-      <div className="search-results">
+      <div className="search-results" id="search-results" ref={resultsContainer}>
         {results.slice(0, limit).map((item) => (
           <article key={item.href} data-reader-cta="search_result">
             <div>
@@ -81,7 +95,7 @@ function SearchResults({ items, suggestions, initial }: Props & { initial: strin
         )}
       </div>
       {results.length > limit && (
-        <button className="search-more" onClick={() => setLimit(limit + 10)} type="button">Show more results ({results.length - limit} remaining)</button>
+        <button className="search-more" aria-controls="search-results" onClick={showMore} type="button">Show more results ({results.length - limit} remaining)</button>
       )}
     </div>
   );
