@@ -2,6 +2,12 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-09-26 — Singapore injectable-peptide advisory (local, Codex)
+
+Added one dated, source-linked item from HSA's September 25 warning. Kept injectable and topical evidence separate, distinguished experimental products from approved prescription medicines, and made the missing case counts/risk denominator explicit. Grade A applies to the documented advisory, not efficacy. Prior release and search work preserved.
+
+Content audit, lint, typecheck, build, 62 Node tests, 375px/1280px article/listing checks and local health (140 sitemap URLs plus 11 links) passed. Screenshots reviewed. No fresh analytics query, public deployment, push or provider connection. Full claim boundaries, research triage and release gates: `DAILY-EDITOR-2026-09-26.md`. Next: owner-reviewed release and public verification after explicit approval.
+
 ## 2026-09-23 — search pagination keyboard repair (local, Codex)
 
 No new publication-worthy skincare item established in the bounded regulator, PubMed and museum scan. Reproduced an archive navigation failure: after expanding 10 results to 20, Tab skipped the newly revealed batch and reached the footer. Focus now moves to the first revealed story and visible/total counts update accessibly, including the final partial batch. Existing release preparation was preserved.

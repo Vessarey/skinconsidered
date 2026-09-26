@@ -2,6 +2,42 @@ import type { Story } from "./types";
 
 export const stories: Story[] = [
   {
+    slug: "singapore-unapproved-peptide-injections-warning-2026",
+    related: { ingredients: ["peptides"], guides: ["procedure-safety-checklist"] },
+    kind: "safety",
+    category: "Consumer advisory",
+    region: "Asia",
+    location: "Singapore",
+    headline: "Singapore warns against unapproved peptide injections bought online",
+    shortHeadline: "Singapore warns on unapproved injectable peptides",
+    dek: "HSA's September 25 warning separates experimental injectables from approved prescription medicines obtained without medical oversight.",
+    date: "2026-09-25",
+    dateLabel: "September 25, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "Official safety advice, not a trial",
+    whyItMatters: "An online seller's research label does not establish suitability for human use.",
+    limitations: "The notice supplies no case counts or risk denominator. It is not a recall, a topical peptide skincare assessment, or evidence that every peptide has the same risks.",
+    sources: [
+      { label: "HSA — unauthorised medicines and injectable peptides warning", url: "https://www.hsa.gov.sg/announcements/risks-of-obtaining-prescription-medicines-unauthorised-channels/", published: "September 25, 2026" },
+    ],
+    sections: [
+      {
+        heading: "Two different situations",
+        paragraphs: [
+          "HSA describes serious reactions reported after purchases through unauthorised channels. It distinguishes prescription GLP-1 medicines used without supervision from experimental injectable peptides, naming retatrutide and cagrilintide as unapproved in its dated warning.",
+          "The agency flags uncertain contents and quality, and advises obtaining prescribed products from established pharmacies, hospitals or clinics with a doctor's assessment. Do not read this as advice to stop prescribed treatment.",
+        ],
+      },
+      {
+        heading: "Keep the evidence in scope",
+        paragraphs: [
+          "Grade A describes the documented Singapore advisory, not peptide efficacy or a measured complication rate. This is a regulator communication, not a commercially sponsored treatment trial. Source checked September 26, 2026.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "taiwan-medicube-cream-advisory-2026",
     related: { dispatches: ["singapore-nu-skin-dermatic-effects-recall-2026"], trends: ["salmon-dna-pdrn"] },
     kind: "safety",
