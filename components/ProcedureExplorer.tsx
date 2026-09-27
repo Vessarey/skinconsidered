@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { CostBand, DowntimeBand, EvidenceGrade, ProcedureCategory, ProcedureConcern, ProcedureKind, ProcedureSetting } from "@/lib/content";
 import { EvidenceBadge } from "./EvidenceBadge";
 import { track } from "./PostHogProvider";
@@ -92,6 +92,7 @@ function matchesQuery(profile: ExplorerProfile, words: string[]) {
 export function ProcedureExplorer({ profiles, categories, concerns }: { profiles: ExplorerProfile[]; categories: ProcedureCategory[]; concerns: ProcedureConcern[] }) {
   const params = useSearchParams();
   const filters = readFilters(params, concerns);
+  const searchInput = useRef<HTMLInputElement>(null);
 
   // Deep links such as /procedures#rf-microneedling open the matching file. The
   // <details> elements stay uncontrolled, so this only touches the DOM.
@@ -127,6 +128,8 @@ export function ProcedureExplorer({ profiles, categories, concerns }: { profiles
   function reset() {
     const cleared: Filters = { concern: ALL, downtime: ALL, cost: ALL, setting: ALL, grade: ALL, q: "" };
     writeFilters(cleared);
+    // Both reset buttons disappear when filters clear; keep the next action reachable.
+    searchInput.current?.focus();
   }
 
   const selectFilter = (label: string, key: keyof Filters, options: { value: string; label: string }[]) => (
@@ -148,6 +151,7 @@ export function ProcedureExplorer({ profiles, categories, concerns }: { profiles
         <label htmlFor="procedure-search">Search procedures, brands, or concerns</label>
         <input
           id="procedure-search"
+          ref={searchInput}
           onChange={(event) => update({ q: event.target.value })}
           placeholder="Try HydraFacial, melasma, or a chemical peel"
           type="search"

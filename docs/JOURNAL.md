@@ -2,6 +2,12 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-09-27 — procedure filter reset focus (local, Codex)
+
+No new publication-worthy development established in the bounded source scan. Reproduced keyboard focus falling to the document body when either procedure reset button disappears. Reset now returns focus to search, allowing immediate typing and normal Tab navigation; existing filter history remains intact.
+
+Content audit, lint, typecheck, build, 62 Node tests, new mobile/desktop reset checks and existing growth journeys pass. Local health: 140 sitemap pages plus 11 other internal links. Screenshots inspected. No fresh audience query or publication. See `DAILY-EDITOR-2026-09-27.md` for sources, validation limits and next release gate.
+
 ## 2026-09-26 — Singapore injectable-peptide advisory (local, Codex)
 
 Added one dated, source-linked item from HSA's September 25 warning. Kept injectable and topical evidence separate, distinguished experimental products from approved prescription medicines, and made the missing case counts/risk denominator explicit. Grade A applies to the documented advisory, not efficacy. Prior release and search work preserved.
