@@ -1,7 +1,8 @@
 type SearchEntry = { title: string; description: string; terms: string; type: string };
 
 function normalize(value: string) {
-  return value.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/moisturis/g, "moisturiz").replace(/[^a-z0-9]+/g, " ").trim();
+  // Preserve letters and combining marks outside Latin, including Japanese voicing marks.
+  return value.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/moisturis/g, "moisturiz").replace(/[^\p{L}\p{N}\p{M}]+/gu, " ").trim();
 }
 
 function variants(word: string) {
@@ -12,7 +13,7 @@ function variants(word: string) {
 /** Title matches lead; descriptions and aliases keep the rest of the archive discoverable. */
 export function searchArchive<T extends SearchEntry>(items: T[], query: string): T[] {
   const phrase = normalize(query);
-  if (!phrase) return items;
+  if (!phrase) return query.trim() ? [] : items;
   const words = phrase.split(/\s+/).map(variants);
   return items.map((item, index) => {
     const title = normalize(item.title);

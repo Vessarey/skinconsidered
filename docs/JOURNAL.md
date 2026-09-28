@@ -2,6 +2,12 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-09-28 — honest archive search matching (local, Codex)
+
+No new publication-worthy development established in the bounded source scan. Reproduced non-Latin and punctuation-only queries returning the full archive as supposed matches. Search now preserves Unicode letters and combining marks and treats nonempty, unsearchable queries as no match. Blank browsing, existing aliases and Latin accent folding are preserved; this does not add translation.
+
+Content audit, lint, typecheck, build, 65 Node tests, new desktop/mobile Unicode checks, existing pagination and growth journeys pass. Local health: 140 sitemap URLs plus 11 other internal links. Screenshots inspected. No fresh audience query or publication. See `DAILY-EDITOR-2026-09-28.md` for source triage, validation boundaries and the owner-reviewed release gate.
+
 ## 2026-09-27 — procedure filter reset focus (local, Codex)
 
 No new publication-worthy development established in the bounded source scan. Reproduced keyboard focus falling to the document body when either procedure reset button disappears. Reset now returns focus to search, allowing immediate typing and normal Tab navigation; existing filter history remains intact.
