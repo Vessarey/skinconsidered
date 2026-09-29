@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, RefObject, useEffect, useRef, useState } from "react";
 import type { SearchItem } from "@/lib/content";
 import { searchArchive } from "@/lib/search";
 import { track } from "./PostHogProvider";
@@ -12,16 +12,26 @@ type Props = { items: SearchItem[]; suggestions: string[] };
 export function SearchExperience(props: Props) {
   const params = useSearchParams();
   const initial = params.get("q") ?? "";
+  const inputRef = useRef<HTMLInputElement>(null);
+  const resetPendingRef = useRef(false);
   // Remount the draft when the URL changes, including browser Back and Forward.
-  return <SearchResults key={initial} {...props} initial={initial} />;
+  return <SearchResults key={initial} {...props} initial={initial} inputRef={inputRef} resetPendingRef={resetPendingRef} />;
 }
 
-function SearchResults({ items, suggestions, initial }: Props & { initial: string }) {
+function SearchResults({ items, suggestions, initial, inputRef, resetPendingRef }: Props & { initial: string; inputRef: RefObject<HTMLInputElement | null>; resetPendingRef: RefObject<boolean> }) {
   const [query, setQuery] = useState(initial);
   const [limit, setLimit] = useState(10);
   const resultsContainer = useRef<HTMLDivElement>(null);
   const firstNewResult = useRef<number | null>(null);
   const results = searchArchive(items, query);
+
+  useEffect(() => {
+    // Wait for both the URL and draft reset; the URL update can remount this input.
+    if (resetPendingRef.current && initial === "" && query === "") {
+      inputRef.current?.focus();
+      resetPendingRef.current = false;
+    }
+  }, [initial, query, inputRef, resetPendingRef]);
 
   useEffect(() => {
     if (firstNewResult.current === null) return;
@@ -57,7 +67,7 @@ function SearchResults({ items, suggestions, initial }: Props & { initial: strin
       <form action="/search" method="get" onSubmit={search} role="search">
         <label htmlFor="site-search">Search by ingredient, concern, procedure, or place</label>
         <div>
-          <input id="site-search" name="q" onChange={(event) => { setQuery(event.target.value); setLimit(10); }}
+          <input id="site-search" name="q" ref={inputRef} onChange={(event) => { setQuery(event.target.value); setLimit(10); }}
             placeholder="Try sunscreen, Botox, or skin barrier" type="search" value={query} maxLength={200} />
           <button type="submit">Search</button>
         </div>
@@ -87,7 +97,7 @@ function SearchResults({ items, suggestions, initial }: Props & { initial: strin
             <h2>No match for that search yet.</h2>
             <p>Try a shorter phrase or a different spelling. You can also explore our guides or compare procedures.</p>
             <div className="empty-state-actions">
-              <button className="search-reset" onClick={() => navigateSearch("")} type="button">Clear search</button>
+              <button className="search-reset" onClick={() => { resetPendingRef.current = true; navigateSearch(""); }} type="button">Clear search</button>
               <Link href="/guides">Browse guides</Link>
               <Link href="/procedures">Compare procedures</Link>
             </div>

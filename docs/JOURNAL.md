@@ -2,6 +2,12 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-09-29 — search reset keyboard recovery (local, Codex)
+
+No new publication-worthy development established in the bounded source scan; museum retrieval was limited. Reproduced “Clear search” leaving focus on the document body. Reset now waits for the URL-driven input remount and returns focus to the current search field, including unsent drafts. Yesterday's Unicode matching is preserved.
+
+Content audit, lint, typecheck, build, 65 Node tests, new 375px/1280px reset checks and existing Unicode, pagination and growth journeys pass. Local health: 140 sitemap URLs plus 11 other internal links. Screenshots inspected. No fresh audience query or publication. See `DAILY-EDITOR-2026-09-29.md` for sources, the caught initial focus-timing failure, validation limits and the owner-reviewed release gate.
+
 ## 2026-09-28 — honest archive search matching (local, Codex)
 
 No new publication-worthy development established in the bounded source scan. Reproduced non-Latin and punctuation-only queries returning the full archive as supposed matches. Search now preserves Unicode letters and combining marks and treats nonempty, unsearchable queries as no match. Blank browsing, existing aliases and Latin accent folding are preserved; this does not add translation.
