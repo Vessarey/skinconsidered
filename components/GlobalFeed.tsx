@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import type { WireItem } from "@/lib/content";
 
 type Filters = { region: string; desk: string };
@@ -29,6 +29,7 @@ function writeFilters(filters: Filters) {
 export function GlobalFeed({ stories, regions, desks }: { stories: WireItem[]; regions: string[]; desks: string[] }) {
   const params = useSearchParams();
   const filters = readFilters(params, regions, desks);
+  const allRegionsButton = useRef<HTMLButtonElement>(null);
 
   const visible = useMemo(
     () =>
@@ -48,6 +49,7 @@ export function GlobalFeed({ stories, regions, desks }: { stories: WireItem[]; r
       <span className="filter-label">{label}</span>
       {[ALL, ...options].map((option) => (
         <button
+          ref={key === "region" && option === ALL ? allRegionsButton : undefined}
           aria-pressed={filters[key] === option}
           className={filters[key] === option ? "active" : ""}
           key={option}
@@ -102,7 +104,10 @@ export function GlobalFeed({ stories, regions, desks }: { stories: WireItem[]; r
             <span aria-hidden="true">*</span>
             <h2>Nothing on file for that combination yet.</h2>
             <p>The wire grows with each reviewed edition. Widen the filters or search the archive.</p>
-            <button className="empty-state-reset" onClick={() => update({ region: ALL, desk: ALL })} type="button">
+            <button className="empty-state-reset" onClick={() => {
+              update({ region: ALL, desk: ALL });
+              allRegionsButton.current?.focus();
+            }} type="button">
               Clear filters
             </button>
           </div>

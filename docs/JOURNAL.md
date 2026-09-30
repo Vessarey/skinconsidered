@@ -2,6 +2,12 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-09-30 — global news filter recovery (local, Codex)
+
+Reviewed new HSA industry notices and MHRA safety compilations, plus regulator, PubMed and museum sources; no material new skincare item selected. Reproduced the global wire's empty-filter reset losing focus to the page body. It now focuses the persistent Region “All” control while resetting both filters. Previous search and procedure repairs remain intact.
+
+Content audit, lint, typecheck, build, 65 Node tests, new 375px/1280px reset checks, seven-width feed layout and existing growth journeys pass. Local health: 140 sitemap URLs plus 11 links. Screenshots inspected. No fresh audience query or publication. See `DAILY-EDITOR-2026-09-30.md` for source triage and validation limits. Owner-reviewed release approval remains the next best action.
+
 ## 2026-09-29 — search reset keyboard recovery (local, Codex)
 
 No new publication-worthy development established in the bounded source scan; museum retrieval was limited. Reproduced “Clear search” leaving focus on the document body. Reset now waits for the URL-driven input remount and returns focus to the current search field, including unsent drafts. Yesterday's Unicode matching is preserved.
