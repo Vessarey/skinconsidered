@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Routines.module.css";
 
 export function RoutineThumbnail({ src, name }: { src: string; name: string }) {
@@ -13,18 +13,37 @@ export function RoutineThumbnail({ src, name }: { src: string; name: string }) {
 
 export function RoutineVideo({ videoId, thumbnail, name }: { videoId: string; thumbnail: string; name: string }) {
   const [loaded, setLoaded] = useState(false);
+  const playerRef = useRef<HTMLIFrameElement>(null);
+  const loadButtonRef = useRef<HTMLButtonElement>(null);
+  const focusPendingRef = useRef(false);
+
+  useEffect(() => {
+    // Only move focus for an explicit toggle, never on initial render.
+    if (!focusPendingRef.current) return;
+    (loaded ? playerRef.current : loadButtonRef.current)?.focus();
+    focusPendingRef.current = false;
+  }, [loaded]);
+
+  function togglePlayer(next: boolean) {
+    focusPendingRef.current = true;
+    setLoaded(next);
+  }
+
   return (
     <figure className={styles.video}>
       <div className={styles.player}>
-        {loaded ? <iframe src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0`} title={`${name} · Vogue Beauty Secrets`} allow="encrypted-media; picture-in-picture; fullscreen" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" /> :
-          <button type="button" className={styles.loadVideo} onClick={() => setLoaded(true)} aria-label={`Load ${name}’s original Vogue video`}>
+        {loaded ? <iframe ref={playerRef} onLoad={(event) => {
+          // Enter the ready browsing context only if the reader has not moved elsewhere.
+          if (document.activeElement === event.currentTarget) event.currentTarget.contentWindow?.focus();
+        }} src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0`} title={`${name} · Vogue Beauty Secrets`} allow="encrypted-media; picture-in-picture; fullscreen" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" /> :
+          <button ref={loadButtonRef} type="button" className={styles.loadVideo} onClick={() => togglePlayer(true)} aria-label={`Load ${name}’s original Vogue video`}>
             <RoutineThumbnail src={thumbnail} name={name} />
             <span className={styles.playLabel}><span aria-hidden="true">▶</span> Load original video</span>
           </button>}
       </div>
       <figcaption>
         <span>Video & preview: Vogue / YouTube. {loaded ? "Player unavailable?" : "The YouTube player loads only when you choose."} <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></span>
-        <span className={styles.privacyNote}>Preview images come from YouTube. Loading the player connects to YouTube’s privacy-enhanced service; its own privacy terms apply. {loaded && <button type="button" onClick={() => setLoaded(false)}>Close player</button>}</span>
+        <span className={styles.privacyNote}>Preview images come from YouTube. Loading the player connects to YouTube’s privacy-enhanced service; its own privacy terms apply. {loaded && <button type="button" onClick={() => togglePlayer(false)}>Close player</button>}</span>
       </figcaption>
     </figure>
   );

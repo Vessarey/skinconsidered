@@ -32,6 +32,7 @@
 .profileHero .date { font: .68rem/1.8 var(--mono); margin-top: 1.5rem; }
 .video { min-width: 0; margin: 0; }
 .player { width: 100%; aspect-ratio: 16/9; min-height: 200px; overflow: hidden; background: #e9dedf; border-radius: .3rem; }
+.player:focus-within { outline: 3px solid var(--cobalt); outline-offset: 3px; }
 .player iframe { width: 100%; height: 100%; border: 0; display: block; }
 .loadVideo { position: relative; width: 100%; height: 100%; padding: 0; border: 0; cursor: pointer; background: #e9dedf; }
 .playLabel { position: absolute; left: 50%; bottom: 1rem; transform: translateX(-50%); display: flex; align-items: center; gap: .7rem; width: max-content; max-width: 94%; border-radius: 3rem; background: var(--paper); color: var(--ink); padding: .8rem 1rem; font: 600 .8rem/1.4 var(--serif); }

@@ -2,6 +2,12 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-10-01 — routine video keyboard lifecycle (local, Codex)
+
+No new publication-worthy skincare development established in the bounded regulator, PubMed and museum scan; direct retrieval of one PubMed candidate was blocked. Reproduced video load and close both losing focus to the body. Explicit loading now hands focus to the ready player, closing returns it to the load control, and delayed loads cannot reclaim focus after the reader moves away. Added a visible media focus outline; consent and privacy settings remain unchanged.
+
+Content audit, lint, typecheck, build, 65 Node tests, all-three-profile 375px/1280px player regressions and existing growth journeys pass. Local health: 140 sitemap URLs plus 11 links. Screenshots inspected. Video checks used fixtures, not live playback. No fresh analytics or public release. See `DAILY-EDITOR-2026-10-01.md`; owner-reviewed release approval remains the next best action.
+
 ## 2026-09-30 — global news filter recovery (local, Codex)
 
 Reviewed new HSA industry notices and MHRA safety compilations, plus regulator, PubMed and museum sources; no material new skincare item selected. Reproduced the global wire's empty-filter reset losing focus to the page body. It now focuses the persistent Region “All” control while resetting both filters. Previous search and procedure repairs remain intact.
