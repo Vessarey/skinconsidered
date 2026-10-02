@@ -2,6 +2,12 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-10-02 — source-linked US recall dispatch (local, Codex)
+
+Added one new company-recall item from an FDA-hosted source, with event/review dates separated, evidence scope and commercial interest disclosed, and older background kept distinct. Global regulator, PubMed and museum triage is recorded in `DAILY-EDITOR-2026-10-02.md`. Existing routine-video and discovery fixes are preserved.
+
+Content audit, lint, typecheck, build, 68 Node tests, new 375px/1280px article/discovery regressions and existing growth journeys pass. Local health: 141 sitemap URLs plus 11 links. Screenshots inspected. No fresh audience query or public release; owner review and explicit release approval are next.
+
 ## 2026-10-01 — routine video keyboard lifecycle (local, Codex)
 
 No new publication-worthy skincare development established in the bounded regulator, PubMed and museum scan; direct retrieval of one PubMed candidate was blocked. Reproduced video load and close both losing focus to the body. Explicit loading now hands focus to the ready player, closing returns it to the load control, and delayed loads cannot reclaim focus after the reader moves away. Added a visible media focus outline; consent and privacy settings remain unchanged.

@@ -2,6 +2,49 @@ import type { Story } from "./types";
 
 export const stories: Story[] = [
   {
+    slug: "us-greenwich-glutathione-recall-2026",
+    related: { guides: ["procedure-safety-checklist"] },
+    kind: "safety",
+    category: "Recall",
+    region: "North America",
+    location: "United States",
+    headline: "Greenwich Rx recalls ten lots of injectable glutathione",
+    shortHeadline: "US glutathione recall: check the lot",
+    dek: "An October 1 company notice posted by FDA cites potentially elevated endotoxin levels.",
+    date: "2026-10-01",
+    dateLabel: "October 1, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "Company recall, not an efficacy study",
+    whyItMatters: "The recall covers specified lots, not every glutathione product.",
+    limitations: "No risk denominator or measured endotoxin values are supplied. The notice does not establish cosmetic use, oral or topical risk, or treatment efficacy.",
+    sources: [
+      { label: "FDA — Greenwich Rx company recall and complete lot table", url: "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/greenwich-rx-issues-voluntary-nationwide-recall-compounded-glutathione-due-elevated-endotoxin-levels", published: "October 1, 2026" },
+      { label: "FDA — earlier warning on supplement-grade glutathione in injectables", url: "https://www.fda.gov/drugs/human-drug-compounding/fda-reminds-compounders-not-use-dietary-supplement-grade-glutathione-injectables", published: "August 27, 2026; separate background" },
+    ],
+    sections: [
+      {
+        heading: "Check the product and lot",
+        paragraphs: [
+          "The voluntary US recall concerns 200 mg/mL, 10 mL multidose vials intended for subcutaneous use. Greenwich Rx reports two patients receiving emergency-department care after intravenous administration; this product was not formulated for that route.",
+          "The company advises affected-lot customers to stop use and follow its disposal directions. Check the linked lot table; discuss health concerns with a healthcare provider.",
+        ],
+      },
+      {
+        heading: "Attribution and limits",
+        paragraphs: [
+          "Greenwich Rx has a commercial interest. FDA hosts the company's announcement without endorsement. Grade A denotes a documented recall, not confirmed causation. Reviewed October 2, 2026.",
+        ],
+      },
+      {
+        heading: "Older context, not the same incident",
+        paragraphs: [
+          "FDA's August 27 warning explains why supplement-grade glutathione is unsuitable for injectable compounding. That earlier episode names Medisca lot 229536. Neither source establishes a connection between that lot and this Greenwich recall; do not combine their patient counts.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "singapore-unapproved-peptide-injections-warning-2026",
     related: { ingredients: ["peptides"], guides: ["procedure-safety-checklist"] },
     kind: "safety",
