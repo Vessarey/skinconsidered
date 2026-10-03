@@ -13,6 +13,14 @@ export function PrimaryNav() {
   const pathname = usePathname();
   const mobileMenu = useRef<HTMLDetailsElement>(null);
 
+  const closeMobileMenu = () => {
+    const menu = mobileMenu.current;
+    if (!menu) return;
+    const focusWasInside = menu.contains(document.activeElement);
+    menu.open = false;
+    if (focusWasInside) menu.querySelector("summary")?.focus();
+  };
+
   const isCurrent = (href: string) =>
     pathname === href ||
     pathname.startsWith(`${href}/`) ||
@@ -37,13 +45,14 @@ export function PrimaryNav() {
       <Link className="header-newsletter" href="/newsletter" aria-current={isCurrent("/newsletter") ? "page" : undefined}>Newsletter <span aria-hidden="true">↗</span></Link>
       <details className="mobile-nav" key={pathname} ref={mobileMenu} onKeyDown={(event) => {
         if (event.key === "Escape" && mobileMenu.current?.open) {
-          mobileMenu.current.open = false;
-          mobileMenu.current.querySelector("summary")?.focus();
+          closeMobileMenu();
         }
       }}>
         <summary>Menu <span aria-hidden="true">+</span></summary>
         <nav aria-label="Mobile navigation" onClick={(event) => {
-          if ((event.target as HTMLElement).closest("a") && mobileMenu.current) mobileMenu.current.open = false;
+          // Modified clicks keep the current page and its menu available.
+          if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          if ((event.target as HTMLElement).closest("a")) closeMobileMenu();
         }}>{links(true)}</nav>
       </details>
     </>

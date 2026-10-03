@@ -2,6 +2,12 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-10-03 — mobile menu focus recovery (local, Codex)
+
+No new publication-worthy development established in the bounded regulator, PubMed and museum scan; retrieval/date limits are recorded in `DAILY-EDITOR-2026-10-03.md`. Reproduced selecting the current mobile destination leaving focus on its hidden link. Closing now restores summary focus when focus was inside the menu; modified clicks preserve the original menu.
+
+Content audit, lint, typecheck, build, 68 Node tests, new mobile/tablet/desktop navigation regressions and existing growth journeys pass. Local health: 141 sitemap pages plus 11 links. Screenshots inspected. Native new-tab creation is not certified by the headless checks. No fresh analytics or public release; owner review and release approval remain next.
+
 ## 2026-10-02 — source-linked US recall dispatch (local, Codex)
 
 Added one new company-recall item from an FDA-hosted source, with event/review dates separated, evidence scope and commercial interest disclosed, and older background kept distinct. Global regulator, PubMed and museum triage is recorded in `DAILY-EDITOR-2026-10-02.md`. Existing routine-video and discovery fixes are preserved.
