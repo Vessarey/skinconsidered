@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const ART = {
   "home-hero": { src: "/art/home-hero.jpg", width: 1536, height: 1024 },
   "home-us": { src: "/art/home-us.jpg", width: 1024, height: 1024 },
@@ -31,14 +33,17 @@ export function Artwork({
   priority?: boolean;
 }) {
   const art = ART[name];
+  const sizes = name.startsWith("explore-")
+    ? "(max-width: 900px) 44vw, 21vw"
+    : "(max-width: 640px) calc(100vw - 2.5rem), (max-width: 900px) 42vw, 36vw";
   return (
     <figure className={`site-art ${className}`.trim()}>
-      {/* eslint-disable-next-line @next/next/no-img-element -- static PNG in /public; served as-is, no optimizer needed */}
-      <img
+      <Image
         src={art.src}
         alt={alt}
         width={art.width}
         height={art.height}
+        sizes={sizes}
         loading={priority ? "eager" : "lazy"}
         decoding="async"
         fetchPriority={priority ? "high" : "auto"}

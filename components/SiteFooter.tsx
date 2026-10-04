@@ -5,7 +5,7 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="footer-brand">
-        <Link className="footer-wordmark" href="/">
+        <Link className="footer-wordmark" href="/" prefetch={false}>
           skin considered<span aria-hidden="true">*</span>
         </Link>
         <p>Independent skincare reporting and education. Not medical advice. No affiliate links, no sponsored grades.</p>

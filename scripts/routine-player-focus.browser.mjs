@@ -42,6 +42,9 @@ try {
         assert.equal(await frame.getAttribute("title"), `${profile.name} · Vogue Beauty Secrets`);
         const play = page.frameLocator("iframe").getByRole("button", { name: "Play fixture" });
         await play.waitFor();
+        // Visibility can precede the frame's load/focus handler; test the ready player.
+        await play.evaluate(() => document.readyState === "complete" ? Promise.resolve() : new Promise((resolve) => window.addEventListener("load", resolve, { once: true })));
+        await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
         // The next Tab reaches a player control; later Tabs leave the player normally.
         await page.keyboard.press("Tab");
         assert.equal(await play.evaluate((el) => el === document.activeElement), true);

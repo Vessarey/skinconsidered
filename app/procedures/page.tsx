@@ -79,7 +79,7 @@ export default function ProceduresPage() {
         </p>
         <a className="primary-action" href="#compare">Find a procedure <span aria-hidden="true">↓</span></a>
         </div>
-        <Artwork name="desk-procedures" priority />
+        <Artwork name="desk-procedures" />
       </header>
 
       <section className="procedure-catalog" aria-labelledby="procedure-catalog-title">

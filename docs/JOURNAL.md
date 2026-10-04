@@ -2,6 +2,14 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-10-03 — requested engagement and quality review (local, Codex)
+
+Fresh production comparison: 127 live sitemap routes versus 141 reviewed local routes; all 14 missing routes return 404, including Routines and Newsletter. Live `www` still returns 200. Search Console's requested September 4–October 1 window returned through September 29 only: 1 click / 2,431 impressions (0.0411% CTR); missing dates are not zeros. PostHog requires reauthentication, so engagement is unavailable, not proven improved.
+
+Responsive owned artwork cuts the mobile homepage hero from 465,631 to 10,048 encoded bytes (97.8% less image payload). Disabled home-brand prefetch, removed hidden mobile procedure-art downloads, added routine-to-guide links and a visible RSS option with honest email-unavailable copy, and repaired the newsletter archive's squeezed phone headline. Next and matching lint config patched to 16.3.8; DOMPurify/brace-expansion lockfile patches applied. Production npm audit: zero findings; five development-only findings remain in one unpatched braces dependency chain.
+
+Content audit, lint, typecheck, build, 68 Node tests, reader-quality and existing growth/player/navigation browser checks, OG decoding and all 141 local sitemap routes pass. Source audit has seven blocked URLs, not seven established broken links. Screenshots inspected. Local only: no push, deployment or provider/analytics connection. Full baselines, candidate decisions, test caveats and release gates: `ENGAGEMENT-REVIEW-2026-10-03.md`. Next: explicit release approval, production parity, then sufficient post-release data.
+
 ## 2026-10-03 — mobile menu focus recovery (local, Codex)
 
 No new publication-worthy development established in the bounded regulator, PubMed and museum scan; retrieval/date limits are recorded in `DAILY-EDITOR-2026-10-03.md`. Reproduced selecting the current mobile destination leaving focus on its hidden link. Closing now restores summary focus when focus was inside the menu; modified clicks preserve the original menu.

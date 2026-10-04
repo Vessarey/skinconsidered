@@ -8,7 +8,7 @@ export function SiteHeader() {
         Skip to content
       </a>
       <header className="site-header">
-        <Link className="wordmark" href="/" aria-label="Skin Considered home">
+        <Link className="wordmark" href="/" prefetch={false} aria-label="Skin Considered home">
           <span>skin</span>
           <strong>considered</strong>
           <i aria-hidden="true">*</i>

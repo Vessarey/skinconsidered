@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { NewsletterPanel } from "@/components/NewsletterPanel";
 import { RoutineCards } from "@/components/RoutineCards";
 import { canonical } from "@/lib/seo";
@@ -20,7 +21,13 @@ export default function RoutinesPage() {
     <section className={styles.gallery} aria-label="Celebrity skincare routines"><RoutineCards headingLevel={2} /></section>
     <section className={styles.context} aria-labelledby="routine-context">
       <h2 id="routine-context">A routine is a snapshot.<br />Not a prescription.</h2>
-      <p>These are selected steps from dated, first-person interviews—not confirmation of what someone uses today. We show brand relationships where known and separate personal experiences from evidence. No product rankings, shopping commissions, or promises of celebrity skin.</p>
+      <div>
+        <p>These are selected steps from dated, first-person interviews—not confirmation of what someone uses today. We show brand relationships where known and separate personal experiences from evidence. No product rankings, shopping commissions, or promises of celebrity skin.</p>
+        <nav className={styles.related} aria-label="Make the routine your own" data-reader-cta="routine_context">
+          <Link href="/guides/routine-from-zero">Build your own routine from the basics →</Link>
+          <Link href="/guides/skin-barrier-explained">Understand your skin barrier →</Link>
+        </nav>
+      </div>
     </section>
     <NewsletterPanel source="routines" />
   </main>;

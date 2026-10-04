@@ -54,9 +54,12 @@ export function NewsletterForm({ source = "site", configured = false, previewHre
   if (!configured || status === "preview") {
     return (
       <div className="newsletter-preview" data-source={source}>
-        <p><b>Read a preview.</b> Email subscriptions are opening soon. You can read the briefing here in the meantime.</p>
+        <p><b>Keep reading.</b> Follow new stories in your feed reader, or explore a sample briefing. Email subscriptions are not available yet.</p>
         {message && <p role="status">{message}</p>}
-        <Link className="primary-action" href={previewHref}>Read the preview <span aria-hidden="true">→</span></Link>
+        <div className="newsletter-preview-actions">
+          <Link className="primary-action" href={previewHref}>Read the preview <span aria-hidden="true">→</span></Link>
+          <a href="/rss.xml">Get the RSS feed <span aria-hidden="true">↗</span></a>
+        </div>
         <details className="feed-follow">
           <summary>Follow new stories in a feed reader</summary>
           <p>Already use a feed reader? Add this address to receive new stories there.</p>

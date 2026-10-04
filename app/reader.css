@@ -81,6 +81,8 @@ p { text-wrap: pretty; }
 .newsletter-panel h1, .newsletter-panel h2, .article-shell .newsletter-panel.compact h2 { max-width: 19ch; margin: .9rem 0 1rem; font: 600 clamp(1.9rem, 3.2vw, 3rem)/1.1 var(--serif); letter-spacing: -.045em; text-transform: none; }
 .newsletter-panel > div > p { margin: 0; max-width: 44ch; font: .98rem/1.6 var(--serif); }
 .newsletter-panel > .newsletter-preview > p { margin: 0 0 1.25rem; }
+.newsletter-preview-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem 1.25rem; }
+.newsletter-preview-actions > a:not(.primary-action) { display: inline-flex; align-items: center; gap: .4rem; min-height: 2.75rem; font: 600 .85rem/1.4 var(--serif); }
 .newsletter-form > label { position: static; display: block; width: auto; height: auto; clip: auto; margin-bottom: .5rem; font: 600 .8rem/1.4 var(--serif); }
 .newsletter-form > div { border: 1px solid var(--hairline); border-radius: .3rem; overflow: hidden; }
 .newsletter-form input { height: 3.25rem; font: 1rem/1.4 var(--serif); }
@@ -237,6 +239,8 @@ main > .newsletter-panel:first-child { margin-top: 3rem; }
   .dispatch-row { grid-template-columns: 1fr; gap: 1rem; padding-block: 1.5rem; }
   .dispatch-signal { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
   .dispatch-signal > span { flex: 1; }
+  /* The legacy column-2 placement would create a second, implicit archive column. */
+  .issue-archive .dispatch-signal { grid-column: 1; text-align: left; }
   .article-header h1 { font-size: 2.5rem; }
   .article-header { padding-top: .5rem; }
   .article-layout { display: flex; flex-direction: column; gap: 2rem; padding-block: 2rem; }
