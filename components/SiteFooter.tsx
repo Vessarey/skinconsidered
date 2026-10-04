@@ -39,7 +39,7 @@ export function SiteFooter() {
 
       <div className="footer-meta">
         <span>
-          Edition Vol.{EDITION.volume} / No.{EDITION.number} · Sources last reviewed {LAST_REVIEWED}
+          Edition Vol.{EDITION.volume} / No.{EDITION.number} · Edition date {LAST_REVIEWED}
         </span>
         <span>© 2026 Skin Considered</span>
       </div>

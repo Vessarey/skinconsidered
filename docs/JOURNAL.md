@@ -2,6 +2,18 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-10-04 — prepared release published and production parity restored
+
+Vanessa explicitly authorized ongoing improvements and publication without routine review on October 4; spending still requires approval. Updated the existing release PR #1 with the already-prepared work through `dc7911a`, waited for its Vercel preview to pass, and merged it at 04:42:05 UTC as `b179d8a5a1a778ffb4f8b4f93a75033d95c4e52e`. Production Vercel status succeeded: https://vercel.com/vessareys-projects/skinconsidered/6S7Lm9jNXT78e3zyQP9QxDSGPpNN.
+
+Fresh validation: content audit, lint, typecheck, production build, all 68 Node tests, local 141-route health, and installed Mac Chrome reader checks at 375/1280px across nine hubs pass. Seven newsletter widths, mobile retina image decoding, routine-to-guide links and RSS pass. The first test attempt lacked the default-port server; rerunning with the documented preview fixed the harness failures, with no product test weakened.
+
+Fresh production audit compares against the reviewed local sitemap: 141/141 intended pages return 200, zero expected routes missing, four additional internal links pass, and canonical/title/description/H1 checks pass. `www` now returns 308 to the apex. Newsletter and Routines are live. The email provider remains unavailable; no subscriber data, credentials, analytics or provider settings changed. No fresh audience uplift is claimed. Historical reviews retain their real dates: this follow-up changes the footer label from “Sources last reviewed” to “Edition date” rather than implying a new review of old claims.
+
+Rollback baseline: `b26424320d6be4cea25f8dec55ef9f2a007b760f` (previous main). Revert the merge with `git revert -m 1 b179d8a5a1a778ffb4f8b4f93a75033d95c4e52e` in a clean checkout and publish through the same workflow, or promote the prior Vercel production deployment. No reset, force-push or content deletion. Local main is clean at the merged release before this documentation follow-up.
+
+Next: daily operators use the actual checkout `/Users/vanessa/code/seosites/skinconsidered` and the updated publication authority. Parent task owns automation configuration. Reconnect PostHog, verify production-host event ingestion, then evaluate the released work on matched settled search windows after recrawl. Newsletter provider setup remains a separate access/spending decision.
+
 ## 2026-10-03 — requested engagement and quality review (local, Codex)
 
 Fresh production comparison: 127 live sitemap routes versus 141 reviewed local routes; all 14 missing routes return 404, including Routines and Newsletter. Live `www` still returns 200. Search Console's requested September 4–October 1 window returned through September 29 only: 1 click / 2,431 impressions (0.0411% CTR); missing dates are not zeros. PostHog requires reauthentication, so engagement is unavailable, not proven improved.

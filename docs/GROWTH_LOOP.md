@@ -1,6 +1,6 @@
 # Growth loop: the daily routine
 
-A cloud agent runs this loop once a day against the repository and the live site. It exists to grow clicks, readers, and subscribers, and to make the site ready to monetize, without ever trading trust for reach. Everything it changes goes through a pull request; it never pushes to `main`, never deploys, and never invents a fact, a number, or a source.
+A cloud agent runs this loop once a day against the repository and the live site. It exists to grow clicks, readers, and subscribers, and to make the site ready to monetize, without ever trading trust for reach. Vanessa authorized autonomous site improvements and publication on October 4, 2026, without routine owner review. Keep changes focused, evidence-backed, tested and reversible; never invent a fact, number or source. Ask before spending. Existing medical, privacy, credential and safety constraints remain in force.
 
 ## Inputs
 
@@ -23,7 +23,7 @@ A cloud agent runs this loop once a day against the repository and the live site
 4. **Conversion.** Review the newsletter placements, copy, and preview state. Keep the honest preview until `BUTTONDOWN_API_KEY` (or `NEWSLETTER_WEBHOOK_URL`) is set in Vercel. Never add popups, fake counts, urgency, or pre-checked boxes.
 5. **The issue.** Draft the day's issue of The Daily Considered in `content/newsletter.ts` (newest first; weekday issues, Sunday synthesis). Format: a subject under 60 characters, a preheader under 110, one or two intro sentences, then sections in the site's desk order (Safety, Regulation, Research, Procedures, then one "Weigh a trend" or guide pick), each item a title, a read-time or file label, the site path, and a two-sentence summary that states the evidence limit. Every item must point at a file already on the site or a primary source; the grade on an item is the grade on the file, and the audit enforces both. Do not invent items to fill a section; a short issue is fine, and if nothing changed since the last issue, write no issue. The web version publishes automatically at `/newsletter/<date>`; the email HTML is at `/newsletter/<date>/email`. The owner sends it with `npm run newsletter -- <date>` (draft) or `--send`; the routine never sends.
 6. **Monetization readiness.** Keep `/about` commercial rules current. Propose, never enable, reader membership tooling, labeled sponsorship slots, or a jobs/directory product only when returning-reader evidence supports it, and only as a PR the owner can read.
-7. **Ship.** Run all gates again. Commit to a branch named `routine/YYYY-MM-DD`, push, and open one PR titled `Daily improvements — YYYY-MM-DD` with a short report: what was checked, what changed, what data drove it, and blockers the owner must resolve (provider keys, licensed photos, domains, budgets). If nothing needs changing, open no PR and leave a one-paragraph note in the run log.
+7. **Ship.** Complete the relevant quality gates, review the diff, then publish the smallest coherent tested improvement using the existing GitHub/Vercel workflow. A PR may be merged once its relevant checks pass without routine owner review. Verify the intended revision and affected live routes, canonicals, metadata and reader paths; record the prior revision and a revert or Vercel rollback path. Preserve concurrent changes and do not duplicate completed daily work. If nothing needs changing, leave a concise journal entry. Missing providers and unavailable analytics are blockers, not zero results.
 
 ## Hard rules
 
@@ -32,7 +32,7 @@ A cloud agent runs this loop once a day against the repository and the live site
 - Sources first: FDA, NIH/PubMed, professional societies, regulators, peer-reviewed literature, official recalls. Press coverage can locate a story; it does not replace the record.
 - No dark patterns, no affiliate links, no sponsored grades, no sensational headlines.
 - The audit must pass. If `npm run audit:content` fails, fix the content; do not weaken the audit.
-- Never commit secrets, never touch `.env*`, never run `vercel`, never push to `main`.
+- Never commit secrets or change `.env*`, credential or security settings under routine publication authority. Use the existing release access only. No spending without explicit approval.
 
 ## Metrics the loop reports
 
