@@ -1,0 +1,60 @@
+.recovery {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 7rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.eyebrow {
+  color: var(--raspberry-dark);
+  font: 700 .7rem/1.5 var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.recovery h1 {
+  max-width: 18ch;
+  margin: 1rem 0 1.5rem;
+  font: 600 clamp(2rem, 5vw, 4rem)/1.1 var(--serif);
+  letter-spacing: -.045em;
+  text-transform: none;
+}
+
+.recovery > p:not(.eyebrow) {
+  max-width: 55ch;
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.actions button,
+.actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font: 600 .875rem/1.4 var(--serif);
+}
+
+.actions button {
+  border: 0;
+  border-radius: 2rem;
+  padding: .85rem 1.5rem;
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+}
+
+.actions a {
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.actions :focus-visible {
+  outline: 3px solid var(--raspberry);
+  outline-offset: 4px;
+}

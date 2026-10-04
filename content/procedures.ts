@@ -41,7 +41,7 @@ const src = {
   fdaBodyContouring: { label: "U.S. FDA — non-invasive body contouring technologies", url: "https://www.fda.gov/medical-devices/aesthetic-cosmetic-devices/non-invasive-body-contouring-technologies" },
   fdaTattooRemoval: { label: "U.S. FDA — tattoo removal: options and results", url: "https://www.fda.gov/consumers/consumer-updates/tattoo-removal-options-and-results" },
   fdaKybellaLabel: { label: "U.S. FDA — Kybella (deoxycholic acid injection) prescribing information (PDF)", url: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2015/206333Orig1s000lbl.pdf", published: "April 2015 approval" },
-  fdaVaginalLetter: { label: "U.S. FDA — 2018 letter to a device maker on marketing of energy-based 'vaginal rejuvenation' (PDF)", url: "https://www.fda.gov/files/medical%20devices/published/Inmode%20MD%20Lotd%20IHCTOA%20Letter.pdf", published: "July 24, 2018" },
+  fdaVaginalLetter: { label: "U.S. FDA — letters to industry, including 2018 energy-based 'vaginal rejuvenation' device letters", url: "https://www.fda.gov/medical-devices/industry-medical-devices/letters-industry", published: "InMode letter dated July 24, 2018" },
   aadHairLoss: { label: "American Academy of Dermatology — hair loss treatment options", url: "https://www.aad.org/public/diseases/hair-loss/treatment" },
   aadFatRemoval: { label: "American Academy of Dermatology — fat removal treatments", url: "https://www.aad.org/public/cosmetic/fat-removal" },
   asdsCryo: { label: "American Society for Dermatologic Surgery — cryolipolysis", url: "https://www.asds.net/skin-experts/skin-treatments/cryolipolysis" },

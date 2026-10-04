@@ -3,9 +3,9 @@ import type { EvidenceGrade, StoryKind } from "./types";
 /** The dated edition shown in the utility bar, footer, and feeds. Update when a new edition ships. */
 export const EDITION = {
   volume: "01",
-  number: "001",
-  date: "2026-09-01",
-  label: "September 1, 2026",
+  number: "003",
+  date: "2026-09-05",
+  label: "September 5, 2026",
 };
 
 export const LAST_REVIEWED = EDITION.label;
@@ -65,10 +65,11 @@ export const gradeDefinitions: Record<EvidenceGrade, { code: string; label: stri
 };
 
 export const primaryNav = [
-  { label: "Today", href: "/today" },
+  { label: "Latest", href: "/today" },
+  { label: "Routines", href: "/routines" },
   { label: "U.S.", href: "/us" },
   { label: "Guides", href: "/guides" },
-  { label: "Topicals", href: "/ingredients" },
+  { label: "Ingredients", href: "/ingredients" },
   { label: "Procedures", href: "/procedures" },
   { label: "Trends", href: "/trends" },
   { label: "Culture", href: "/culture" },

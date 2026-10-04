@@ -1,15 +1,21 @@
 import type { MetadataRoute } from "next";
+import { dispatchListingDates } from "@/lib/sitemap-dates";
 import { cultureStories, EDITION, guides, ingredients, lastUpdated, procedureProfiles, siteUrl, stories, trends } from "@/lib/content";
+import { issuePath, issues } from "@/lib/newsletter";
+import { routines } from "@/content/routines";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteUrl();
   const edition = new Date(EDITION.date);
-  const sections = ["/today", "/us", "/guides", "/ingredients", "/procedures", "/trends", "/culture"];
+  const listingDates = dispatchListingDates(EDITION.date, stories);
+  const sections = ["/today", "/us", "/guides", "/ingredients", "/procedures", "/trends", "/culture", "/newsletter"];
   const policies = ["/about", "/methodology", "/coverage", "/corrections", "/privacy"];
 
   return [
-    { url: base, lastModified: edition, changeFrequency: "daily", priority: 1 },
-    ...sections.map((route) => ({ url: `${base}${route}`, lastModified: edition, changeFrequency: "weekly" as const, priority: 0.8 })),
+    { url: base, lastModified: new Date(listingDates.all), changeFrequency: "daily", priority: 1 },
+    { url: `${base}/routines`, lastModified: new Date("2026-09-08"), changeFrequency: "weekly", priority: 0.8 },
+    ...routines.map((profile) => ({ url: `${base}/routines/${profile.slug}`, lastModified: new Date(profile.reviewed), changeFrequency: "monthly" as const, priority: 0.7 })),
+    ...sections.map((route) => ({ url: `${base}${route}`, lastModified: route === "/today" ? new Date(listingDates.all) : route === "/us" ? new Date(listingDates.us) : edition, changeFrequency: "weekly" as const, priority: 0.8 })),
     ...stories.map((story) => ({
       url: `${base}/dispatches/${story.slug}`,
       lastModified: new Date(lastUpdated(story)),
@@ -45,6 +51,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(lastUpdated(trend)),
       changeFrequency: "monthly" as const,
       priority: 0.6,
+    })),
+    ...issues.map((issue) => ({
+      url: `${base}${issuePath(issue)}`,
+      lastModified: new Date(issue.date),
+      changeFrequency: "yearly" as const,
+      priority: 0.5,
     })),
     ...policies.map((route) => ({ url: `${base}${route}`, lastModified: edition, changeFrequency: "yearly" as const, priority: 0.3 })),
   ];

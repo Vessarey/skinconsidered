@@ -1,21 +1,8 @@
 import { EDITION, lastUpdated, siteUrl, storiesByDate } from "@/lib/content";
+import { escapeMarkup as escapeXml, rssDescription } from "@/lib/rss";
 
 // The feed is built from static content; render it once at build time.
 export const dynamic = "force-static";
-
-function escapeXml(value: string) {
-  return value.replace(
-    /[<>&'"]/g,
-    (character) =>
-      ({
-        "<": "&lt;",
-        ">": "&gt;",
-        "&": "&amp;",
-        "'": "&apos;",
-        '"': "&quot;",
-      })[character] ?? character,
-  );
-}
 
 function rfc822(iso: string) {
   return new Date(`${iso}T12:00:00Z`).toUTCString();
@@ -33,7 +20,7 @@ export function GET() {
       <link>${base}/dispatches/${story.slug}</link>
       <guid isPermaLink="true">${base}/dispatches/${story.slug}</guid>
       <pubDate>${rfc822(story.date)}</pubDate>
-      <description>${escapeXml(`${story.dek} Evidence: ${story.signal}. The limit: ${story.limitations}`)}</description>
+      <description>${escapeXml(rssDescription(story))}</description>
       <category>${escapeXml(story.category)}</category>
       <category>${escapeXml(story.region)}</category>
     </item>`,

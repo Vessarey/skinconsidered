@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { CostBand, DowntimeBand, EvidenceGrade, ProcedureCategory, ProcedureConcern, ProcedureKind, ProcedureSetting } from "@/lib/content";
 import { EvidenceBadge } from "./EvidenceBadge";
+import { track } from "./PostHogProvider";
 
 /** Serializable subset of a profile: everything the comparison needs, nothing it does not. */
 export type ExplorerProfile = {
@@ -73,13 +74,13 @@ function readFilters(params: URLSearchParams, concerns: string[]): Filters {
   };
 }
 
-function writeFilters(filters: Filters) {
+function writeFilters(filters: Filters, replace = false) {
   const params = new URLSearchParams();
   for (const [key, value] of Object.entries(filters)) {
     if (value && value !== ALL) params.set(key, value);
   }
   const query = params.toString();
-  window.history.replaceState(null, "", query ? `/procedures?${query}#compare` : "/procedures#compare");
+  window.history[replace ? "replaceState" : "pushState"](null, "", query ? `/procedures?${query}#compare` : "/procedures#compare");
 }
 
 function matchesQuery(profile: ExplorerProfile, words: string[]) {
@@ -90,7 +91,8 @@ function matchesQuery(profile: ExplorerProfile, words: string[]) {
 
 export function ProcedureExplorer({ profiles, categories, concerns }: { profiles: ExplorerProfile[]; categories: ProcedureCategory[]; concerns: ProcedureConcern[] }) {
   const params = useSearchParams();
-  const [filters, setFilters] = useState<Filters>(() => readFilters(params, concerns));
+  const filters = readFilters(params, concerns);
+  const searchInput = useRef<HTMLInputElement>(null);
 
   // Deep links such as /procedures#rf-microneedling open the matching file. The
   // <details> elements stay uncontrolled, so this only touches the DOM.
@@ -106,9 +108,7 @@ export function ProcedureExplorer({ profiles, categories, concerns }: { profiles
 
   const words = filters.q.toLowerCase().trim().split(/\s+/).filter(Boolean);
 
-  const visible = useMemo(
-    () =>
-      profiles.filter(
+  const visible = profiles.filter(
         (profile) =>
           (filters.concern === ALL || profile.concerns.includes(filters.concern as ProcedureConcern)) &&
           (filters.downtime === ALL || profile.downtimeBand === filters.downtime) &&
@@ -116,41 +116,33 @@ export function ProcedureExplorer({ profiles, categories, concerns }: { profiles
           (filters.setting === ALL || profile.setting === filters.setting) &&
           (filters.grade === ALL || profile.evidenceGrade === filters.grade) &&
           matchesQuery(profile, words),
-      ),
-    // words is derived from filters.q, which is already a dependency.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [filters, profiles],
   );
 
   const active = Object.entries(filters).filter(([, value]) => value && value !== ALL).length;
 
   function update(next: Partial<Filters>) {
     const merged = { ...filters, ...next };
-    setFilters(merged);
-    writeFilters(merged);
+    writeFilters(merged, "q" in next);
   }
 
   function reset() {
     const cleared: Filters = { concern: ALL, downtime: ALL, cost: ALL, setting: ALL, grade: ALL, q: "" };
-    setFilters(cleared);
     writeFilters(cleared);
+    // Both reset buttons disappear when filters clear; keep the next action reachable.
+    searchInput.current?.focus();
   }
 
-  const chipGroup = (label: string, key: keyof Filters, options: { value: string; label: string }[]) => (
-    <div className="filter-group" role="group" aria-label={`Filter procedures by ${label.toLowerCase()}`}>
-      <span className="filter-label">{label}</span>
-      {[{ value: ALL, label: ALL }, ...options].map((option) => (
-        <button
-          aria-pressed={filters[key] === option.value}
-          className={filters[key] === option.value ? "active" : ""}
-          key={option.value}
-          onClick={() => update({ [key]: option.value })}
-          type="button"
-        >
-          {option.label}
-        </button>
-      ))}
-    </div>
+  const selectFilter = (label: string, key: keyof Filters, options: { value: string; label: string }[]) => (
+    <label className="procedure-filter">
+      <span>{label}</span>
+      <select value={filters[key]} onChange={(event) => {
+        update({ [key]: event.target.value });
+        track("procedure_filter", { group: label, value: event.target.value, path: "/procedures" });
+      }}>
+        <option value={ALL}>Any {label.toLowerCase()}</option>
+        {options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
+      </select>
+    </label>
   );
 
   return (
@@ -159,24 +151,31 @@ export function ProcedureExplorer({ profiles, categories, concerns }: { profiles
         <label htmlFor="procedure-search">Search procedures, brands, or concerns</label>
         <input
           id="procedure-search"
+          ref={searchInput}
           onChange={(event) => update({ q: event.target.value })}
-          placeholder="TRY: HYDRAFACIAL, MELASMA, JOWLS, PEEL…"
+          placeholder="Try HydraFacial, melasma, or a chemical peel"
           type="search"
+          maxLength={80}
           value={filters.q}
         />
       </div>
-      <div className="filter-bar">
-        {chipGroup("Concern", "concern", concerns.map((concern) => ({ value: concern, label: concern })))}
-        {chipGroup("Downtime", "downtime", DOWNTIME_OPTIONS.map((option) => ({ value: option, label: option })))}
-        {chipGroup("Cost band", "cost", COST_OPTIONS.map((option) => ({ value: option, label: option })))}
-        {chipGroup("Who performs it", "setting", SETTING_OPTIONS.map((option) => ({ value: option, label: option })))}
-        {chipGroup("Evidence", "grade", GRADE_OPTIONS)}
+      <div className="procedure-filters">
+        {selectFilter("Concern", "concern", concerns.map((concern) => ({ value: concern, label: concern })))}
+        {selectFilter("Downtime", "downtime", DOWNTIME_OPTIONS.map((option) => ({ value: option, label: option })))}
+        {selectFilter("Cost", "cost", COST_OPTIONS.map((option) => ({ value: option, label: option })))}
       </div>
+      <details className="procedure-more-filters">
+        <summary>More filters{filters.setting !== ALL || filters.grade !== ALL ? " · active" : ""}</summary>
+        <div className="procedure-filters">
+          {selectFilter("Setting", "setting", SETTING_OPTIONS.map((option) => ({ value: option, label: option })))}
+          {selectFilter("Evidence", "grade", GRADE_OPTIONS)}
+        </div>
+      </details>
       <div className="procedure-explorer-status">
         <p className="result-count" aria-live="polite">
           {visible.length} of {profiles.length} procedure files{active ? ` · ${active} ${active === 1 ? "filter" : "filters"} on` : ""}
         </p>
-        {active > 0 && (
+        {active > 0 && visible.length > 0 && (
           <button className="empty-state-reset" onClick={reset} type="button">
             Clear filters
           </button>

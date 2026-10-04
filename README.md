@@ -9,7 +9,7 @@ The founding edition includes:
 - source-linked dispatches and explicit limitations;
 - practical guides, ingredient files, and a cultural practice archive;
 - unified search, RSS, structured metadata, sitemap, and responsive layouts;
-- a provider-ready newsletter endpoint with a truthful preview state until configured.
+- The Daily Considered: a TLDR-style newsletter built from the files (`content/newsletter.ts`), with a public archive at `/newsletter`, email-safe HTML at `/newsletter/<date>/email`, a Buttondown-backed signup with a truthful preview state until `BUTTONDOWN_API_KEY` is set, and `npm run newsletter -- <date>` to draft or send an issue.
 
 ## Run locally
 
@@ -33,6 +33,7 @@ Editorial data is plain TypeScript, one file per desk, so an editor can add a fi
 | `content/trends.ts` | Trend files: what it is, the claim, the evidence, a grade, an editorial verdict, and who should skip it (see below) |
 | `content/procedures.ts` | Procedure decision files: one per family, branded treatment, or technique (see below) |
 | `content/coverage.ts` | The coverage taxonomy and the source registry (watchlist) behind `/coverage` |
+| `content/newsletter.ts` | Newsletter issues, newest first; each item links a site file and inherits its grade |
 | `content/site.ts` | Edition number and date, desks, regions, grade definitions, newsletter promise, primary navigation |
 | `content/types.ts` | The shapes above, including `related` cross links and dated `updates` |
 

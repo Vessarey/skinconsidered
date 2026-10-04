@@ -12,7 +12,7 @@ export function ReadingProgress() {
     const update = () => {
       frame = 0;
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = max <= 0 ? 0 : Math.min(1, window.scrollY / max);
+      const progress = max <= 0 ? 0 : Math.max(0, Math.min(1, window.scrollY / max));
       if (bar.current) bar.current.style.transform = `scaleX(${progress})`;
     };
 
@@ -21,9 +21,14 @@ export function ReadingProgress() {
     };
 
     update();
+    // Fonts, media, and expanded content can change page height without a scroll.
+    const observer = new ResizeObserver(schedule);
+    observer.observe(document.documentElement);
+    observer.observe(document.body);
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     return () => {
+      observer.disconnect();
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
       if (frame) window.cancelAnimationFrame(frame);

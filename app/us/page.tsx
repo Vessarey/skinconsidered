@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Artwork } from "@/components/Artwork";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { EDITION, readingTime, storiesByDate } from "@/lib/content";
 import { canonical } from "@/lib/seo";
@@ -45,11 +46,12 @@ export default function UnitedStatesPage() {
         <div>
           <span>United States desk / FDA source-linked</span>
           <h1>U.S. skincare, without the fine-print fog.</h1>
-        </div>
         <p>
           Start with what you may need to act on. Then see what changed in rules, products, and procedures. Every file separates an official action
           from what it does—and does not—mean for you.
         </p>
+        </div>
+        <Artwork name="desk-us" priority />
       </header>
 
       <section className="us-snapshot" aria-label="United States desk snapshot">

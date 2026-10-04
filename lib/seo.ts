@@ -19,6 +19,27 @@ export function metaDescription(text: string, limit = 155) {
   return `${cut.slice(0, Math.max(cut.lastIndexOf(" "), 80))}…`;
 }
 
+/** Production canonical origin; used if NEXT_PUBLIC_SITE_URL is ever missing on a Vercel production build. */
+export const PRODUCTION_ORIGIN = "https://skinconsidered.com";
+
+/** A missing variable must never publish localhost canonicals, sitemap URLs, or feed links in production. */
+export function resolveOrigin(configured: string | undefined, vercelEnv: string | undefined) {
+  const fallback = vercelEnv === "production" ? PRODUCTION_ORIGIN : "http://localhost:3000";
+  return (configured || fallback).replace(/\/$/, "");
+}
+
+/**
+ * Google shows roughly 60 characters of a title. The layout template appends
+ * " — Skin Considered"; when that would push the descriptive part past the
+ * visible limit, drop the suffix so the words a searcher matched stay visible.
+ */
+export const TITLE_LIMIT = 60;
+const TITLE_SUFFIX = " — Skin Considered";
+
+export function seoTitle(base: string): string | { absolute: string } {
+  return base.length + TITLE_SUFFIX.length <= TITLE_LIMIT ? base : { absolute: base };
+}
+
 export function breadcrumbs(base: string, trail: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",

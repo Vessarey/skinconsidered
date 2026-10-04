@@ -1,15 +1,11 @@
 import Link from "next/link";
 import { EDITION, LAST_REVIEWED, NEWSLETTER, primaryNav } from "@/content/site";
-import { newsletterConfigured } from "@/lib/newsletter";
-import { NewsletterForm } from "./NewsletterForm";
 
 export function SiteFooter() {
-  const configured = newsletterConfigured();
-
   return (
     <footer className="site-footer">
       <div className="footer-brand">
-        <Link className="footer-wordmark" href="/">
+        <Link className="footer-wordmark" href="/" prefetch={false}>
           skin considered<span aria-hidden="true">*</span>
         </Link>
         <p>Independent skincare reporting and education. Not medical advice. No affiliate links, no sponsored grades.</p>
@@ -37,7 +33,8 @@ export function SiteFooter() {
 
       <div className="footer-newsletter">
         <h2>{NEWSLETTER.name}</h2>
-        <NewsletterForm configured={configured} source="footer" />
+        <p>A little perspective on the skincare news that matters.</p>
+        <Link href="/newsletter">Explore the newsletter →</Link>
       </div>
 
       <div className="footer-meta">

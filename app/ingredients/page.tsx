@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Artwork } from "@/components/Artwork";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { NewsletterPanel } from "@/components/NewsletterPanel";
 import { concernGuideEntries, gradeDefinitions, ingredientFamilies, ingredients, resolveRelated, type EvidenceGrade } from "@/lib/content";
 import { canonical } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Topicals: prescription, OTC, and cosmetic skincare ingredients",
+  title: "Skincare ingredients: uses, evidence & cautions",
   description:
     "Tretinoin, azelaic acid, benzoyl peroxide, hydroquinone, niacinamide, and more: U.S. status, strengths, evidence by use, side effects, and access.",
   alternates: canonical("/ingredients"),
@@ -23,48 +24,27 @@ const statusShort: Record<string, string> = {
 };
 
 export default function IngredientsPage() {
-  const rx = ingredients.filter((item) => item.status.startsWith("Prescription")).length;
-  const otc = ingredients.filter((item) => item.status.startsWith("OTC")).length;
-  const cosmetic = ingredients.filter((item) => item.status === "Cosmetic ingredient").length;
 
   return (
     <main id="main-content">
       <header className="page-hero ingredient-hero">
         <div>
-          <span>Topicals / {String(ingredients.length).padStart(2, "0")} files</span>
+          <span>Ingredient library / {ingredients.length} ingredients</span>
           <h1>
-            The name on the front is only the beginning.<sup>*</sup>
+            Know what’s in your routine.
           </h1>
-        </div>
         <p>
           Prescription, over-the-counter, and cosmetic ingredients people are actually using, each with its U.S. status, the strengths sold, evidence graded per use,
           how to use it, side effects, cautions, and what drives the price.
         </p>
+        </div>
+        <Artwork name="desk-ingredients" priority />
       </header>
-
-      <section className="topical-snapshot" aria-label="Topicals snapshot">
-        <div>
-          <b>{rx}</b>
-          <span>Prescription or prescription-strength files</span>
-        </div>
-        <div>
-          <b>{otc}</b>
-          <span>OTC drug files (FDA monograph or approved switch)</span>
-        </div>
-        <div>
-          <b>{cosmetic}</b>
-          <span>Cosmetic ingredient files, no premarket review</span>
-        </div>
-        <div>
-          <b>Per use</b>
-          <span>Every grade belongs to a claim, not to the ingredient</span>
-        </div>
-      </section>
 
       <section className="concern-guide" aria-labelledby="concern-guide-title">
         <div className="concern-guide-intro">
           <span>Start with your concern</span>
-          <h2 id="concern-guide-title">The best topicals for each concern, by name.</h2>
+          <h2 id="concern-guide-title">Explore ingredients by concern.</h2>
           <p>
             First-line means the ingredients with the strongest evidence for that concern; also useful means supporting actives or prescription step-ups. Each name
             opens the full file with status, strengths, and sources.

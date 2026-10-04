@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Artwork } from "@/components/Artwork";
 import { NewsletterPanel } from "@/components/NewsletterPanel";
 import { guides, readingTime } from "@/lib/content";
 import { canonical } from "@/lib/seo";
@@ -19,17 +20,15 @@ export default function GuidesPage() {
         <div>
           <span>Learn the field / {total} files</span>
           <h1>
-            Understand the system before you optimize it.<sup>*</sup>
+            Skincare, made easier to understand.
           </h1>
+        <p>Start a routine, understand your skin barrier, or prepare for a consultation. Clear guides with practical next steps and the evidence behind them.</p>
         </div>
-        <p>Fewer product lists. Better mental models. Every guide separates practical defaults from moments that need individual medical care.</p>
+        <Artwork name="desk-guides" priority />
       </header>
       <section className="guides-index" aria-label="All guides">
-        {guides.map((guide, index) => (
+        {guides.map((guide) => (
           <article key={guide.slug}>
-            <div className="guide-index-number" aria-hidden="true">
-              {guide.number}
-            </div>
             <div className="guide-index-copy">
               <span>{guide.level}</span>
               <h2>
@@ -44,9 +43,6 @@ export default function GuidesPage() {
             </div>
             <div className="guide-index-meta">
               <span>{readingTime(guide.sections, guide.description).label} read</span>
-              <span>
-                File {String(index + 1).padStart(2, "0")} / {total}
-              </span>
               <Link href={`/guides/${guide.slug}`}>Open guide ↗</Link>
             </div>
           </article>

@@ -14,6 +14,7 @@ import { ingredients } from "../content/ingredients.ts";
 import { priceMenus } from "../content/price-survey.ts";
 import { stories } from "../content/stories.ts";
 import { trends } from "../content/trends.ts";
+import { routines, routineEvidenceSource } from "../content/routines.ts";
 
 const USER_AGENT = "Mozilla/5.0 (compatible; SkinConsideredLinkCheck/1.0)";
 const KNOWN_BLOCKERS = [403, 412, 429, 999];
@@ -31,6 +32,8 @@ for (const item of cultureStories) item.sources.forEach((source) => add(source.u
 for (const item of procedureProfiles) item.sources.forEach((source) => add(source.url, `procedure:${item.slug}`));
 for (const item of ingredients) item.sources.forEach((source) => add(source.url, `topical:${item.slug}`));
 for (const item of trends) item.sources.forEach((source) => add(source.url, `trend:${item.slug}`));
+for (const item of routines) item.sources.forEach((source) => add(source.url, `routine:${item.slug}`));
+add(routineEvidenceSource, "routine:independent-context");
 for (const entry of sourceRegistry) add(entry.url, `registry:${entry.id}`);
 for (const menu of priceMenus) add(menu.url, `price-menu:${menu.id}`);
 

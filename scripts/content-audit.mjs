@@ -14,6 +14,9 @@ import { procedureProfiles } from "../content/procedures.ts";
 import { DESKS, EDITION, REGION_ORDER, gradeDefinitions } from "../content/site.ts";
 import { stories } from "../content/stories.ts";
 import { trends } from "../content/trends.ts";
+import { reviewHasDatedRecord } from "../lib/review-date.ts";
+import { newsletterIssues } from "../content/newsletter.ts";
+import { routines } from "../content/routines.ts";
 import { concernGuides } from "../content/concerns.ts";
 import { priceMenus, PRICE_SURVEY_DATE } from "../content/price-survey.ts";
 import { procedurePrices } from "../content/procedure-prices.ts";
@@ -57,7 +60,7 @@ const PROCEDURE_CONCERNS = [
 const PROCEDURE_SETTINGS = ["Spa or esthetician", "Medical office", "Physician-performed"];
 const DOWNTIME_BANDS = ["None", "1–3 days", "4–7 days", "1–3 weeks", "3+ weeks"];
 const COST_BANDS = ["Under $250", "$250–$750", "$750–$2,000", "Over $2,000", "No reliable estimate"];
-const SOURCE_TYPES = ["Regulator", "Public health agency", "Professional society", "Literature", "Statistics", "Archive"];
+const SOURCE_TYPES = ["Regulator", "Public health agency", "Professional society", "Literature", "Statistics", "Archive", "First-person media"];
 const SOURCE_REGIONS = ["United States", "Europe", "Asia", "Oceania", "Latin America", "Global"];
 
 const failures = [];
@@ -73,7 +76,7 @@ const forbiddenPrototypeClaims = [
 
 const hypePhrases = ["ancient secret", "beauty hack", "miracle", "clinically proven", "dermatologist-approved", "guaranteed results", "cures "];
 
-const everything = JSON.stringify({ stories, guides, cultureStories, ingredients, procedureProfiles }).toLowerCase();
+const everything = JSON.stringify({ stories, guides, cultureStories, ingredients, procedureProfiles, newsletterIssues, routines }).toLowerCase();
 
 for (const claim of forbiddenPrototypeClaims) {
   if (everything.includes(claim.toLowerCase())) fail(`Fictional prototype claim found: ${claim}`);
@@ -96,6 +99,7 @@ const slugs = {
   ingredients: new Set(ingredients.map((ingredient) => ingredient.slug)),
   procedures: new Set(procedureProfiles.map((profile) => profile.slug)),
   trends: new Set(trends.map((trend) => trend.slug)),
+  routines: new Set(routines.map((profile) => profile.slug)),
 };
 
 function checkUnique(label, list) {
@@ -131,7 +135,8 @@ function checkUpdates(label, item) {
     if (!isoDate.test(update.date)) fail(`${label} "${item.slug}" has an update with a non-ISO date: ${update.date}`);
     if (formatDate(update.date) !== update.dateLabel) fail(`${label} "${item.slug}" update label "${update.dateLabel}" does not match ${update.date}`);
     if (!update.note) fail(`${label} "${item.slug}" has an update without a note.`);
-    if (update.date > EDITION.date) fail(`${label} "${item.slug}" has an update dated after the edition.`);
+    // A new file/update need not imply a fresh review of the entire site edition.
+    if (update.date > new Date().toISOString().slice(0, 10)) fail(`${label} "${item.slug}" has an update dated in the future.`);
   }
 }
 
@@ -155,7 +160,7 @@ for (const story of stories) {
   if (!isoDate.test(story.date)) fail(`${label} "${story.slug}" date is not ISO: ${story.date}`);
   else {
     if (formatDate(story.date) !== story.dateLabel) fail(`${label} "${story.slug}" dateLabel "${story.dateLabel}" does not match ${story.date}`);
-    if (story.date > EDITION.date) fail(`${label} "${story.slug}" is dated after the edition.`);
+    if (story.date > new Date().toISOString().slice(0, 10)) fail(`${label} "${story.slug}" is dated in the future.`);
   }
   for (const field of ["headline", "shortHeadline", "dek", "signal", "whyItMatters", "limitations", "location"]) {
     if (!story[field]?.trim()) fail(`${label} "${story.slug}" is missing ${field}.`);
@@ -224,7 +229,7 @@ for (const trend of trends) {
   if (!TREND_VERDICTS.includes(trend.verdict)) fail(`${label} "${trend.slug}" has an unknown verdict: ${trend.verdict}`);
   if (!gradeDefinitions[trend.grade]) fail(`${label} "${trend.slug}" has an unknown grade: ${trend.grade}`);
   if (!isoDate.test(trend.reviewed ?? "")) fail(`${label} "${trend.slug}" reviewed date is not ISO: ${trend.reviewed}`);
-  else if (trend.reviewed > EDITION.date) fail(`${label} "${trend.slug}" is reviewed after the edition date.`);
+  else if (!reviewHasDatedRecord(trend.reviewed, EDITION.date, trend.updates)) fail(`${label} "${trend.slug}" needs a dated update for a review after the edition date.`);
   checkSources(label, trend);
   checkRelated(label, trend);
   checkUpdates(label, trend);
@@ -315,6 +320,55 @@ for (const item of [...procedureProfiles, ...ingredients]) {
   }
 }
 
+// Newsletter issues: dated, labeled, every item resolves to a real file or an HTTPS source, grades match the file.
+const fileGrades = new Map([
+  ...stories.map((item) => [`/dispatches/${item.slug}`, item.grade]),
+  ...trends.map((item) => [`/trends/${item.slug}`, item.grade]),
+  ...ingredients.map((item) => [`/ingredients/${item.slug}`, item.evidence]),
+  ...procedureProfiles.map((item) => [`/procedures/${item.slug}`, item.evidenceGrade]),
+  ...guides.map((item) => [`/guides/${item.slug}`, null]),
+  ...cultureStories.map((item) => [`/culture/${item.slug}`, null]),
+]);
+checkUnique("newsletter issue", newsletterIssues.map((issue) => ({ slug: issue.date })));
+for (const issue of newsletterIssues) {
+  const label = `Newsletter issue "${issue.date}"`;
+  if (!isoDate.test(issue.date)) fail(`${label} has a non-ISO date.`);
+  else if (formatDate(issue.date) !== issue.dateLabel) fail(`${label} label "${issue.dateLabel}" does not match its date.`);
+  if (!issue.subject?.trim() || issue.subject.length > 70) fail(`${label} needs a subject under 70 characters.`);
+  if (!issue.preheader?.trim() || issue.preheader.length > 140) fail(`${label} needs a preheader under 140 characters.`);
+  if (!issue.intro?.length) fail(`${label} has no intro.`);
+  if (!issue.sections?.length) fail(`${label} has no sections.`);
+  for (const section of issue.sections ?? []) {
+    if (!section.emoji || !section.heading || !section.items?.length) fail(`${label} section "${section.heading}" is incomplete.`);
+    for (const item of section.items ?? []) {
+      if (!item.title || !item.label || !item.summary) fail(`${label} item "${item.title}" is missing a field.`);
+      if (item.href?.startsWith("/")) {
+        if (!fileGrades.has(item.href)) fail(`${label} links a missing site file: ${item.href}`);
+        else if (item.grade && fileGrades.get(item.href) && fileGrades.get(item.href) !== item.grade) fail(`${label} grades "${item.href}" ${item.grade}; the file says ${fileGrades.get(item.href)}.`);
+      } else if (!item.href?.startsWith("https://")) fail(`${label} item "${item.title}" has a non-HTTPS link.`);
+      if (item.grade && !gradeDefinitions[item.grade]) fail(`${label} item "${item.title}" has an unknown grade.`);
+    }
+  }
+}
+
+checkUnique("routine", routines);
+for (const profile of routines) {
+  const label = `Routine "${profile.slug}"`;
+  checkSources("Routine", profile);
+  if (!isoDate.test(profile.sourceDate) || !isoDate.test(profile.reviewed) || profile.sourceDate > profile.reviewed) fail(`${label} has invalid source/review dates.`);
+  if (!/^[\w-]{11}$/.test(profile.videoId)) fail(`${label} has an invalid video ID.`);
+  if (profile.thumbnail !== `https://i.ytimg.com/vi/${profile.videoId}/hqdefault.jpg`) fail(`${label} thumbnail does not match its source video.`);
+  if (!profile.sources.some(({ url }) => url === `https://www.youtube.com/watch?v=${profile.videoId}`)) fail(`${label} has no original video citation.`);
+  if (!profile.sources.some(({ url }) => url === profile.sourceUrl)) fail(`${label} has no product identification source.`);
+  if (!profile.disclosure?.trim() || !profile.takeaway?.trim() || !profile.name?.trim()) fail(`${label} is missing editorial context.`);
+  if (!profile.products.length) fail(`${label} has no identified steps.`);
+  for (const product of profile.products) if (!product.name || !product.role || !product.note) fail(`${label} has an incomplete product.`);
+  for (const related of profile.related) {
+    const [, section, slug] = related.href.split("/");
+    if (!slugs[section]?.has(slug) || !related.label) fail(`${label} has an invalid related link: ${related.href}`);
+  }
+}
+
 if (!stories.length) fail("No editorial stories found.");
 
 if (failures.length) {
@@ -322,9 +376,9 @@ if (failures.length) {
   process.exit(1);
 }
 
-const everythingWithSources = [...stories, ...guides, ...cultureStories, ...procedureProfiles, ...ingredients, ...trends];
+const everythingWithSources = [...stories, ...guides, ...cultureStories, ...procedureProfiles, ...ingredients, ...trends, ...routines];
 const sourceCount = everythingWithSources.reduce((total, item) => total + item.sources.length, 0);
 const updateCount = everythingWithSources.reduce((total, item) => total + (item.updates?.length ?? 0), 0);
 console.log(
-  `Content audit passed: ${stories.length} dispatches, ${guides.length} guides, ${cultureStories.length} culture files, ${ingredients.length} topical files, ${procedureProfiles.length} procedure profiles, ${trends.length} trend files, ${sourceRegistry.length} registry sources, ${sourceCount} source links, ${updateCount} logged updates, no prototype claims.`,
+  `Content audit passed: ${stories.length} dispatches, ${guides.length} guides, ${cultureStories.length} culture files, ${ingredients.length} topical files, ${procedureProfiles.length} procedure profiles, ${trends.length} trend files, ${newsletterIssues.length} newsletter issues, ${sourceRegistry.length} registry sources, ${sourceCount} source links, ${updateCount} logged updates, no prototype claims.`,
 );

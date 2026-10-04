@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Artwork } from "@/components/Artwork";
 import { Suspense } from "react";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { NewsletterPanel } from "@/components/NewsletterPanel";
 import { ProcedureExplorer, type ExplorerProfile } from "@/components/ProcedureExplorer";
-import { EDITION, procedureCategories, procedureConcerns, procedureProfiles, readingTime, siteUrl, storiesByDate } from "@/lib/content";
+import { procedureCategories, procedureConcerns, procedureProfiles, readingTime, siteUrl, storiesByDate } from "@/lib/content";
 import { breadcrumbs, canonical } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -14,38 +15,9 @@ export const metadata: Metadata = {
   alternates: canonical("/procedures"),
 };
 
-const goalLinks = [
-  { label: "Lines & wrinkles", concern: "Lines & wrinkles" },
-  { label: "Volume & contour", concern: "Volume & contour" },
-  { label: "Scars", concern: "Scars" },
-  { label: "Pigment & dark spots", concern: "Pigment & dark spots" },
-  { label: "Redness & vessels", concern: "Redness & vessels" },
-  { label: "Laxity & lifting", concern: "Laxity & lifting" },
-  { label: "Acne & congestion", concern: "Acne & congestion" },
-  { label: "Hair reduction", concern: "Hair reduction" },
-  { label: "Fat & body contour", concern: "Fat & body contour" },
-  { label: "Hair loss", concern: "Hair loss" },
-  { label: "Excess skin & jowls", concern: "Excess skin & jowls" },
-  { label: "Tattoos", concern: "Tattoos" },
-];
-
-/**
- * Verified from the ASPS 2025 report and the ISAPS 2024 press release. ASPS
- * stopped publishing minimally invasive counts in 2025; the shares below are
- * what it does publish. Both are surveys of plastic surgeons.
- */
-const marketSignals = [
-  { value: "≈50%", label: "Neuromodulators' share of minimally invasive treatments by ASPS members, 2025", source: "ASPS 2025" },
-  { value: "30%", label: "Hyaluronic acid fillers' share of minimally invasive treatments, 2025", source: "ASPS 2025" },
-  { value: "7.8M", label: "Botulinum toxin procedures by plastic surgeons worldwide, 2024", source: "ISAPS 2024" },
-  { value: "6.3M", label: "Hyaluronic acid procedures worldwide, 2024 (+5.2%)", source: "ISAPS 2024" },
-];
-
 export default function ProceduresPage() {
-  const procedureStories = storiesByDate.filter((story) => story.kind === "procedure" || story.category === "Procedure safety");
+  const procedureStories = storiesByDate.filter((story) => story.kind === "procedure" || story.category === "Procedure safety" || Boolean(story.related?.procedures?.length));
   const base = siteUrl();
-  const branded = procedureProfiles.filter((profile) => profile.kind === "branded").length;
-  const withFigure = procedureProfiles.filter((profile) => /\$\d/.test(profile.cost) || profile.advertised).length;
 
   const explorerProfiles: ExplorerProfile[] = procedureProfiles.map((profile) => ({
     slug: profile.slug,
@@ -102,57 +74,19 @@ export default function ProceduresPage() {
           <h1>
             Know the tradeoff before you book.<sup>*</sup>
           </h1>
-        </div>
         <p>
-          {procedureProfiles.length} procedure files, from a spa facial to a facelift: cost context, recovery, result timing, evidence grade, serious risks, who
-          performs it, and the questions that change a quote.
+          Explore {procedureProfiles.length} procedures by cost, recovery time, and evidence. Find realistic outcomes, important risks, and better questions for your consultation.
         </p>
+        <a className="primary-action" href="#compare">Find a procedure <span aria-hidden="true">↓</span></a>
+        </div>
+        <Artwork name="desk-procedures" />
       </header>
-
-      <section className="procedure-snapshot" aria-label="Procedure guide scope">
-        <div>
-          <b>{procedureProfiles.length}</b>
-          <span>Files across {procedureCategories.length} families, including {branded} branded treatment filed separately from its family</span>
-        </div>
-        <div>
-          <b>{withFigure}</b>
-          <span>Files with a published U.S. average or an advertised price range from named clinic menus; the rest say so</span>
-        </div>
-        <div>
-          <b>{EDITION.label}</b>
-          <span>Last editorial review of every file</span>
-        </div>
-        <div>
-          <b>Not a quote</b>
-          <span>Area, product, device, provider, and city change price</span>
-        </div>
-      </section>
-
-      <section className="procedure-start" aria-labelledby="procedure-start-title">
-        <div>
-          <span>Start with the outcome</span>
-          <h2 id="procedure-start-title">What are you trying to change?</h2>
-          <p>
-            Pick a concern to filter the comparison. A diagnosis, your skin tone, medical history, and tolerance for downtime can change the better option, so the
-            comparison is a starting point, not a recommendation.
-          </p>
-        </div>
-        <nav aria-label="Browse procedures by concern">
-          {goalLinks.map((goal) => (
-            <Link href={`/procedures?concern=${encodeURIComponent(goal.concern)}#compare`} key={goal.concern}>
-              {goal.label} <span aria-hidden="true">↓</span>
-            </Link>
-          ))}
-        </nav>
-      </section>
 
       <section className="procedure-catalog" aria-labelledby="procedure-catalog-title">
         <div className="procedure-catalog-intro">
-          <span>Compare / then expand</span>
-          <h2 id="procedure-catalog-title">Every family, side by side.</h2>
+          <h2 id="procedure-catalog-title">Find a procedure.</h2>
           <p>
-            The closed row shows the decision essentials. Open it for evidence, what the cost figure means, benefits, limitations, serious risks, and pause signs.
-            The full file adds the healing timeline, candidacy, regulatory status, operator questions, and sources.
+            Search by name or narrow the list below. Select any procedure to compare the details, then open its full guide for sources and questions to ask.
           </p>
         </div>
         <Suspense fallback={<p className="search-loading">Opening the comparison…</p>}>
@@ -175,36 +109,6 @@ export default function ProceduresPage() {
             target="_blank"
           >
             Read the FDA safety communication ↗<span className="sr-only"> (opens in a new tab)</span>
-          </a>
-        </div>
-      </section>
-
-      <section className="procedure-market" aria-labelledby="procedure-market-title">
-        <div className="section-heading">
-          <div>
-            <span>Use / survey estimates</span>
-            <h2 id="procedure-market-title">Popular does not mean right for you.</h2>
-          </div>
-          <p>
-            These figures show scale of use, not comparative effectiveness or safety. Both come from surveys of plastic surgeons, so spa and dermatology volume
-            is not counted. ASPS stopped publishing minimally invasive procedure counts in its 2025 report and now reports shares.
-          </p>
-        </div>
-        <div className="procedure-market-grid">
-          {marketSignals.map((signal) => (
-            <article key={signal.label}>
-              <b>{signal.value}</b>
-              <span>{signal.label}</span>
-              <small>{signal.source}</small>
-            </article>
-          ))}
-        </div>
-        <div className="procedure-market-sources">
-          <a href="https://www.plasticsurgery.org/documents/news/statistics/2025/plastic-surgery-statistics-report-2025.pdf" rel="noreferrer" target="_blank">
-            ASPS 2025 procedural statistics report (PDF) ↗<span className="sr-only"> (opens in a new tab)</span>
-          </a>
-          <a href="https://www.isaps.org/discover/about-isaps/global-statistics/global-survey-2024-full-report-and-press-releases/" rel="noreferrer" target="_blank">
-            ISAPS 2024 global survey ↗<span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
       </section>

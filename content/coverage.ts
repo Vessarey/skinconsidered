@@ -11,6 +11,7 @@ import type { SourceRegistryEntry, TaxonomyTopic } from "./types";
  */
 
 export const taxonomy: TaxonomyTopic[] = [
+  { desk: "In the Routine", href: "/routines", description: "Celebrity skincare with dated, first-person sources and independent context.", includes: ["Products identified in original recordings", "Known brand relationships and source dates", "Personal experience kept separate from clinical evidence"] },
   {
     desk: "Regulation",
     href: "/today?desk=Regulation",
@@ -70,6 +71,7 @@ export const taxonomy: TaxonomyTopic[] = [
 ];
 
 export const sourceRegistry: SourceRegistryEntry[] = [
+  { id: "vogue-first-person", name: "Vogue · Beauty Secrets", jurisdiction: "International celebrity interviews", region: "Global", type: "First-person media", covers: ["Dated product demonstrations", "Publicly disclosed brand relationships"], cadence: "At publication and before profile updates", url: "https://www.vogue.com/video/series/beauty-secrets", domains: ["vogue.com"], note: "Evidence of what was said or shown, not of product efficacy. Publisher may use affiliate links." },
   // ---------------------------------------------------------------- United States
   {
     id: "fda",
@@ -212,6 +214,30 @@ export const sourceRegistry: SourceRegistryEntry[] = [
     domains: ["cochranelibrary.com"],
   },
   {
+    id: "eu-dg-grow",
+    name: "European Commission DG GROW",
+    jurisdiction: "European Union",
+    region: "Europe",
+    type: "Regulator",
+    covers: ["Market-surveillance campaign reports", "Testing and standardisation recommendations"],
+    cadence: "Weekly",
+    url: "https://single-market-economy.ec.europa.eu/",
+    domains: ["single-market-economy.ec.europa.eu", "op.europa.eu"],
+    note: "Distinguish recommendations and campaign findings from binding law; selected samples need not represent the market.",
+  },
+  {
+    id: "iso",
+    name: "International Organization for Standardization (ISO)",
+    jurisdiction: "International standards",
+    region: "Global",
+    type: "Literature",
+    covers: ["Published test-method scope", "Standard editions and publication dates"],
+    cadence: "Before citing or updating a test method",
+    url: "https://www.iso.org/",
+    domains: ["iso.org"],
+    note: "Public catalogue abstracts establish scope, not a product's compliance. Full paid standards are not implied to have been reviewed.",
+  },
+  {
     id: "eu-safety-gate",
     name: "European Commission Safety Gate",
     jurisdiction: "European Union",
@@ -299,6 +325,30 @@ export const sourceRegistry: SourceRegistryEntry[] = [
     cadence: "Weekly",
     url: "https://www.gov.br/anvisa/pt-br",
     domains: ["gov.br"],
+  },
+  {
+    id: "hsa",
+    name: "Singapore Health Sciences Authority",
+    jurisdiction: "Singapore",
+    region: "Asia",
+    type: "Regulator",
+    covers: ["Cosmetic product recalls", "Health-product safety alerts", "Recall class, level and supplier instructions"],
+    cadence: "Daily on weekdays",
+    url: "https://www.hsa.gov.sg/announcements/",
+    domains: ["hsa.gov.sg"],
+    note: "Publication and recall dates can differ. Distinguish retail-level supplier instructions from consumer-level recalls.",
+  },
+  {
+    id: "tfda",
+    name: "Taiwan Food and Drug Administration",
+    jurisdiction: "Taiwan",
+    region: "Asia",
+    type: "Regulator",
+    covers: ["Cosmetic safety notices", "Overseas recall advisories", "Consumer purchase guidance"],
+    cadence: "Daily on weekdays",
+    url: "https://www.fda.gov.tw/",
+    domains: ["fda.gov.tw"],
+    note: "An overseas-alert notice is not evidence of local testing or a domestic recall. Keep the originating regulator's dates and scope explicit.",
   },
   {
     id: "pmda",

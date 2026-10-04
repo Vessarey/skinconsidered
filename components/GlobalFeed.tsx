@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useRef } from "react";
 import type { WireItem } from "@/lib/content";
 
 type Filters = { region: string; desk: string };
@@ -23,12 +23,13 @@ function writeFilters(filters: Filters) {
   if (filters.region !== ALL) params.set("region", filters.region);
   if (filters.desk !== ALL) params.set("desk", filters.desk);
   const query = params.toString();
-  window.history.replaceState(null, "", query ? `/today?${query}` : "/today");
+  window.history.pushState(null, "", query ? `/today?${query}` : "/today");
 }
 
 export function GlobalFeed({ stories, regions, desks }: { stories: WireItem[]; regions: string[]; desks: string[] }) {
   const params = useSearchParams();
-  const [filters, setFilters] = useState<Filters>(() => readFilters(params, regions, desks));
+  const filters = readFilters(params, regions, desks);
+  const allRegionsButton = useRef<HTMLButtonElement>(null);
 
   const visible = useMemo(
     () =>
@@ -40,7 +41,6 @@ export function GlobalFeed({ stories, regions, desks }: { stories: WireItem[]; r
 
   function update(next: Partial<Filters>) {
     const merged = { ...filters, ...next };
-    setFilters(merged);
     writeFilters(merged);
   }
 
@@ -49,6 +49,7 @@ export function GlobalFeed({ stories, regions, desks }: { stories: WireItem[]; r
       <span className="filter-label">{label}</span>
       {[ALL, ...options].map((option) => (
         <button
+          ref={key === "region" && option === ALL ? allRegionsButton : undefined}
           aria-pressed={filters[key] === option}
           className={filters[key] === option ? "active" : ""}
           key={option}
@@ -103,7 +104,10 @@ export function GlobalFeed({ stories, regions, desks }: { stories: WireItem[]; r
             <span aria-hidden="true">*</span>
             <h2>Nothing on file for that combination yet.</h2>
             <p>The wire grows with each reviewed edition. Widen the filters or search the archive.</p>
-            <button className="empty-state-reset" onClick={() => update({ region: ALL, desk: ALL })} type="button">
+            <button className="empty-state-reset" onClick={() => {
+              update({ region: ALL, desk: ALL });
+              allRegionsButton.current?.focus();
+            }} type="button">
               Clear filters
             </button>
           </div>

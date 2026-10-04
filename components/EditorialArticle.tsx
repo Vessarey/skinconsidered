@@ -83,7 +83,7 @@ export function EditorialArticle({
           ))}
         </div>
         <div className="article-trust" aria-label="Article verification status">
-          <span><b aria-hidden="true">✓</b> Sources rechecked {LAST_REVIEWED}</span>
+          <span>Site edition: {LAST_REVIEWED}</span>
           <span>{sources.length} {sources.length === 1 ? "source link" : "source links"} on file</span>
           <Link href="/methodology">How source strength works</Link>
           <Link href="/corrections">Report a correction</Link>
@@ -93,13 +93,11 @@ export function EditorialArticle({
       {quickRead && quickRead.length > 0 && (
         <section className="article-quick-read" aria-labelledby="quick-read-title">
           <div>
-            <span>Read this first</span>
             <h2 id="quick-read-title">The short version</h2>
           </div>
           <div className="quick-read-grid">
-            {quickRead.map((item, index) => (
+            {quickRead.map((item) => (
               <article key={item.label}>
-                <span>0{index + 1}</span>
                 <h3>{item.label}</h3>
                 <p>{item.text}</p>
               </article>
@@ -137,7 +135,7 @@ export function EditorialArticle({
                 <div>
                   <dt>Important</dt>
                   <dd>
-                    A verdict on the ingredient, brand, country, or category. Grades travel with the exact claim.{" "}
+                    This grade applies to the specific claim in this story. It does not rate the ingredient, brand, or category as a whole.{" "}
                     <Link href={`/methodology#grade-${grade.toLowerCase()}`}>How grading works →</Link>
                   </dd>
                 </div>
@@ -221,7 +219,7 @@ export function EditorialArticle({
 
           <section className="source-drawer" aria-labelledby="sources-title">
             <h2 id="sources-title">Open the source file</h2>
-            <p>These links support the claims above. We rechecked them on {LAST_REVIEWED}; disclosures and limits are summarized in the article.</p>
+            <p>These links support the claims above. Source dates, disclosures and limits are documented in the article and source list.</p>
             <ol>
               {sources.map((source) => (
                 <li key={source.url}>

@@ -2,6 +2,387 @@ import type { Story } from "./types";
 
 export const stories: Story[] = [
   {
+    slug: "us-greenwich-glutathione-recall-2026",
+    related: { guides: ["procedure-safety-checklist"] },
+    kind: "safety",
+    category: "Recall",
+    region: "North America",
+    location: "United States",
+    headline: "Greenwich Rx recalls ten lots of injectable glutathione",
+    shortHeadline: "US glutathione recall: check the lot",
+    dek: "An October 1 company notice posted by FDA cites potentially elevated endotoxin levels.",
+    date: "2026-10-01",
+    dateLabel: "October 1, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "Company recall, not an efficacy study",
+    whyItMatters: "The recall covers specified lots, not every glutathione product.",
+    limitations: "No risk denominator or measured endotoxin values are supplied. The notice does not establish cosmetic use, oral or topical risk, or treatment efficacy.",
+    sources: [
+      { label: "FDA — Greenwich Rx company recall and complete lot table", url: "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/greenwich-rx-issues-voluntary-nationwide-recall-compounded-glutathione-due-elevated-endotoxin-levels", published: "October 1, 2026" },
+      { label: "FDA — earlier warning on supplement-grade glutathione in injectables", url: "https://www.fda.gov/drugs/human-drug-compounding/fda-reminds-compounders-not-use-dietary-supplement-grade-glutathione-injectables", published: "August 27, 2026; separate background" },
+    ],
+    sections: [
+      {
+        heading: "Check the product and lot",
+        paragraphs: [
+          "The voluntary US recall concerns 200 mg/mL, 10 mL multidose vials intended for subcutaneous use. Greenwich Rx reports two patients receiving emergency-department care after intravenous administration; this product was not formulated for that route.",
+          "The company advises affected-lot customers to stop use and follow its disposal directions. Check the linked lot table; discuss health concerns with a healthcare provider.",
+        ],
+      },
+      {
+        heading: "Attribution and limits",
+        paragraphs: [
+          "Greenwich Rx has a commercial interest. FDA hosts the company's announcement without endorsement. Grade A denotes a documented recall, not confirmed causation. Reviewed October 2, 2026.",
+        ],
+      },
+      {
+        heading: "Older context, not the same incident",
+        paragraphs: [
+          "FDA's August 27 warning explains why supplement-grade glutathione is unsuitable for injectable compounding. That earlier episode names Medisca lot 229536. Neither source establishes a connection between that lot and this Greenwich recall; do not combine their patient counts.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "singapore-unapproved-peptide-injections-warning-2026",
+    related: { ingredients: ["peptides"], guides: ["procedure-safety-checklist"] },
+    kind: "safety",
+    category: "Consumer advisory",
+    region: "Asia",
+    location: "Singapore",
+    headline: "Singapore warns against unapproved peptide injections bought online",
+    shortHeadline: "Singapore warns on unapproved injectable peptides",
+    dek: "HSA's September 25 warning separates experimental injectables from approved prescription medicines obtained without medical oversight.",
+    date: "2026-09-25",
+    dateLabel: "September 25, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "Official safety advice, not a trial",
+    whyItMatters: "An online seller's research label does not establish suitability for human use.",
+    limitations: "The notice supplies no case counts or risk denominator. It is not a recall, a topical peptide skincare assessment, or evidence that every peptide has the same risks.",
+    sources: [
+      { label: "HSA — unauthorised medicines and injectable peptides warning", url: "https://www.hsa.gov.sg/announcements/risks-of-obtaining-prescription-medicines-unauthorised-channels/", published: "September 25, 2026" },
+    ],
+    sections: [
+      {
+        heading: "Two different situations",
+        paragraphs: [
+          "HSA describes serious reactions reported after purchases through unauthorised channels. It distinguishes prescription GLP-1 medicines used without supervision from experimental injectable peptides, naming retatrutide and cagrilintide as unapproved in its dated warning.",
+          "The agency flags uncertain contents and quality, and advises obtaining prescribed products from established pharmacies, hospitals or clinics with a doctor's assessment. Do not read this as advice to stop prescribed treatment.",
+        ],
+      },
+      {
+        heading: "Keep the evidence in scope",
+        paragraphs: [
+          "Grade A describes the documented Singapore advisory, not peptide efficacy or a measured complication rate. This is a regulator communication, not a commercially sponsored treatment trial. Source checked September 26, 2026.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "taiwan-medicube-cream-advisory-2026",
+    related: { dispatches: ["singapore-nu-skin-dermatic-effects-recall-2026"], trends: ["salmon-dna-pdrn"] },
+    kind: "safety",
+    category: "Consumer advisory",
+    region: "Asia",
+    location: "Taiwan",
+    headline: "Taiwan flags Medicube cream after Singapore's batch recall",
+    shortHeadline: "Taiwan issues Medicube cream purchase warning",
+    dek: "Taiwan's September 21 notice advises against buying Medicube PDRN Pink Collagen Capsule Cream. It cites Singapore's earlier Sudan IV finding.",
+    date: "2026-09-21",
+    dateLabel: "September 21, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "Official consumer advisory, not a new test result",
+    whyItMatters: "Taiwan's purchase advice and Singapore's batch-specific recall have different scopes. Check which notice applies to your situation.",
+    limitations: "The Taiwan notice does not establish local contamination or a domestic recall. Singapore's finding does not apply to every batch or all Medicube products.",
+    sources: [
+      { label: "Taiwan FDA — overseas cosmetic alert (Traditional Chinese)", url: "https://www.fda.gov.tw/TC/csmnewsContent.aspx?id=8040&mid=271", published: "September 21, 2026" },
+      { label: "Singapore HSA — Medicube batch recall", url: "https://www.hsa.gov.sg/announcements/medicube-pdrn-pink-collagen-capsule-cream--/", published: "Notice: August 28; recall: August 26, 2026" },
+      { label: "Singapore HSA — testing results and consumer advice", url: "https://www.hsa.gov.sg/announcements/hsa-tests-product-samples-of-medicube-pdrn-pink-collagen-capsule-cream-for-presence-of-sudan-red-dyes/", published: "August 28, 2026" },
+    ],
+    sections: [
+      {
+        heading: "What is new",
+        paragraphs: [
+          "Taiwan FDA's September 21 overseas-alert notice urges consumers not to buy the named cream from overseas, online or other sellers. It relays Singapore's earlier action, not a newly announced Taiwanese laboratory finding.",
+        ],
+      },
+      {
+        heading: "Singapore's action was batch-specific",
+        paragraphs: [
+          "HSA recalled two Venus Beauty Pte. Ltd. batches on August 26, publishing the notice August 28: 2E122I.2E117I and 2E191G.2E193G. Retail and wholesale suppliers were told to stop supply and return stock.",
+          "HSA reported minute amounts of Sudan IV in those samples. It did not detect the dye in samples from APR SG or Rirora International, permitted unaffected batches to resume sale, and required accredited-laboratory testing of every batch those three companies intended to supply locally.",
+        ],
+      },
+      {
+        heading: "Advice without a blanket risk claim",
+        paragraphs: [
+          "In its August 28 advice, HSA said serious harm from previous use was unlikely, but consumers should stop using affected products and ask the seller about refund concerns. It reported no local adverse-event reports at that time; that is not a current worldwide safety count.",
+          "Grade A applies to the documented official actions, not skincare efficacy. These are regulator notices, not sponsored product studies. Sources checked September 22, 2026; the Taiwan notice is summarized from Traditional Chinese.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "canada-counterfeit-soprano-laser-advisory-2026",
+    related: { procedures: ["laser-hair-removal"], guides: ["procedure-safety-checklist"] },
+    kind: "safety",
+    category: "Device advisory",
+    region: "North America",
+    location: "Canada",
+    headline: "Canada warns clinics about counterfeit Soprano laser devices",
+    shortHeadline: "Counterfeit Soprano laser devices flagged in Canada",
+    dek: "Health Canada identifies devices labelled Beijing Perfectlaser Technology Co., Ltd. The advisory distinguishes them from genuine Alma Lasers equipment.",
+    date: "2026-09-18",
+    dateLabel: "September 18, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "Official public advisory",
+    whyItMatters: "A brand name or licence document alone cannot establish that a clinic's machine is authentic.",
+    limitations: "The notice lists no affected clinics, serial numbers, device counts or injury rate. It is not a recall of genuine Soprano systems.",
+    sources: [
+      {
+        label: "Health Canada — counterfeit laser advisory RA-82651",
+        url: "https://recalls-rappels.canada.ca/en/alert-recall/counterfeit-laser-hair-removal-and-therapy-devices-found-some-clinics-and-may-pose",
+        published: "September 18, 2026",
+      },
+      {
+        label: "Health Canada — Medical Devices Active Licence Listing (MDALL)",
+        url: "https://www.canada.ca/en/health-canada/services/drugs-health-products/medical-devices/licences/medical-devices-active-licence-listing.html",
+        published: "July 26, 2024 page details",
+      },
+    ],
+    sections: [
+      {
+        heading: "Verify the machine, not the branding",
+        paragraphs: [
+          "Health Canada reports a falsified medical-device licence. It tells clinics to compare permanent-label manufacturer, device and model identifiers with MDALL, consult the manufacturer if uncertain, and stop using and safely dispose of counterfeits.",
+          "MDALL supports searches by company, licence, device name or identifier. It covers licensed Class II–IV devices; Class I devices and investigational or special-access devices are not listed. Our article does not authenticate any individual machine.",
+        ],
+      },
+      {
+        heading: "For people who received treatment",
+        paragraphs: [
+          "The agency advises patients with health concerns after laser therapy—including immediate pain, redness or swelling—to consult a licensed healthcare professional.",
+          "Counterfeit identification includes confirmation from the genuine manufacturer, which has a commercial interest. Grade A reflects the advisory, not treatment efficacy. Sources checked September 19, 2026.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "singapore-nu-skin-dermatic-effects-recall-2026",
+    related: { dispatches: ["canada-kohl-lead-recall-2026", "uk-simple-micellar-water-recall"] },
+    kind: "safety",
+    category: "Recall",
+    region: "Asia",
+    location: "Singapore",
+    headline: "Singapore recalls NU SKIN ageLOC Dermatic Effects from suppliers",
+    shortHeadline: "Singapore retail recall: ageLOC Dermatic Effects",
+    dek: "HSA detected theophylline in the named cosmetic. The recall covers all batches supplied in Singapore.",
+    date: "2026-09-18",
+    dateLabel: "September 18, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "Official retail-level recall",
+    whyItMatters: "Retail and wholesale suppliers are instructed to stop supply and return remaining stock to the local company.",
+    limitations: "The notice gives no concentration or exposure estimate. This is not a consumer-level recall or a finding about other NU SKIN products.",
+    sources: [
+      {
+        label: "HSA — NU SKIN ageLOC Dermatic Effects recall",
+        url: "https://www.hsa.gov.sg/announcements/nu-skin-ageloc-dermatic-effects/",
+        published: "Notice: September 18; recall: September 17, 2026",
+      },
+    ],
+    sections: [
+      {
+        heading: "Dates and identification",
+        paragraphs: [
+          "The recall began September 17, 2026; HSA published its notice September 18. Product identifier: CCPN2106638. The local company is NU SKIN ENTERPRISES SINGAPORE PTE LTD.",
+          "HSA lists Class 2 and retail-level action following product-quality surveillance testing. Its supplier instructions do not establish a consumer refund programme.",
+        ],
+      },
+      {
+        heading: "Keep the finding in scope",
+        paragraphs: [
+          "Readers with the product can consult the linked notice or ask the local company for clarification. An ingredient detection alone does not quantify an individual's risk.",
+          "Grade A describes the documented action, not efficacy. This source is a regulator notice, not a sponsored product trial. Checked September 18, 2026.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "eu-sunscreen-in-vitro-testing-2026",
+    related: { dispatches: ["australia-sunscreen-testing-consultation", "bemotrizinol-us-sunscreen-filter"], guides: ["routine-from-zero"] },
+    kind: "news",
+    category: "Regulation",
+    region: "Europe",
+    location: "European Union",
+    headline: "European Commission backs SPF testing without induced sunburn",
+    shortHeadline: "EU backs sunburn-free sunscreen SPF testing",
+    dek: "A September 15 recommendation supports laboratory SPF testing within its validated scope. The underlying campaign does not establish that all sunscreens meet their claims.",
+    date: "2026-09-15",
+    dateLabel: "September 15, 2026",
+    grade: "Context",
+    color: "cobalt",
+    signal: "Commission recommendation informed by a market-surveillance campaign",
+    whyItMatters: "How SPF is measured matters for both label credibility and the volunteers involved in testing. This announcement supports a less harmful method; it does not announce a ban on human SPF testing.",
+    limitations: "The sample was largely risk-targeted, not representative of all sunscreens. Correlation does not mean identical results. ISO 23675 excludes sticks and powders and does not measure water resistance.",
+    sources: [
+      {
+        label: "European Commission DG GROW — sunscreen-testing announcement",
+        url: "https://single-market-economy.ec.europa.eu/news/eu-moves-more-ethical-sunscreen-testing-2026-09-15_en",
+        published: "September 15, 2026",
+      },
+      {
+        label: "EU Publications Office — JACOP 2025 sunscreen final report (download available)",
+        url: "https://op.europa.eu/en/publication-detail/-/publication/d11996e2-8c85-11f1-9262-01aa75ed71a1/language-en",
+        published: "Report written June 2026; released July 30, 2026",
+      },
+      {
+        label: "ISO 23675:2024 — public abstract and method scope",
+        url: "https://www.iso.org/standard/76616.html",
+        published: "December 2024",
+      },
+    ],
+    sections: [
+      {
+        heading: "What changed—and when",
+        paragraphs: [
+          "On September 15, the European Commission encouraged manufacturers to prioritise sunscreen tests that avoid harming human volunteers. Conventional in vivo SPF testing uses UV-induced skin redness; in vitro testing measures light passing through a sunscreen film on a laboratory substrate.",
+          "This is a new announcement about earlier work, not a study completed this week. JACOP 2025 testing ran from October 2025 to March 2026. The report was written in June and released on the EU publications website on July 30; ISO 23675 was published in December 2024.",
+        ],
+      },
+      {
+        heading: "What the comparison supports",
+        paragraphs: [
+          "Authorities in 11 EU countries collected 74 sunscreen and SPF day-cream products. The report gives a correlation of r = 0.855 between in vivo and in vitro SPF results. Two stick/lip-balm products could not undergo the in vitro test, so 74 is the campaign's product count—not the number of paired comparisons or human participants.",
+          "A strong correlation means the results tended to move together, not that both methods always gave the same SPF. The report says in vitro values were generally slightly lower and that borderline or conflicting results required individual assessment. The hybrid HDRS method was not evaluated in this campaign.",
+        ],
+      },
+      {
+        heading: "Method validation is not a product clearance",
+        paragraphs: [
+          "Authorities assessed 33 of the 74 products (45%) as non-conforming for SPF and/or UVA performance. Sampling combined targeted, risk-based selection with non-targeted sampling; this is not a market-wide failure rate. National follow-up included withdrawals, recalls and other measures, with a May 29 reporting cut-off—not a new blanket recall on September 15.",
+          "ISO's public scope covers emulsions and alcoholic single-phase formulations, excluding sticks and powders. It measures static SPF, not water resistance. UVA protection was assessed using a separate standard. The announcement cannot establish whether a particular bottle meets its label claims.",
+        ],
+      },
+      {
+        heading: "What readers should take from it",
+        paragraphs: [
+          "The Commission continues to recommend sunscreen alongside shade, protective clothing and avoiding peak sun exposure. A change in test-method preference is not a reason to abandon sun protection or a recommendation to buy a particular brand.",
+          "CTX grades the policy and testing context, not treatment efficacy. The campaign was Commission-funded and the report was written by EY for the Commission. We reviewed the published report, not the individual laboratory files or a full conflict-of-interest audit; only ISO's public abstract was reviewed. Sources checked September 16, 2026.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "fda-paba-trolamine-sunscreen-final-order-2026",
+    related: { dispatches: ["bemotrizinol-us-sunscreen-filter"], guides: ["routine-from-zero"] },
+    kind: "news",
+    category: "Regulation",
+    region: "North America",
+    location: "United States",
+    headline: "FDA finalizes removal of two sunscreen actives—with a 2027 effective date",
+    shortHeadline: "FDA sets 2027 removal of PABA and trolamine salicylate",
+    dek: "A final U.S. order removes PABA and trolamine salicylate from the sunscreen monograph. FDA says consumers need not change their sunscreen use in response.",
+    date: "2026-09-11",
+    dateLabel: "September 11, 2026",
+    grade: "A",
+    color: "cobalt",
+    signal: "Final FDA administrative order, not yet effective",
+    whyItMatters: "This is a finalized regulatory decision, not a recall of sunscreen shelves. FDA says it knows of no U.S. sunscreen products currently sold with either active.",
+    limitations: "The order covers two sunscreen actives, not all chemical filters. Its scheduled effective date is September 11, 2027, with a statutory exception if disputed.",
+    sources: [
+      {
+        label: "FDA — Final Administrative Order OTC000008-1, order record and PDF",
+        url: "https://www.accessdata.fda.gov/scripts/cder/omuf/index.cfm?event=OrderDetail&orderid=OTC000008",
+        published: "September 11, 2026",
+      },
+      {
+        label: "FDA — sunscreen regulatory-action questions and answers",
+        url: "https://www.fda.gov/drugs/understanding-over-counter-medicines/questions-and-answers-fdas-regulatory-actions-over-counter-sunscreen",
+        published: "September 10, 2026 announcement",
+      },
+      {
+        label: "FDA — consumer sunscreen guidance, Removed Ingredients",
+        url: "https://www.fda.gov/drugs/understanding-over-counter-medicines/sunscreen-how-help-protect-your-skin-sun",
+      },
+    ],
+    sections: [
+      {
+        heading: "What the order changes",
+        paragraphs: [
+          "FDA concluded that the safety risks of aminobenzoic acid (PABA) and trolamine salicylate as sunscreen actives outweigh their benefits. Once the order takes effect, sunscreens containing either active will require an approved drug application rather than the monograph pathway.",
+          "Section VI sets September 11, 2027 as the effective date, subject to the statutory process if the order is disputed. A final decision is not the same as an immediate market withdrawal.",
+        ],
+      },
+      {
+        heading: "What readers should take from it",
+        paragraphs: [
+          "FDA's consumer advice is unchanged: use sunscreen with other sun-protection measures. The agency says no consumer action is needed because it is unaware of currently marketed U.S. sunscreens containing these ingredients.",
+          "The remaining parts of the 2021 proposal—including other actives, labeling and maximum SPF—are left for future orders. This decision is not a blanket verdict against other sunscreen filters or formulas.",
+        ],
+      },
+      {
+        heading: "Dates and evidence boundaries",
+        paragraphs: [
+          "FDA's consumer pages describe a September 10 announcement, while the formal order is marked issued September 11, 2026. This file uses the order's date; neither date should be confused with its scheduled 2027 implementation.",
+          "Grade A applies to the documented regulatory action, not a ranking of products. Our sources are agency records, not a manufacturer-sponsored trial; no brand recommendation follows from this report. Sources checked September 11, 2026.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "canada-kohl-lead-recall-2026",
+    related: { culture: ["kohl-ancient-egypt"] },
+    kind: "safety",
+    category: "Recall",
+    region: "North America",
+    location: "Canada",
+    headline: "Canada recalls two kohl products over lead levels",
+    shortHeadline: "Two kohl products recalled in Canada over lead levels",
+    dek: "Health Canada says two named eye-cosmetic products contain lead above its impurity limits. The recall tells consumers to stop using them and return them to the importer for a refund.",
+    date: "2026-09-04",
+    dateLabel: "September 4, 2026",
+    grade: "A",
+    color: "raspberry",
+    signal: "Official consumer-product recall",
+    whyItMatters: "Kohl is applied close to the eye, and repeated lead exposure can build up in the body. The notice gives Canadian shoppers two exact product names and a concrete action.",
+    limitations: "The notice does not report the measured lead concentrations or identify lot codes. It applies to two named products sold through one importer in Canada—not to every kohl or kajal product.",
+    sources: [
+      {
+        label: "Health Canada — traditional kohl products recalled due to chemical hazard",
+        url: "https://recalls-rappels.canada.ca/en/alert-recall/traditional-kohl-products-recalled-due-chemical-hazard",
+        published: "September 4, 2026",
+      },
+    ],
+    sections: [
+      {
+        heading: "Check the product name",
+        paragraphs: [
+          "The recall names Mumtaz Herbal Kajal With Almond Oil for Sensitive Eyes and Al-Asmad Alharmain Zam Zam & Rose Water. Health Canada says both contain lead above the impurity limits in its cosmetics guidance.",
+          "The importer reported that 576 units of each product were sold in Canada from January through August 2026. The products originated in India and the United Arab Emirates and were imported by Sara Islamic Store in Mississauga, Ontario.",
+        ],
+      },
+      {
+        heading: "What to do now",
+        paragraphs: [
+          "Health Canada tells consumers to stop using either recalled product immediately and return it to Sara Islamic Store for a refund. The official recall linked below has the importer's current contact information.",
+          "As of August 28, the company had reported no incidents or injuries in Canada. That does not measure exposure or prove that use was harmless; it only describes reports received by that date.",
+        ],
+      },
+      {
+        heading: "Keep the safety finding in scope",
+        paragraphs: [
+          "Lead can accumulate in the body, and Health Canada emphasizes that children are especially vulnerable. The notice does not publish the laboratory value, so readers cannot calculate an individual's exposure from the recall alone.",
+          "Kohl also has deep cultural and material histories across North Africa, the Middle East, and South Asia. A product-specific safety action should not be turned into a claim about every modern formula or about the communities connected to the practice.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "uk-simple-micellar-water-recall",
     related: { dispatches: ["uk-cosmetics-safety-notifications-2026", "brazil-anvisa-sunscreen-recall-henlau"] },
     updates: [
@@ -16,7 +397,7 @@ export const stories: Story[] = [
     category: "Recall",
     region: "Europe",
     location: "United Kingdom",
-    headline: "A U.K. micellar-water recall now covers three bottle sizes",
+    headline: "Simple micellar water recall covers three U.K. bottle sizes",
     shortHeadline: "Simple micellar-water recall expands to 200, 400, and 730 ml",
     dek: "The affected batches may be microbiologically contaminated and could cause eye inflammation. The official notice lists the exact bottle sizes and batch codes to check.",
     date: "2026-08-14",
@@ -301,21 +682,47 @@ export const stories: Story[] = [
     category: "Sunscreen",
     region: "Oceania",
     location: "Australia",
-    headline: "Australia's sunscreen-testing review is awaiting a published decision",
-    shortHeadline: "Australia's SPF-testing consultation has closed; a decision is pending",
-    dek: "The TGA consultation closed May 23 after examining laboratory oversight, testing transparency, ingredient standards, lifecycle checks, and clearer SPF labels. No decision is posted on the consultation page as of September 1.",
+    headline: "Australia's sunscreen reviews address two different questions",
+    shortHeadline: "Australia's SPF-testing review and 4-MBC proposal are separate",
+    dek: "The broader SPF-testing consultation closed May 23. A separate consultation on the ingredient 4-MBC opened September 11 and closes October 12. Proposals are not final rules.",
     date: "2026-03-26",
     dateLabel: "March 26, 2026",
     grade: "Context",
     color: "green",
-    signal: "Public consultation",
+    signal: "Two distinct regulatory consultations",
     whyItMatters: "Australia has an unusually high skin-cancer burden, so confidence in sunscreen testing and labeling has direct public-health stakes.",
-    limitations: "The consultation is closed, but its proposals are not final rules. The TGA says its decision will be published on the consultation page.",
+    limitations: "These consultations do not establish final new rules. The 4-MBC review uses exposure modelling and published toxicology; full underlying raw data were not available for independent corroboration. It does not measure the rate of harm in sunscreen users.",
+    updates: [{
+      kind: "update",
+      date: "2026-09-15",
+      dateLabel: "September 15, 2026",
+      note: "Clarified the distinction between the earlier SPF-testing consultation and the separate 4-MBC consultation announced September 11. Added its October 12 closing date, proposal origins and review limitations. The original March 26 article date is unchanged; September 15 is our editorial update, not a new regulatory action.",
+    }],
     sources: [
       {
         label: "Australian Therapeutic Goods Administration",
         url: "https://www.tga.gov.au/news/media-releases/improving-regulation-sunscreens-australia",
         published: "March 26, 2026",
+      },
+      {
+        label: "TGA — broader sunscreen-regulation consultation",
+        url: "https://consultations.tga.gov.au/tga/improvements-to-regulation-of-sunscreens-in-aus/",
+        published: "March 26–May 23, 2026 consultation period",
+      },
+      {
+        label: "TGA — 4-MBC consultation, options and deadline",
+        url: "https://consultations.tga.gov.au/tga/scheduling-pre-meeting-notice-4mbc-nov-2026/",
+        published: "September 11–October 12, 2026 consultation period",
+      },
+      {
+        label: "TGA — 4-MBC announcement and consumer advice",
+        url: "https://www.tga.gov.au/news/media-releases/tga-consult-additional-controls-active-sunscreen-ingredient",
+        published: "September 11, 2026",
+      },
+      {
+        label: "TGA — 4-MBC safety review and limitations",
+        url: "https://www.tga.gov.au/resources/publication/corporate-reports/safety-review-4-methylbenzylidene-camphor-4-mbc",
+        published: "Published September 11, 2026; report version July 2026",
       },
     ],
     sections: [
@@ -329,7 +736,22 @@ export const stories: Story[] = [
         heading: "Why the process matters",
         paragraphs: [
           "A sunscreen label compresses a large amount of formulation and testing work into a few claims. Regulation determines which test methods count, how evidence is documented, and what happens when products or laboratories fall short.",
-          "As of September 1, the consultation page still says submissions will be reviewed and a decision published there. Until that response appears, the correct status is decision pending—not framework changed.",
+          "The broader consultation page checked September 15 lists the consultation as closed on May 23; no final response was found on that page. That is a page-specific observation, not proof that every Australian sunscreen policy remains unchanged.",
+        ],
+      },
+      {
+        heading: "A separate ingredient-safety consultation",
+        paragraphs: [
+          "On September 11, the TGA opened a separate consultation on 4-methylbenzylidene camphor (4-MBC). It closes October 12, 2026, ahead of advisory-committee consideration in November. October 12 is the closing date, not an opening or implementation date.",
+          "The TGA Delegate put forward two options using concentration limits and, for one option, age and application-site conditions. Two private applicants proposed a prohibition. These are competing proposals, not adopted restrictions; the applicants' proposal should not be described as a TGA ban.",
+          "The TGA's September 11 announcement advises Australians to continue sunscreen use alongside other sun-protection measures. It does not announce a product recall. This ingredient-specific process is separate from the earlier review of SPF testing and broader regulation.",
+        ],
+      },
+      {
+        heading: "What the safety review can establish",
+        paragraphs: [
+          "The July-version report, published September 11, combines existing safety assessments and toxicology with the Australian Sunscreen Exposure Model. Its recommendations depend on assumed exposure and available evidence, not a newly measured rate of disease among sunscreen users. It lacked full raw data for independent corroboration and excluded other consumer-product exposure, metabolites and impurities from its risk assessment.",
+          "CTX grades the policy process, not sunscreen efficacy or a product's safety. Our sources are regulator records, not a sponsored product trial; private applicants' proposals are identified as such. Sources for this clarification checked September 15, 2026. The September 11 development is not being presented as a new September 15 action.",
         ],
       },
     ],

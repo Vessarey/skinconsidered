@@ -1,31 +1,21 @@
 import { NEWSLETTER } from "@/content/site";
-import { newsletterConfigured } from "@/lib/newsletter";
+import { issuePath, issues, newsletterConfigured } from "@/lib/newsletter";
 import { NewsletterForm } from "./NewsletterForm";
 
-export function NewsletterPanel({ compact = false, source }: { compact?: boolean; source?: string }) {
-  const headingId = `newsletter-title-${source ?? (compact ? "compact" : "panel")}`;
+export function NewsletterPanel({ compact = false, source, headingLevel = 2 }: { compact?: boolean; source?: string; headingLevel?: 1 | 2 }) {
+  const placement = source ?? (compact ? "article" : "homepage");
+  const headingId = "newsletter-title-" + placement;
   const configured = newsletterConfigured();
+  const Heading = headingLevel === 1 ? "h1" : "h2";
 
   return (
-    <section className={`newsletter-panel ${compact ? "compact" : ""}`} aria-labelledby={headingId}>
+    <section className={"newsletter-panel" + (compact ? " compact" : "")} aria-labelledby={headingId} data-source={placement}>
       <div>
         <span>{NEWSLETTER.name}</span>
-        <h2 id={headingId}>
-          {compact ? "Get the next one weighed, not hyped." : "What changed, how much to trust it, and what to do."}
-          <sup>*</sup>
-        </h2>
-        {!compact && (
-          <ul className="newsletter-bullets">
-            {NEWSLETTER.bullets.map((bullet) => (
-              <li key={bullet}>{bullet}</li>
-            ))}
-          </ul>
-        )}
+        <Heading id={headingId}>{compact ? "Make sense of the next skincare headline." : "Less noise. More perspective."}</Heading>
+        <p>A short briefing on skincare news, research, and procedures. What matters, why it matters, and the sources behind it.</p>
       </div>
-      <div>
-        <p>{compact ? `${NEWSLETTER.cadence}. ${NEWSLETTER.promise}` : NEWSLETTER.promise}</p>
-        <NewsletterForm configured={configured} source={source ?? (compact ? "article" : "homepage")} />
-      </div>
+      <NewsletterForm configured={configured} source={placement} previewHref={issues[0] ? issuePath(issues[0]) : "/today"} />
     </section>
   );
 }

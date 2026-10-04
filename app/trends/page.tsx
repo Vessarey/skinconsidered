@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Artwork } from "@/components/Artwork";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { NewsletterPanel } from "@/components/NewsletterPanel";
 import { EDITION, TREND_CATEGORY_ORDER, TREND_VERDICT_ORDER, trends } from "@/lib/content";
@@ -19,8 +20,6 @@ const verdictCopy: Record<(typeof TREND_VERDICT_ORDER)[number], string> = {
 };
 
 export default function TrendsPage() {
-  const counts = TREND_VERDICT_ORDER.map((verdict) => ({ verdict, count: trends.filter((trend) => trend.verdict === verdict).length }));
-
   return (
     <main id="main-content">
       <header className="page-hero trend-hero">
@@ -29,22 +28,25 @@ export default function TrendsPage() {
           <h1>
             What the feed says. What the evidence says.<sup>*</sup>
           </h1>
-        </div>
         <p>
           Every trend gets the same treatment: what it is, what it claims, the strongest evidence for and against, a grade on that evidence, a plain verdict, and
           who should skip it. Verdicts are ours; sources are linked.
         </p>
+        </div>
+        <Artwork name="desk-trends" priority />
       </header>
 
-      <section className="trend-verdict-key" aria-label="Verdict key">
-        {counts.map(({ verdict, count }) => (
+      <details className="trend-verdict-explainer">
+        <summary>What do the verdicts mean?</summary>
+        <div className="trend-verdict-key">
+        {TREND_VERDICT_ORDER.map((verdict) => (
           <div key={verdict} className={`verdict-${verdict.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
-            <b>{count}</b>
             <span>{verdict}</span>
             <small>{verdictCopy[verdict]}</small>
           </div>
         ))}
-      </section>
+        </div>
+      </details>
 
       {TREND_CATEGORY_ORDER.map((category) => {
         const group = trends.filter((trend) => trend.category === category);

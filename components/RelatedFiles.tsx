@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { RelatedFile } from "@/lib/content";
 
-export function RelatedFiles({ files, title = "Related files", id = "related-title" }: { files: RelatedFile[]; title?: string; id?: string }) {
+export function RelatedFiles({ files, title = "Keep exploring", id = "related-title" }: { files: RelatedFile[]; title?: string; id?: string }) {
   if (!files.length) return null;
 
   return (

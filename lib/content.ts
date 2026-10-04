@@ -1,10 +1,13 @@
 import { concernGuides } from "@/content/concerns";
+import { resolveOrigin } from "@/lib/seo";
+import { countSourceCitations } from "./source-coverage";
 import { sourceRegistry, taxonomy } from "@/content/coverage";
 import { cultureStories as cultureRecords } from "@/content/culture";
 import { aspsFees2022, PRICE_SURVEY_DATE, priceMenus, priceMenuSource } from "@/content/price-survey";
 import { procedurePrices } from "@/content/procedure-prices";
 import { guides as guideRecords } from "@/content/guides";
 import { ingredients } from "@/content/ingredients";
+import { routines } from "@/content/routines";
 import { procedureProfiles as procedureRecords } from "@/content/procedures";
 import {
   DESKS,
@@ -291,7 +294,7 @@ export function formatEditionDate(date: string) {
 }
 
 export function siteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  return resolveOrigin(process.env.NEXT_PUBLIC_SITE_URL, process.env.VERCEL_ENV);
 }
 
 function latestUpdate<T extends { date: string; dateLabel: string }>(updates?: T[]) {
@@ -493,7 +496,7 @@ export type SearchItem = {
 export const searchableItems = [
   ...storiesByDate.map((item) => ({
     href: `/dispatches/${item.slug}`,
-    type: `${deskLabel(item.kind)} · ${item.category}`,
+    type: [...new Set([deskLabel(item.kind), item.category])].join(" · "),
     title: item.headline,
     description: item.dek,
     terms: [item.region, item.location, item.kind, item.signal, item.whyItMatters, ...item.sections.map((section) => section.heading)].join(" "),
@@ -549,9 +552,16 @@ export const searchableItems = [
       ...item.majorRisks,
     ].join(" "),
   })),
+  ...routines.map((item) => ({
+    href: `/routines/${item.slug}`,
+    type: "Celebrity routine · First-person source",
+    title: `${item.name}’s skincare routine`,
+    description: item.description,
+    terms: ["celebrity skincare Vogue video", item.angle, ...item.products.map((product) => product.name)].join(" "),
+  })),
 ] satisfies SearchItem[];
 
-export const searchSuggestions = ["tazarotene", "azelaic acid", "slugging", "Botox", "HydraFacial", "melasma", "Japan"];
+export const searchSuggestions = ["Sunscreen", "Retinoids", "Skin barrier", "Botox", "Hailey Bieber", "Japan"];
 
 // ------------------------------------------------------------------
 // Coverage: what the desk tracks, and which sources are actually cited.
@@ -559,26 +569,14 @@ export const searchSuggestions = ["tazarotene", "azelaic acid", "slugging", "Bot
 
 export type SourceCoverage = SourceRegistryEntry & { cited: number; status: SourceStatus };
 
-function hostOf(url: string) {
-  try {
-    return new URL(url).hostname.toLowerCase();
-  } catch {
-    return "";
-  }
-}
-
 /** Every source URL on file across dispatches, guides, culture files, and procedure profiles. */
 export function allSourceUrls() {
-  return [...stories, ...guides, ...cultureStories, ...procedureProfiles, ...ingredients, ...trends].flatMap((item) => item.sources.map((source) => source.url));
+  return [...stories, ...guides, ...cultureStories, ...procedureProfiles, ...ingredients, ...trends, ...routines].flatMap((item) => item.sources.map((source) => source.url));
 }
 
 /** Registry entries with a computed citation count. "In use" is never declared by hand. */
 export function sourceCoverage(): SourceCoverage[] {
-  const hosts = allSourceUrls().map(hostOf);
-  return sourceRegistry.map((entry) => {
-    const cited = hosts.filter((host) => entry.domains.some((domain) => host === domain || host.endsWith(`.${domain}`))).length;
-    return { ...entry, cited, status: cited > 0 ? "In use" : "Watchlist" };
-  });
+  return countSourceCitations(sourceRegistry, allSourceUrls());
 }
 
 export type JurisdictionCoverage = {

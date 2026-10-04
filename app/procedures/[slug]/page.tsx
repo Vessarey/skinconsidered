@@ -17,7 +17,7 @@ import {
   resolveRelated,
   siteUrl,
 } from "@/lib/content";
-import { breadcrumbs, canonical, metaDescription, schemaDate } from "@/lib/seo";
+import { breadcrumbs, canonical, metaDescription, schemaDate, seoTitle } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -31,8 +31,14 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!profile) return {};
 
   return {
-    title: `${profile.name}: cost, downtime, evidence, and risks`,
-    description: metaDescription(`${profile.cost}. ${profile.purpose} Sessions, downtime, evidence grade, risks, and sources.`),
+    title: seoTitle(`${profile.name}: cost, downtime, evidence, and risks`),
+    // A missing national figure is honest on the page but a weak snippet lead;
+    // open with what the treatment does and keep the cost line for real figures.
+    description: metaDescription(
+      profile.cost.startsWith("No reliable")
+        ? `${profile.purpose} Cost context, downtime, evidence grade, risks, and sources.`
+        : `${profile.cost}. ${profile.purpose} Sessions, downtime, evidence grade, risks, and sources.`,
+    ),
     alternates: canonical(`/procedures/${profile.slug}`),
     openGraph: {
       type: "article",
