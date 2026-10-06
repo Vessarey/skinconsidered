@@ -62,8 +62,8 @@ export function ogImage({
             textTransform: "uppercase",
           }}
         >
-          <span style={{ color: tokens[accent] }}>{eyebrow}</span>
-          <span>Considered before published</span>
+          <span style={{ color: tokens[accent], width: 560, flexShrink: 0 }}>{eyebrow}</span>
+          <span style={{ width: 440, flexShrink: 0, textAlign: "right" }}>Considered before published</span>
         </div>
         <div
           style={{

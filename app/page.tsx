@@ -8,7 +8,7 @@ import { deskLabel, lastUpdated, readingTime, storiesByDate } from "@/lib/conten
 import { canonical } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Skincare news, ingredient evidence & procedure guides",
+  title: { absolute: "Skincare news & ingredient evidence — Skin Considered" },
   description: "Understand the skincare news that matters. Read global safety updates, ingredient evidence, and clear guides to procedure costs, risks, and recovery.",
   alternates: canonical("/"),
 };

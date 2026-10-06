@@ -2,6 +2,41 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-10-06 — isolated homepage title and social-image branding repair
+
+Published-main branding scope only: homepage title explicitly includes Skin
+Considered within 53 characters, and the shared 1200×630 OG image header
+uses bounded 560px/440px text columns. The long homepage eyebrow wraps
+instead of overlapping “Considered before published.” Copy, visual tokens,
+footer/edition dates, clinical content and sources remain unchanged.
+
+Reviewed pending routine commits a6e52e7 (search-focus handoff), 85aeb90
+(Guardian calamine status article) and 38a7869 (article source jumps). The
+routine checkout remained clean at 38a7869, but no authoritative active-
+writer signal was available. Used a separate branch/worktree from published
+main 85bef91; none of those three commits is included in this release.
+Their source/interaction review and publication remain a separate task.
+No files in the routine checkout were modified or processes stopped.
+
+Fresh lint, typecheck, content audit and build passed; all 68 published-main
+Node tests passed against this checkout's own port-3011 preview. The tests'
+localhost-3000 canonical expectations were retained; the operator's port-
+3000 preview was not restarted. Read-only source audit checked 304 URLs:
+296 reachable, seven scripted-access blocks, one temporarily unreachable,
+zero broken links. Rendered pixel checks across all 123 generated OG PNGs
+confirm 1200×630 size and at least 80px separation between top text columns;
+homepage and culture images visually inspected. Homepage rendered title
+and existing viewport/mobile-nav/skip-link source checked. No app CSS,
+page body, navigation, provider or dependency changes. Live mobile/browser
+interaction could not be rerun because Mac browser controls were absent;
+no Core Web Vitals, Google display or conversion-lift claim.
+
+Use the existing GitHub/Vercel publication workflow, then require successful
+Vercel status and production sitemap parity/metadata/image verification.
+Rollback is a normal revert of this scoped commit, preserving later work.
+Vanessa's standing tested-publication authority applies; no spending,
+credentials, permissions, OAuth, tracking or external-agent contact.
+
 ## 2026-10-04 — prepared release published and production parity restored
 
 Vanessa explicitly authorized ongoing improvements and publication without routine review on October 4; spending still requires approval. Updated the existing release PR #1 with the already-prepared work through `dc7911a`, waited for its Vercel preview to pass, and merged it at 04:42:05 UTC as `b179d8a5a1a778ffb4f8b4f93a75033d95c4e52e`. Production Vercel status succeeded: https://vercel.com/vessareys-projects/skinconsidered/6S7Lm9jNXT78e3zyQP9QxDSGPpNN.
