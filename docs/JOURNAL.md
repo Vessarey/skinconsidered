@@ -2,6 +2,36 @@
 
 Newest entry first. One entry per run of the daily loop in `docs/GROWTH_LOOP.md`. Record what was checked, the numbers behind each decision, what changed, and what the owner must resolve. Never write a number here that was not read from a tool in the same run.
 
+## 2026-10-08 — Published-source dependency-only security patch
+
+The production dependency audit flagged sharp 0.35.4 (librsvg advisory
+GHSA-wq5f-xc86-pv6w) and source-map-js 1.2.1 (GHSA-68fv-2mgg-jv7q).
+Update their compatible lockfile families to 0.35.5 / 1.2.2. Audit now reports
+zero production findings; this is dependency hardening, not an observed exploit.
+Next 16.3.8, React, all clinical/editorial sources and application code stay
+unchanged. The owner checkout remains clean at routine/2026-10-07 `77fa723`,
+with four unpublished commits; the patch starts from published main `41ceb1e`
+and includes none of that work.
+
+Lint, typecheck, content audit and builds passed. All 68 published-main tests
+passed against this checkout's own port-3102 preview with the tests' expected
+localhost canonical origin; that preview was then stopped. The production
+build explicitly used https://skinconsidered.com. All 141 page titles,
+descriptions, canonicals, visible content, reader/social metadata and JSON-LD
+match the live baseline (only Next's compiler font-adjust hint excluded from
+local/deployed comparison). All 123 built OG images are 1200x630 and pixel
+identical to the preceding verified release. Source-link audit: 304 URLs,
+296 reachable, seven scripted-access blocks, one temporarily unreachable,
+zero broken; blocked/unreachable sources need manual follow-up, not invented
+corrections. Focused live RSS, routines, newsletter previews, ultrasound and
+microcurrent pages and www redirects passed before the patch.
+
+Use the existing GitHub/Vercel workflow, require ready status and live 141-page
+parity before reporting publication, and retain a normal dependency-only revert
+as rollback. No newsletter provider, real submission, credential, account,
+schedule, tracking or access change. Browser-control tools were absent, so
+interactive desktop/mobile, player and screen-reader QA remain unverified.
+
 ## 2026-10-06 — isolated homepage title and social-image branding repair
 
 Published-main branding scope only: homepage title explicitly includes Skin
